@@ -1,0 +1,6 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "databaseModule/postgresql-42.3.3.jar"
+    ]
+}
