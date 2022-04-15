@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+      <children>
+            <ImageView fitHeight="246.0" fitWidth="640.0" layoutY="161.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@GUI%20images/ip.png" />
+               </image>
+            </ImageView>
+        <Label alignment="CENTER" layoutX="63.0" layoutY="132.0" prefHeight="33.0" prefWidth="220.0" style="&#10;" text="User Name " textAlignment="CENTER" textFill="#6841ec" wrapText="false" AnchorPane.leftAnchor="65.0">
+          <font>
+            <Font name="System Bold" size="24.0" />
+          </font>
+        </Label>
+            <Label alignment="CENTER" layoutX="129.0" layoutY="200.0" prefHeight="33.0" prefWidth="220.0" style="&#10;" text="Password" textAlignment="CENTER" textFill="#6841ec" wrapText="false" AnchorPane.leftAnchor="65.0">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <TextField layoutX="301.0" layoutY="132.0" prefHeight="33.0" prefWidth="181.0" />
+            <Label contentDisplay="CENTER" layoutX="231.0" layoutY="26.0" prefHeight="44.0" prefWidth="198.0" text="TEAMDER" textFill="#6841ec">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+            <Button layoutX="22.0" layoutY="14.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="51.0" text="Back" />
+            <ImageView fitHeight="64.0" fitWidth="63.0" layoutX="-31.0" layoutY="323.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@GUI%20images/Resim1.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="52.0" fitWidth="48.0" layoutX="41.0" layoutY="315.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@GUI%20images/ResimV.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="52.0" fitWidth="48.0" layoutX="606.0" layoutY="278.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@GUI%20images/Resim1.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="52.0" fitWidth="48.0" layoutX="134.0" layoutY="355.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@GUI%20images/Resim1.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="33.0" fitWidth="34.0" layoutX="198.0" layoutY="328.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@GUI%20images/ResimT.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="52.0" fitWidth="48.0" layoutX="261.0" layoutY="339.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@GUI%20images/ResimV.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="104.0" fitWidth="101.0" layoutX="-36.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@GUI%20images/ResimF.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="52.0" fitWidth="48.0" layoutX="327.0" layoutY="296.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@GUI%20images/ResimF.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="52.0" fitWidth="48.0" layoutX="491.0" layoutY="331.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@GUI%20images/ResimF.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="52.0" fitWidth="48.0" layoutX="401.0" layoutY="345.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@GUI%20images/Resim1.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="52.0" fitWidth="48.0" layoutX="547.0" layoutY="355.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@GUI%20images/ResimV.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="33.0" fitWidth="34.0" layoutX="74.0" layoutY="377.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@GUI%20images/ResimT.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="33.0" fitWidth="34.0" layoutX="425.0" layoutY="293.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@GUI%20images/ResimT.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="52.0" fitWidth="48.0" layoutX="107.0" layoutY="296.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@GUI%20images/ResimF.png" />
+               </image>
+            </ImageView>
+            <PasswordField layoutX="301.0" layoutY="200.0" prefHeight="33.0" prefWidth="181.0" />
+            <ImageView fitHeight="149.0" fitWidth="143.0" layoutX="509.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@GUI%20images/Resim1.png" />
+               </image>
+            </ImageView>
+      </children>
+    </AnchorPane>
+  </children>
+</VBox>

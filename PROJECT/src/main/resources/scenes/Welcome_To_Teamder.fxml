@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="400.0" prefWidth="620.0" VBox.vgrow="ALWAYS">
+      <children>
+            <Button contentDisplay="CENTER" layoutX="248.0" layoutY="134.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="145.0" style="-fx-background-color: #ffda00#ffda00;" text="Create an Account" textFill="#00040d" AnchorPane.leftAnchor="248.0" AnchorPane.rightAnchor="247.0" AnchorPane.topAnchor="134.0">
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor></Button>
+            <Label alignment="CENTER" prefHeight="75.0" prefWidth="429.0" text="WELCOME TO TEAMDER " textAlignment="CENTER" textFill="#6841ec" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="110.0" AnchorPane.topAnchor="5.0">
+               <font>
+                  <Font name="Arial Bold" size="32.0" />
+               </font>
+            </Label>
+            <Button layoutX="256.0" layoutY="200.0" mnemonicParsing="false" style="-fx-background-color: #ffda00#ffda00;" text="Log In" textFill="#00040dfe" AnchorPane.leftAnchor="256.0" AnchorPane.rightAnchor="256.0" AnchorPane.topAnchor="200.0" />
+            <ImageView fitHeight="41.0" fitWidth="56.0" layoutX="27.0" layoutY="240.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@GUI%20images/ResimV.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="70.0" fitWidth="62.0" layoutX="69.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@GUI%20images/ResimF.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="41.0" fitWidth="56.0" layoutX="149.0" layoutY="345.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@GUI%20images/ResimV.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="31.0" fitWidth="22.0" layoutX="214.0" layoutY="331.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@GUI%20images/ResimT.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="41.0" fitWidth="56.0" layoutX="267.0" layoutY="331.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@GUI%20images/Basketboll.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="41.0" fitWidth="56.0" layoutX="246.0" layoutY="282.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@GUI%20images/ResimF.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="41.0" fitWidth="56.0" layoutX="412.0" layoutY="303.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@GUI%20images/Basketboll.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="41.0" fitWidth="56.0" layoutX="476.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@GUI%20images/Basketboll.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="31.0" fitWidth="22.0" layoutX="354.0" layoutY="355.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@GUI%20images/ResimT.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="31.0" fitWidth="22.0" layoutX="612.0" layoutY="147.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@GUI%20images/ResimT.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="41.0" fitWidth="56.0" layoutX="27.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@GUI%20images/Basketboll.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="18.0" layoutY="320.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@GUI%20images/ResimT.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="41.0" fitWidth="56.0" layoutX="546.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@GUI%20images/Basketboll.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="50.0" fitWidth="60.0" layoutX="583.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@GUI%20images/ResimV.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="31.0" fitWidth="22.0" layoutX="542.0" layoutY="313.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@GUI%20images/ResimT.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="24.0" fitWidth="22.0" layoutX="68.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@GUI%20images/ResimT.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="56.0" fitWidth="52.0" layoutX="27.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@GUI%20images/ResimF.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="41.0" fitWidth="56.0" layoutX="566.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="566.0" AnchorPane.rightAnchor="33.0" AnchorPane.topAnchor="346.0">
+               <image>
+                  <Image url="@GUI%20images/ResimF.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="45.0" fitWidth="51.0" layoutX="126.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@GUI%20images/Resim1.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="45.0" fitWidth="51.0" layoutX="255.0" layoutY="344.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@GUI%20images/Resim1.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="45.0" fitWidth="51.0" layoutX="332.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@GUI%20images/Resim1.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="45.0" fitWidth="51.0" layoutX="477.0" layoutY="333.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@GUI%20images/Resim1.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="45.0" fitWidth="51.0" layoutX="551.0" layoutY="79.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@GUI%20images/Resim1.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="45.0" fitWidth="51.0" layoutX="586.0" layoutY="245.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="110.0" AnchorPane.leftAnchor="586.0" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="245.0">
+               <image>
+                  <Image url="@GUI%20images/Resim1.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="45.0" fitWidth="51.0" layoutX="-17.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@GUI%20images/Resim1.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="45.0" fitWidth="51.0" layoutX="-16.0" layoutY="350.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@GUI%20images/Resim1.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="58.0" fitWidth="69.0" layoutX="430.0" layoutY="274.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@GUI%20images/ResimV.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="41.0" fitWidth="56.0" layoutX="407.0" layoutY="347.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@GUI%20images/ResimF.png" />
+               </image>
+            </ImageView>
+      </children>
+    </AnchorPane>
+  </children>
+</VBox>
