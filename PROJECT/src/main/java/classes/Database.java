@@ -1,5 +1,9 @@
 package classes;
 
+/**
+ * THIS CLASS HAS NO USE JUST FOR TEST DATABASE
+ */
+
 import java.sql.*;
 
 class Database {
@@ -23,6 +27,7 @@ class Database {
             e.printStackTrace();
         }
     }
+
     // A Method to add a user to the database
     public void insert(int ID,String userName, String pass, String sports, String bio) {
         try {
