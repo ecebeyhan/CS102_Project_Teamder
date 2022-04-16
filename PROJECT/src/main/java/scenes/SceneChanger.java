@@ -10,10 +10,7 @@ import classes.User;
 
 import java.io.IOException;
 
-/**
- *
- * @author jaret_000
- */
+
 public class SceneChanger {
     
     private static User loggedInUser;

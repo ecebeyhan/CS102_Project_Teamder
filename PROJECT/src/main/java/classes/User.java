@@ -36,9 +36,9 @@ public class User {
     // private Database db = new Database();
 
     public User(String name, String password, String sports, String bio) {
+        setUserName(name);
         setBio(bio);
         setPassword(password);
-        setUserName(bio);
         setSports(sports);
         setImageFile(new File("./src/main/java/images/defaultPerson.png"));
     }
@@ -103,6 +103,7 @@ public class User {
     public void setBio(String bio) {
         this.bio = bio;
     }
+
     public void setPassword(String password) {
         if (password.length() < 20) 
             this.password = password;
@@ -122,13 +123,9 @@ public class User {
         this.sports = sports;
     }
 
-    //-----------------------------------------------------------------
-    //  Set Database
-    //-----------------------------------------------------------------
-    // public void setDatabase() {
-    //     db.insertUser(getName(), getPassword(), getSports(), getBio());
-    // }
-
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
 
     //-----------------------------------------------------------------
     //  Add new match to "MatchList" of the user object
@@ -144,14 +141,6 @@ public class User {
 
     public void addFriend(User friend) {
         this.friendsList.add(friend);
-    }
-
-    //-----------------------------------------------------------------
-    //  Login method to check username & password
-    //-----------------------------------------------------------------
-
-    public void login(String userName, String password) {
-
     }
 
     //-----------------------------------------------------------------
@@ -173,7 +162,7 @@ public class User {
     }
 
     //-----------------------------------------------------------------
-    // Get unique file name (guarantee unieqness)
+    // Get unique file name (guarantee uniqueness)
     //-----------------------------------------------------------------
     private String getUniqueFileName(String oldFileName)
     {

@@ -7,11 +7,12 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/18" fx:controller="scenes.registerController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml" fx:controller="scenes.registerController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
@@ -37,7 +38,6 @@
                            </font>
                         </Label>
                         <TextArea fx:id="bioTextArea" layoutX="40.0" layoutY="190.0" prefHeight="161.0" prefWidth="273.0" promptText="Talk about yourself..." AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="190.0" />
-                        <Button layoutX="16.0" layoutY="14.0" mnemonicParsing="false" text="Back" />
                      </children>
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
@@ -47,27 +47,34 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <RadioButton fx:id="basketCB" layoutX="26.0" layoutY="92.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="206.0" text="Basketball" AnchorPane.leftAnchor="20.0">
+                        <RadioButton fx:id="basketCB" layoutX="20.0" layoutY="69.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="206.0" text="Basketball" AnchorPane.leftAnchor="20.0">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </RadioButton>
-                        <RadioButton fx:id="footballCB" layoutX="18.0" layoutY="159.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="206.0" text="Football" AnchorPane.leftAnchor="20.0">
+                        <RadioButton fx:id="footballCB" layoutX="20.0" layoutY="118.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="206.0" text="Football" AnchorPane.leftAnchor="20.0">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </RadioButton>
-                        <RadioButton fx:id="volleyballCB" layoutX="18.0" layoutY="229.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="206.0" text="Volleyball" textFill="#070000" AnchorPane.leftAnchor="20.0">
+                        <RadioButton fx:id="volleyballCB" layoutX="18.0" layoutY="159.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="206.0" text="Volleyball" textFill="#070000" AnchorPane.leftAnchor="18.0">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </RadioButton>
-                        <RadioButton fx:id="tennisCB" layoutX="18.0" layoutY="292.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="206.0" text="Tennis" AnchorPane.leftAnchor="20.0">
+                        <RadioButton fx:id="tennisCB" layoutX="18.0" layoutY="199.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="206.0" text="Tennis" AnchorPane.leftAnchor="18.0">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </RadioButton>
-                        <Button fx:id="registerButton" layoutX="211.0" layoutY="351.0" mnemonicParsing="false" onAction="#clickRegisterButton" text="Register" />
+                        <Label fx:id="label" layoutX="18.0" layoutY="250.0" />
+                        <Label fx:id="label2" layoutX="20.0" layoutY="287.0" prefHeight="17.0" prefWidth="5.0" />
+                        <ToolBar layoutX="143.0" layoutY="345.0" prefHeight="40.0" prefWidth="129.0">
+                           <items>
+                              <Button fx:id="registerButton" mnemonicParsing="false" onAction="#clickRegisterButton" text="Register" />
+                            <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#clickCancelButton" text="Cancel" />
+                           </items>
+                        </ToolBar>
                      </children>
                   </AnchorPane>
               </items>

@@ -44,26 +44,6 @@
                   <Font size="30.0" />
                </font>
             </Label>
-            <ImageView fitHeight="76.0" fitWidth="107.0" layoutX="476.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@Resim1.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="76.0" fitWidth="107.0" layoutX="536.0" layoutY="162.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@ResimF.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="76.0" fitWidth="107.0" layoutX="470.0" layoutY="233.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@ResimV.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="54.0" fitWidth="48.0" layoutX="550.0" layoutY="306.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@Resim1.png" />
-               </image>
-            </ImageView>
             <ComboBox editable="true" layoutX="229.0" layoutY="142.0" prefWidth="150.0" promptText="1" visibleRowCount="1" />
             <ComboBox editable="true" layoutX="229.0" layoutY="187.0" prefWidth="150.0" promptText="5" visibleRowCount="1" />
             <ComboBox editable="true" layoutX="229.0" layoutY="225.0" prefWidth="150.0" promptText="4" />
