@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml" fx:controller="scenes.registerController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/18" fx:controller="scenes.registerController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
@@ -68,7 +68,7 @@
                            </font>
                         </RadioButton>
                         <Label fx:id="label" layoutX="18.0" layoutY="250.0" />
-                        <Label fx:id="label2" layoutX="20.0" layoutY="287.0" prefHeight="17.0" prefWidth="5.0" />
+                        <Label fx:id="label2" layoutX="18.0" layoutY="287.0" />
                         <ToolBar layoutX="143.0" layoutY="345.0" prefHeight="40.0" prefWidth="129.0">
                            <items>
                               <Button fx:id="registerButton" mnemonicParsing="false" onAction="#clickRegisterButton" text="Register" />

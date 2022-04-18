@@ -87,8 +87,10 @@ public class loginController implements Initializable {
             SceneChanger sc = new SceneChanger();
 
             if(uPass.equals(dbPassword)) {
-                // SceneChanger.setLoggedInUser(user);
-                errorLabel.setText("Logged in successfully!");
+                // errorLabel.setText("Logged in successfully!");
+                SceneChanger.setLoggedInUser(user);
+                profileController controllerClass = new profileController();
+                sc.changeScenes(event, "Profile_Page.fxml", "Profile Page", user, controllerClass);
             }
             else
                 //if the user DNE

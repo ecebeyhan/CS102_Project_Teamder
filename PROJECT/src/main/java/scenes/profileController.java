@@ -1,12 +1,27 @@
 package scenes;
 
+import classes.User;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class profileController {
+public class profileController implements MainController, Initializable {
 
     @FXML
     private Button logOutButton;
@@ -16,6 +31,20 @@ public class profileController {
     private Button startButton;
     @FXML
     private Button imageButton;
+    @FXML
+    private Text userNameLabel;
+    @FXML
+    private Text sportsLabel;
+    @FXML
+    private Text avgLabel;
+    @FXML
+    private TextArea bioText;
+    @FXML
+    private ImageView imageView;
+
+    private File imageFile;
+    private boolean imgChanged;
+    private User user;
 
     @FXML
     protected void clickOnLogOut(ActionEvent event) throws IOException {
@@ -33,10 +62,81 @@ public class profileController {
 
     }
 
+    /**
+     * This method launch a FileChooser to select an image file.
+     * When this is done, the image is loaded to the profile image view.
+     */
     @FXML
-    protected void clickOnAddImage(ActionEvent event) {
+    protected void clickOnEditImage(ActionEvent event) {
+
+        // get the stage to open a new window to select an image
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+        // initialize the file chooser
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select an image");
+
+        // set the extension filter
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Image files (*.jpg, *.png)", "*.jpg", "*.png");
+        FileChooser.ExtensionFilter extFilter2 = new FileChooser.ExtensionFilter("All files (*.*)", "*.*");
+        fileChooser.getExtensionFilters().addAll(extFilter, extFilter2);
+
+        // set the initial directory
+        String userDirectoryString = System.getProperty("user.home");  // it works for windows as far as I know
+        File userDirectory = new File(userDirectoryString);
+        fileChooser.setInitialDirectory(userDirectory);
+
+
+        // open the file dialog
+        File tmpImageFile = fileChooser.showOpenDialog(stage);
+
+        if (tmpImageFile != null) {
+            imageFile = tmpImageFile;
+
+            // update the image view
+            if (imageFile.isFile()) {
+                try {
+                    BufferedImage bufferedImage = ImageIO.read(imageFile);
+                    Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+                    imageView.setImage(image);
+                    imgChanged = true;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 
     }
 
 
+    @Override
+    public void preloadData(User user) {
+        this.user = user;
+        userNameLabel.setText(user.getName());
+        sportsLabel.setText(user.getSports());
+        bioText.setText(user.getBio());
+
+    }
+
+
+
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        imgChanged = false;
+
+        // load the default image to profile image view
+        try {
+            imageFile = new File("./src/main/java/images/defaultPerson.png");
+            BufferedImage img = ImageIO.read(imageFile);
+            Image image = SwingFXUtils.toFXImage(img, null);
+            imageView.setImage(image);
+
+        } catch (IOException e) {
+            System.err.println("Error: " + e.getMessage());
+        }
+
+    }
 }

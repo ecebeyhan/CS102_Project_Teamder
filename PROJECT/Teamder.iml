@@ -13,7 +13,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/OneDrive/Masaüstü/postgresql-42.3.3.jar!/" />
+          <root url="jar://$MODULE_DIR$/dbLib/postgresql-42.3.4.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -33,5 +33,7 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.apiguardian:apiguardian-api:1.1.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-engine:5.8.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.platform:junit-platform-engine:1.8.1" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-swing:16" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-swing:win:16" level="project" />
   </component>
 </module>

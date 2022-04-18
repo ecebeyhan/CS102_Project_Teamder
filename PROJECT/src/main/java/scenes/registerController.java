@@ -91,11 +91,11 @@ public class registerController {
 
     public void createUser() throws IOException, SQLException {
         String sports = "";
-        if (footballCB.isSelected()) { sports += "Football,"; }
-        if (basketCB.isSelected()) { sports += "Basketball,"; }
-        if (tennisCB.isSelected()) { sports += "Tennis,"; }
-        if (volleyballCB.isSelected()) { sports += "Volleyball,"; }
-        if (sports.length() > 0) { sports = sports.substring(0,sports.length()-1); }
+        if (footballCB.isSelected()) { sports += "Football, "; }
+        if (basketCB.isSelected()) { sports += "Basketball, "; }
+        if (tennisCB.isSelected()) { sports += "Tennis, "; }
+        if (volleyballCB.isSelected()) { sports += "Volleyball, "; }
+        if (sports.length() > 0) { sports = sports.substring(0,sports.length()-2); }
         user = new User(nameTextField.getText(), passwordField.getText(), sports,bioTextArea.getText());
 
         user.insertUserToDB();
