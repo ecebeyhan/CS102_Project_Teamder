@@ -7,8 +7,6 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
@@ -16,7 +14,7 @@
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #93732;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #93732;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox alignment="CENTER" layoutX="407.0" prefHeight="400.0" prefWidth="194.0">
          <children>
@@ -40,52 +38,7 @@
             </HBox>
          </children>
       </VBox>
-      <ImageView fitHeight="56.0" fitWidth="58.0" layoutX="349.0" layoutY="351.0">
-         <image>
-            <Image url="@../../../../Users/doruk/Downloads/output-onlinepngtools.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="66.0" fitWidth="58.0" layoutX="300.0" layoutY="357.0" preserveRatio="true">
-         <image>
-            <Image url="@../../../../Users/doruk/Downloads/output-onlinepngtools%20(1).png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="30.0" fitWidth="37.0" layoutX="271.0" layoutY="379.0" preserveRatio="true">
-         <image>
-            <Image url="@../../../../Users/doruk/Downloads/output-onlinepngtools%20(3).png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="187.0" fitWidth="302.0" layoutX="55.0" layoutY="69.0" preserveRatio="true">
-         <image>
-            <Image url="@../../../../Users/doruk/Downloads/img.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="21.0" fitWidth="17.0" layoutX="110.0" layoutY="111.0" preserveRatio="true">
-         <image>
-            <Image url="@../../../../Users/doruk/Downloads/pngwing.com.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="21.0" fitWidth="17.0" layoutX="162.0" layoutY="170.0" preserveRatio="true">
-         <image>
-            <Image url="@../../../../Users/doruk/Downloads/pngwing.com.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="21.0" fitWidth="17.0" layoutX="226.0" layoutY="138.0" preserveRatio="true">
-         <image>
-            <Image url="@../../../../Users/doruk/Downloads/pngwing.com.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="21.0" fitWidth="17.0" layoutX="110.0" layoutY="200.0" preserveRatio="true">
-         <image>
-            <Image url="@../../../../Users/doruk/Downloads/pngwing.com.png" />
-         </image>
-      </ImageView>
       <RadioButton layoutX="118.0" layoutY="193.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="111.0" style="-fx-background-color: #ffffff; -fx-border-color: #949393;" text="Join the match" />
-      <ImageView fitHeight="17.0" fitWidth="10.0" layoutX="169.0" layoutY="179.0" preserveRatio="true">
-         <image>
-            <Image url="@cursor.png" />
-         </image>
-      </ImageView>
       <TextField alignment="CENTER" layoutX="86.0" layoutY="19.0" prefHeight="40.0" prefWidth="236.0" text="Toplanın Gençler!">
          <font>
             <Font size="18.0" />
@@ -119,11 +72,6 @@
             <Insets />
          </opaqueInsets>
       </VBox>
-      <ImageView fitHeight="17.0" fitWidth="10.0" layoutX="286.0" layoutY="120.0" preserveRatio="true">
-         <image>
-            <Image url="@cursor.png" />
-         </image>
-      </ImageView>
       <VBox layoutX="229.0" layoutY="59.0" prefHeight="43.0" prefWidth="114.0" style="-fx-background-color: #ffffff; -fx-border-color: #949393;">
          <children>
             <Label prefHeight="18.0" prefWidth="106.0" text="Rate: 4/5" />

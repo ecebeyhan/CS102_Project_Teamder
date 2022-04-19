@@ -15,11 +15,15 @@ public class SceneChanger {
     
     private static User loggedInUser;
 
-    
-    
     /**
      * This method will accept the title of the new scene, the .fxml file name for
      * the view and the ActionEvent that triggered the change
+     * IMPORTANT: This method does not preload next scene with a User Object!!!
+     * This method will be used only Welcome, Profile Creation and Login pages
+     * since these ones does not require any user information to be preloaded
+     * @param event ActionEvent that triggered the change
+     * @param viewName .fxml file name for the view (for example "Log_In.fxml")
+     * @param title Title of the new scene
      */
     public void changeScenes(ActionEvent event, String viewName, String title) throws IOException
     {
@@ -38,7 +42,12 @@ public class SceneChanger {
     }
     
     /**
-     * This method will change scenes and preload the next scene with a User object
+     * This method will change scenes and preload the next scene with specified User object
+     * @param event ActionEvent that triggered the change
+     * @param viewName .fxml file name for the view (for example "Log_In.fxml")
+     * @param title Title of the new scene
+     * @param user User object that will be preloaded in the next scene
+     * @param controllerClass Class of the controller for the next scene
      */
     public void changeScenes(ActionEvent event, String viewName, String title, User user, MainController controllerClass) throws IOException
     {

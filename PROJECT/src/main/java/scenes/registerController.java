@@ -89,6 +89,9 @@ public class registerController {
         sc.changeScenes(event, "Welcome_To_Teamder.fxml", "Welcome Page");
     }
 
+    /**
+     * Creates a new user and adds it to the database.
+     */
     public void createUser() throws IOException, SQLException {
         String sports = "";
         if (footballCB.isSelected()) { sports += "Football, "; }
@@ -96,9 +99,11 @@ public class registerController {
         if (tennisCB.isSelected()) { sports += "Tennis, "; }
         if (volleyballCB.isSelected()) { sports += "Volleyball, "; }
         if (sports.length() > 0) { sports = sports.substring(0,sports.length()-2); }
+
+        // create the User object with the information from the text fields
         user = new User(nameTextField.getText(), passwordField.getText(), sports,bioTextArea.getText());
 
-        user.insertUserToDB();
+        user.insertUserToDB(); // add into database
 
     }
 }

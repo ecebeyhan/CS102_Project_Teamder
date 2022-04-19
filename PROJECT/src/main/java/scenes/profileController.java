@@ -46,17 +46,32 @@ public class profileController implements MainController, Initializable {
     private boolean imgChanged;
     private User user;
 
+    /**
+     * This method is called when the user clicks on the Log Out button.
+     * Simply goes back to Login page.
+     * @param event the event that triggers the method
+     */
     @FXML
     protected void clickOnLogOut(ActionEvent event) throws IOException {
         SceneChanger sc = new SceneChanger();
         sc.changeScenes(event, "Log_In.fxml", "Login Page");
     }
 
+    /**
+     * This method is called when the user clicks on the Join a Match button.
+     * It will open a new window to allow the user to join a match. (*.fxml)
+     * @param event the event that triggers the method
+     */
     @FXML
     protected void clickOnJoin(ActionEvent event) {
 
     }
 
+    /**
+     * This method is called when the user clicks on the Start a Match button.
+     * It will open a new window to allow the user to start a match. (Match_Page.fxml)
+     * @param event the event that triggers the method
+     */
     @FXML
     protected void clickOnStart(ActionEvent event) {
 
@@ -65,10 +80,10 @@ public class profileController implements MainController, Initializable {
     /**
      * This method launch a FileChooser to select an image file.
      * When this is done, the image is loaded to the profile image view.
+     * @param event the event that triggers this method
      */
     @FXML
     protected void clickOnEditImage(ActionEvent event) {
-
         // get the stage to open a new window to select an image
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 
@@ -85,7 +100,6 @@ public class profileController implements MainController, Initializable {
         String userDirectoryString = System.getProperty("user.home");  // it works for windows as far as I know
         File userDirectory = new File(userDirectoryString);
         fileChooser.setInitialDirectory(userDirectory);
-
 
         // open the file dialog
         File tmpImageFile = fileChooser.showOpenDialog(stage);
@@ -105,20 +119,19 @@ public class profileController implements MainController, Initializable {
                 }
             }
         }
-
     }
 
-
+    /**
+     * This method preloads the profile page with the user's information.
+     * @param user the user to be loaded
+     */
     @Override
     public void preloadData(User user) {
         this.user = user;
         userNameLabel.setText(user.getName());
         sportsLabel.setText(user.getSports());
         bioText.setText(user.getBio());
-
     }
-
-
 
     /**
      * Initializes the controller class.

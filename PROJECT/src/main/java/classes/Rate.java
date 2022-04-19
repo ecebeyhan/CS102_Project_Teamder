@@ -26,9 +26,10 @@ public class Rate {
         this.count = count;
     }
 
-    //-----------------------------------------------------------------
-    //  Update method to updating the rate of the user
-    //-----------------------------------------------------------------
+    /**
+     * This method is used to calculate the average rating.
+     * @param rate The rating to be added to the current average.
+     */
     public void update(int rate) {
         this.rating = (rating * count + rate) / (this.count + 1);
         setCount(count++);

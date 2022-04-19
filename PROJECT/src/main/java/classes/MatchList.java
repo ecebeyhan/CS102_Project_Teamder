@@ -14,17 +14,19 @@ public class MatchList {
         this.matchList = matchList;
     }
 
-    //-----------------------------------------------------------------
-    //  Add new "Match" to "matchList" arraylist
-    //-----------------------------------------------------------------
+    /**
+     * Add a new match to the match list
+     * @param match the match to be added
+     */
     public void addMatch(Match match) {
         this.matchList.add(match);
     }
 
-    //-----------------------------------------------------------------
-    //  Filter the matches in "this"
-    //  Maçları aktiflik durumuna göre return
-    //-----------------------------------------------------------------
+    /**
+     * Order the match list by activation status
+     * @param active true if the match is active, false if the match is inactive
+     * @return the match list ordered by activation status
+     */
     public MatchList filter(boolean active) {
         MatchList newMatches = new MatchList(); // create new MatchList obj
         for (Match obj: this.matchList) {       // this MatchList'in içinde gez
@@ -35,14 +37,18 @@ public class MatchList {
         return newMatches;
     }
 
-    //-----------------------------------------------------------------
-    //  Filter the matches in "this"
-    //  Maçları verilen filtreye göre return
-    //-----------------------------------------------------------------
 
-    //public MatchList filter(Date date, String place, String[] sports, String name) {
-
-    //}
+//    /**
+//     * Filter the match list by the given parameters
+//     * @param date
+//     * @param place
+//     * @param sports
+//     * @param name
+//     * @return
+//     */
+//    public MatchList filter(Date date, String place, String[] sports, String name) {
+//
+//    }
 
 
 }

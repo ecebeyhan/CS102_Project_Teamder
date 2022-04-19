@@ -29,6 +29,15 @@ public class loginController implements Initializable {
     @FXML
     private Label errorLabel;
 
+    /**
+     * This method is used to login the user
+     * First it connects to the database
+     * Then it checks whether the user with the specified username exists
+     * If it does, it checks whether the password is correct
+     * If it is, it logs in the user
+     * Finally, opens the profile page with the user's information
+     * @param event
+     */
     @FXML
     protected void clickOnLogin(ActionEvent event) throws IOException, NoSuchAlgorithmException {
         Connection conn = null;
@@ -83,7 +92,6 @@ public class loginController implements Initializable {
                 user.setUserID(resultSet.getInt("userid"));
 
             }
-
             SceneChanger sc = new SceneChanger();
 
             if(uPass.equals(dbPassword)) {
@@ -96,12 +104,15 @@ public class loginController implements Initializable {
                 //if the user DNE
                 errorLabel.setText("There is no such a user!");
 
-
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
     }
 
+    /**
+     * This method is used to clear the text fields
+     * @param event
+     */
     @FXML
     protected void clickOnClear(ActionEvent event) {
         userNameTField.setText("");
@@ -109,11 +120,17 @@ public class loginController implements Initializable {
         errorLabel.setText("Inputs are cleaned!");
     }
 
+    /**
+     * This method is used to cancel the login
+     * Simply goes back to Welcome Page
+     * @param event
+     */
     @FXML
     protected void clickOnCancel(ActionEvent event) throws IOException {
         SceneChanger sc = new SceneChanger();
         sc.changeScenes(event, "Welcome_To_Teamder.fxml", "Welcome Page");
     }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
