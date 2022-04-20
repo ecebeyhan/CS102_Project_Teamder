@@ -6,18 +6,17 @@ public class Match {
 
     private Sport sport;
     private String place;
-    private Date date; // uygun bir class'la değişecez
+    private Date date;
     private boolean isActive; //
     private String name;
-    private int ID;
+    private int ID; // unique id
 
-    public Match(Sport sport, String place, Date date, boolean isActive, String name, int ID) {
-        this.sport = sport;
-        this.place = place;
-        this.date = date;
-        this.isActive = isActive;
-        this.name = name;
-        this.ID = ID;
+    public Match(Sport sport, String place, Date date, boolean isActive, String name) {
+        setActive(isActive);
+        setPlace(place);
+        setDate(date);
+        setSport(sport);
+        setName(name);
     }
 
     //-----------------------------------------------------------------
@@ -29,10 +28,6 @@ public class Match {
 
     public void setDate(Date date) {
         this.date = date;
-    }
-
-    public void setID(int ID) {
-        this.ID = ID;
     }
 
     public void setName(String name) {

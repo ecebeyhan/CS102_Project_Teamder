@@ -6,6 +6,7 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.ResourceBundle;
 
+import classes.Database;
 import classes.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -40,72 +41,16 @@ public class loginController implements Initializable {
      */
     @FXML
     protected void clickOnLogin(ActionEvent event) throws IOException, NoSuchAlgorithmException {
-        Connection conn = null;
-        PreparedStatement myStatement = null;
-        ResultSet resultSet = null;
-
         String uName = userNameTField.getText();
         String uPass = passTField.getText();
 
-        if(uName.length() < 1 || uPass.length() < 1) {
-            errorLabel.setText("Enter a valid input"); return;
+        if(uName.equals("") || uPass.equals("")) {
+            errorLabel.setText("Please fill in all the inputs!");
         }
-
-        try {
-            String url = "jdbc:postgresql://rogue.db.elephantsql.com:5432/iepnsbnu";
-            String username = "iepnsbnu";
-            String password = "RucLTf_zMlhMaa99HMxypHICcednwQix";
-
-            // 1 connect to db
-            conn = DriverManager.getConnection(url, username, password);
-
-            // 2 create a query ( with ? for user input)
-            String query = "SELECT * FROM users WHERE name = ?";
-
-            // 3 prepare the statement wanted to run on the sql
-            myStatement = conn.prepareStatement(query);
-
-            // 4 establish the '?' created in 'step 2'
-            myStatement.setString(1, uName);
-
-            // 5 execute the query
-            resultSet = myStatement.executeQuery();
-
-            // 6 get passwords from the db compare them with userNames
-            String dbPassword = null;
-            String sports = null;
-            String bio = null;
-            User user = null;
-
-            while (resultSet.next()) {
-
-                dbPassword = resultSet.getString("password");
-
-                sports = resultSet.getString("sports");
-
-                bio = resultSet.getString("bio");
-
-                user = new User(uName,
-                        resultSet.getString("password"),
-                        resultSet.getString("sports"),
-                        resultSet.getString("bio"));
-                user.setUserID(resultSet.getInt("userid"));
-
+        else {
+            if(!Database.login(uName, uPass, event)){
+                errorLabel.setText("Wrong username or password!");
             }
-            SceneChanger sc = new SceneChanger();
-
-            if(uPass.equals(dbPassword)) {
-                // errorLabel.setText("Logged in successfully!");
-                SceneChanger.setLoggedInUser(user);
-                profileController controllerClass = new profileController();
-                sc.changeScenes(event, "Profile_Page.fxml", "Profile Page", user, controllerClass);
-            }
-            else
-                //if the user DNE
-                errorLabel.setText("There is no such a user!");
-
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
         }
     }
 
@@ -128,7 +73,7 @@ public class loginController implements Initializable {
     @FXML
     protected void clickOnCancel(ActionEvent event) throws IOException {
         SceneChanger sc = new SceneChanger();
-        sc.changeScenes(event, "Welcome_To_Teamder.fxml", "Welcome Page");
+        sc.changeScenes(event, "Welcome_To_Teamder.fxml", "Teamder | Welcome Page");
     }
 
 

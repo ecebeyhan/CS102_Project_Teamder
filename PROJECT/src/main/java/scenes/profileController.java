@@ -1,5 +1,7 @@
 package scenes;
 
+import classes.Database;
+import classes.ImageHandler;
 import classes.User;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
@@ -54,7 +56,7 @@ public class profileController implements MainController, Initializable {
     @FXML
     protected void clickOnLogOut(ActionEvent event) throws IOException {
         SceneChanger sc = new SceneChanger();
-        sc.changeScenes(event, "Log_In.fxml", "Login Page");
+        sc.changeScenes(event, "Log_In.fxml", "Teamder | Login Page");
     }
 
     /**
@@ -83,42 +85,8 @@ public class profileController implements MainController, Initializable {
      * @param event the event that triggers this method
      */
     @FXML
-    protected void clickOnEditImage(ActionEvent event) {
-        // get the stage to open a new window to select an image
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-        // initialize the file chooser
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Select an image");
-
-        // set the extension filter
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Image files (*.jpg, *.png)", "*.jpg", "*.png");
-        FileChooser.ExtensionFilter extFilter2 = new FileChooser.ExtensionFilter("All files (*.*)", "*.*");
-        fileChooser.getExtensionFilters().addAll(extFilter, extFilter2);
-
-        // set the initial directory
-        String userDirectoryString = System.getProperty("user.home");  // it works for windows as far as I know
-        File userDirectory = new File(userDirectoryString);
-        fileChooser.setInitialDirectory(userDirectory);
-
-        // open the file dialog
-        File tmpImageFile = fileChooser.showOpenDialog(stage);
-
-        if (tmpImageFile != null) {
-            imageFile = tmpImageFile;
-
-            // update the image view
-            if (imageFile.isFile()) {
-                try {
-                    BufferedImage bufferedImage = ImageIO.read(imageFile);
-                    Image image = SwingFXUtils.toFXImage(bufferedImage, null);
-                    imageView.setImage(image);
-                    imgChanged = true;
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+    protected void clickOnEditImage(ActionEvent event) throws IOException {
+        ImageHandler.editImage(event, imageFile, imageView, imgChanged);
     }
 
     /**
