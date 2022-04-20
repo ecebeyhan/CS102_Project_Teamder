@@ -1,5 +1,6 @@
 package scenes;
 
+import classes.Database;
 import classes.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -33,10 +34,6 @@ public class registerController {
     private RadioButton volleyballCB;
     @FXML
     private PasswordField passwordField;
-
-    private User user;
-
-
 
     @FXML
     protected void clickRegisterButton(ActionEvent event) throws IOException, SQLException {
@@ -77,7 +74,14 @@ public class registerController {
             return;
         }
         else {
-            createUser();
+            String sports = "";
+            if (footballCB.isSelected()) { sports += "Football, "; }
+            if (basketCB.isSelected()) { sports += "Basketball, "; }
+            if (tennisCB.isSelected()) { sports += "Tennis, "; }
+            if (volleyballCB.isSelected()) { sports += "Volleyball, "; }
+            if (sports.length() > 0) { sports = sports.substring(0,sports.length()-2); }
+
+            Database.createUser(nameTextField.getText(), passwordField.getText(), bioTextArea.getText(), sports);
             label.setText("Account has been created!");
             label2.setText(" Click on 'Cancel' to return Login Page.");
         }
@@ -86,24 +90,6 @@ public class registerController {
     @FXML
     protected void clickCancelButton(ActionEvent event) throws IOException {
         SceneChanger sc = new SceneChanger();
-        sc.changeScenes(event, "Welcome_To_Teamder.fxml", "Welcome Page");
-    }
-
-    /**
-     * Creates a new user and adds it to the database.
-     */
-    public void createUser() throws IOException, SQLException {
-        String sports = "";
-        if (footballCB.isSelected()) { sports += "Football, "; }
-        if (basketCB.isSelected()) { sports += "Basketball, "; }
-        if (tennisCB.isSelected()) { sports += "Tennis, "; }
-        if (volleyballCB.isSelected()) { sports += "Volleyball, "; }
-        if (sports.length() > 0) { sports = sports.substring(0,sports.length()-2); }
-
-        // create the User object with the information from the text fields
-        user = new User(nameTextField.getText(), passwordField.getText(), sports,bioTextArea.getText());
-
-        user.insertUserToDB(); // add into database
-
+        sc.changeScenes(event, "Welcome_To_Teamder.fxml", "Teamder | Welcome Page");
     }
 }
