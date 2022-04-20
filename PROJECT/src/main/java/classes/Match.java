@@ -12,12 +12,12 @@ public class Match {
     private int ID;
 
     public Match(Sport sport, String place, Date date, boolean isActive, String name, int ID) {
-        setActive(isActive);
-        setPlace(place);
-        setDate(date);
-        setSport(sport);
-        setName(name);
-        setID(ID);
+        this.sport = sport;
+        this.place = place;
+        this.date = date;
+        this.isActive = isActive;
+        this.name = name;
+        this.ID = ID;
     }
 
     //-----------------------------------------------------------------
