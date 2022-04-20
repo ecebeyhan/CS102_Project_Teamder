@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Main-Class: scenes.Main
+Class-Path: ./src/main/java/classes
+
