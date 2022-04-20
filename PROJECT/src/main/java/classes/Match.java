@@ -10,14 +10,16 @@ public class Match {
     private boolean isActive; //
     private String name;
     private int ID;
+    private User[] teamA; //userlar girdikçe onları ekleyecek bir method?
+    private User[] teamB; 
 
     public Match(Sport sport, String place, Date date, boolean isActive, String name, int ID) {
-        this.sport = sport;
-        this.place = place;
-        this.date = date;
-        this.isActive = isActive;
-        this.name = name;
-        this.ID = ID;
+        setSport(sport);
+        setPlace(place);
+        setDate(date);
+        setActive(isActive);
+        setName(name);
+        setID(ID);
     }
 
     //-----------------------------------------------------------------
