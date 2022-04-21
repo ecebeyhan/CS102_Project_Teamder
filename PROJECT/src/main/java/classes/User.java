@@ -23,7 +23,6 @@ public class User {
     private String sports;  // interested sports (gostermelik)
     private String bio;
     private File imageFile;
-    private ArrayList<User> friendsList;
     private Rate rating;
 
     /**
@@ -59,10 +58,6 @@ public class User {
     //-----------------------------------------------------------------
     //  Getter methods for all instance variables
     //-----------------------------------------------------------------
-    public ArrayList<User> getFriendsList() {
-        return friendsList;
-    }
-
     public Rate getRating() {
         return rating;
     }
@@ -94,10 +89,6 @@ public class User {
     //-----------------------------------------------------------------
     //  Setter methods for all instance variables
     //-----------------------------------------------------------------
-    public void setFriendsList(ArrayList<User> friendsList) {
-        this.friendsList = friendsList;
-    }
-
     public void setRating(Rate rating) {
         this.rating = rating;
     }
@@ -124,12 +115,6 @@ public class User {
     public void setSports(String sports) {
         this.sports = sports;
     }
-
-    public void addFriend(User friend) {
-        this.friendsList.add(friend);
-    }
-
-
 
     /**
      * toString method
