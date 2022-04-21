@@ -1,3 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
+  All rights reserved. Use is subject to license terms.
+
+  This file is available and licensed under the following license:
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions
+  are met:
+
+  - Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+  - Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in
+    the documentation and/or other materials provided with the distribution.
+  - Neither the name of Oracle Corporation nor the names of its
+    contributors may be used to endorse or promote products derived
+    from this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
@@ -13,58 +47,58 @@
 <?import javafx.scene.text.Font?>
 
 <VBox prefHeight="383.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FindMatch">
-    <children>
-        <SplitPane prefHeight="385.0" prefWidth="640.0">
-            <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="403.0" prefWidth="638.0">
-                    <children>
-                        <Label layoutX="12.0" layoutY="62.0" text="Sports" />
-                        <CheckBox layoutX="13.0" layoutY="82.0" mnemonicParsing="false" text="Football" />
-                        <CheckBox layoutX="13.0" layoutY="102.0" mnemonicParsing="false" text="Volleyball" />
-                        <CheckBox layoutX="13.0" layoutY="123.0" mnemonicParsing="false" text="Basketball" />
-                        <CheckBox layoutX="13.0" layoutY="143.0" mnemonicParsing="false" text="Tennis" />
-                        <Label layoutX="15.0" layoutY="172.0" text="City" />
-                        <ComboBox layoutX="13.0" layoutY="192.0" prefWidth="150.0" promptText="Ankara" />
-                        <Label layoutX="13.0" layoutY="230.0" text="Date" />
-                        <DatePicker layoutX="11.0" layoutY="250.0" promptText="DD/MM/YYYY" />
-                        <ScrollPane layoutX="230.0" layoutY="-3.0" prefHeight="385.0" prefWidth="409.0">
-                            <content>
-                                <Pane prefHeight="600.0" prefWidth="397.0">
-                                    <children>
-                                        <TextField layoutX="17.0" layoutY="39.0" promptText="Enter match name" />
-                                        <Label layoutX="17.0" layoutY="68.0" prefHeight="20.0" prefWidth="247.0" text="2 Matches found">
-                                            <font>
-                                                <Font size="18.0" />
-                                            </font>
-                                        </Label>
-                                        <Pane layoutX="17.0" layoutY="98.0" prefHeight="85.0" prefWidth="174.0">
-                                            <children>
-                                                <Hyperlink layoutX="-3.0" layoutY="5.0" text="Toplanın Gençler!" />
-                                                <Label layoutX="3.0" layoutY="26.0" text="City: Ankara" />
-                                                <Label layoutX="3.0" layoutY="43.0" text="Date: 2022/04/03" />
-                                            </children>
-                                        </Pane>
-                                        <Pane layoutX="17.0" layoutY="184.0" prefHeight="85.0" prefWidth="160.0">
-                                            <children>
-                                                <Hyperlink layoutY="3.0" text="Kaleci Olmak İstemiyorum!!" />
-                                                <Label layoutX="4.0" layoutY="26.0" text="City: Ankara" />
-                                                <Label layoutX="4.0" layoutY="45.0" text="Date: 2022/04/03" />
-                                            </children>
-                                        </Pane>
-                                        <Button layoutX="177.0" layoutY="39.0" mnemonicParsing="false" onAction="#clickSearchButton" text="SEARCH" />
-                                    </children>
-                                </Pane>
-                            </content>
-                        </ScrollPane>
-                        <Label layoutX="15.0" layoutY="39.0" text="Filter Matches">
-                            <font>
-                                <Font name="System Bold" size="14.0" />
-                            </font>
-                        </Label>
-                        <Button layoutX="1.0" layoutY="2.0" mnemonicParsing="false" text="BACK" />
-                    </children>
-                </AnchorPane>
-            </items>
-        </SplitPane>
-    </children>
+  <children>
+      <SplitPane prefHeight="385.0" prefWidth="640.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="403.0" prefWidth="638.0">
+               <children>
+                  <Label layoutX="12.0" layoutY="62.0" text="Sports" />
+                  <CheckBox layoutX="13.0" layoutY="82.0" mnemonicParsing="false" text="Football" />
+                  <CheckBox layoutX="13.0" layoutY="102.0" mnemonicParsing="false" text="Volleyball" />
+                  <CheckBox layoutX="13.0" layoutY="123.0" mnemonicParsing="false" text="Basketball" />
+                  <CheckBox layoutX="13.0" layoutY="143.0" mnemonicParsing="false" text="Tennis" />
+                  <Label layoutX="15.0" layoutY="172.0" text="City" />
+                  <ComboBox layoutX="13.0" layoutY="192.0" prefWidth="150.0" promptText="Ankara" />
+                  <Label layoutX="13.0" layoutY="230.0" text="Date" />
+                  <DatePicker layoutX="11.0" layoutY="250.0" promptText="DD/MM/YYYY" />
+                  <ScrollPane layoutX="230.0" layoutY="-3.0" prefHeight="385.0" prefWidth="409.0">
+                     <content>
+                        <Pane prefHeight="600.0" prefWidth="397.0">
+                           <children>
+                              <TextField layoutX="17.0" layoutY="39.0" promptText="Enter match name" />
+                              <Label layoutX="17.0" layoutY="68.0" prefHeight="20.0" prefWidth="247.0" text="2 Matches found">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Pane layoutX="17.0" layoutY="98.0" prefHeight="85.0" prefWidth="174.0">
+                                 <children>
+                                    <Hyperlink layoutX="-3.0" layoutY="5.0" text="Toplanın Gençler!" />
+                                    <Label layoutX="3.0" layoutY="26.0" text="City: Ankara" />
+                                    <Label layoutX="3.0" layoutY="43.0" text="Date: 2022/04/03" />
+                                 </children>
+                              </Pane>
+                              <Pane layoutX="17.0" layoutY="184.0" prefHeight="85.0" prefWidth="160.0">
+                                 <children>
+                                    <Hyperlink layoutY="3.0" text="Kaleci Olmak İstemiyorum!!" />
+                                    <Label layoutX="4.0" layoutY="26.0" text="City: Ankara" />
+                                    <Label layoutX="4.0" layoutY="45.0" text="Date: 2022/04/03" />
+                                 </children>
+                              </Pane>
+                              <Button layoutX="177.0" layoutY="39.0" mnemonicParsing="false" onAction="#clickSearchButton" text="SEARCH" />
+                           </children>
+                        </Pane>
+                     </content>
+                  </ScrollPane>
+                  <Label layoutX="15.0" layoutY="39.0" text="Filter Matches">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="1.0" layoutY="2.0" mnemonicParsing="false" text="BACK" />
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+  </children>
 </VBox>
