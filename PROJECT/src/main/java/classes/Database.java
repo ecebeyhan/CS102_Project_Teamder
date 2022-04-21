@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import scenes.SceneChanger;
 import scenes.profileController;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.*;
 
@@ -47,20 +48,52 @@ public class Database {
     }
 
     /**
-     * @param uName
-     * @param uPass
-     * @param event
+     * Updates the user's image in the database.
+     * @param image The image to be updated.
+     * @param user The user to be updated.
      */
-    public static boolean login(String uName, String uPass, ActionEvent event) {
+    public static void imageChange(File image, User user) throws SQLException, IOException {
+        Connection myConnection = null;
+        Statement myStat = null;
+        boolean operation = false;
+        try {
+            myConnection = DriverManager.getConnection(url, username, password);
+            myStat = myConnection.createStatement();
+            myStat.execute("UPDATE public.\"users\" SET imagefile = '" + image.getName() + "' WHERE \"name\" = '"+ user.getName() + "';");
+            operation = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (myConnection != null) {
+                myConnection.close();
+            }
+            if (myStat != null) {
+                myStat.close();
+            }
+        }
+        if(operation) {
+            user.setImageFile(image);
+        }
+
+    }
+
+    /**
+     * This method is used to login the user
+     * First it connects to the database
+     * Then it checks whether the user with the specified username exists
+     * If it does, it checks whether the password is correct
+     * If it is, it logs in the user
+     * Finally, opens the profile page with the user's information
+     * @param event The event that triggered the method
+     * @param uName The username of the user
+     * @param uPass The password of the user
+     */
+    public static boolean login(String uName, String uPass, ActionEvent event) throws SQLException {
         Connection conn = null;
         PreparedStatement myStatement = null;
         ResultSet resultSet = null;
 
         try {
-            String url = "jdbc:postgresql://rogue.db.elephantsql.com:5432/iepnsbnu";
-            String username = "iepnsbnu";
-            String password = "RucLTf_zMlhMaa99HMxypHICcednwQix";
-
             // 1 connect to db
             conn = DriverManager.getConnection(url, username, password);
 
@@ -80,22 +113,22 @@ public class Database {
             String dbPassword = null;
             String sports = null;
             String bio = null;
+            File imageFile = null;
             User user = null;
 
             while (resultSet.next()) {
 
                 dbPassword = resultSet.getString("password");
-
+//
                 sports = resultSet.getString("sports");
-
+//
                 bio = resultSet.getString("bio");
 
-                user = new User(uName,
-                        resultSet.getString("password"),
-                        resultSet.getString("sports"),
-                        resultSet.getString("bio"));
-                user.setUserID(resultSet.getInt("userid"));
-
+                imageFile = new File(ImageHandler.IMAGE_PATH + resultSet.getString("imagefile"));
+                if (imageFile.isFile())
+                    user = new User(uName, dbPassword,sports, bio, imageFile);
+                else
+                    user = new User(uName, dbPassword,sports, bio);
             }
             SceneChanger sc = new SceneChanger();
 
@@ -108,6 +141,14 @@ public class Database {
                 return false;
         } catch (Exception e) {
             System.err.println(e.getMessage());
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+            if (myStatement != null) {
+                myStatement.close();
+            }
+
         }
         return false;
     }
