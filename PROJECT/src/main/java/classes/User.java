@@ -1,15 +1,9 @@
 package classes;
 
+import javafx.scene.image.Image;
+
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.security.SecureRandom;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -24,7 +18,6 @@ public class User {
 
     }
 
-    private int userID;         // a uniqe ID for every users
     private String userName;
     private String password;
     private String sports;  // interested sports (gostermelik)
@@ -41,7 +34,7 @@ public class User {
      * @param sports the interested sports of the user
      * @param bio the bio of the user
      */
-    public User(String name, String password, String sports, String bio) throws IOException {
+    public User(String name, String password, String sports, String bio) throws IOException, SQLException {
         setUserName(name);
         setBio(bio);
         setPassword(password);
@@ -57,9 +50,10 @@ public class User {
      * @param bio the bio of the user
      * @param imageFile the image of the user
      */
-    public User(String name, String password, String sports, String bio, File imageFile) throws IOException {
+    public User(String name, String password, String sports, String bio, File imageFile) throws IOException, SQLException {
         this(name, password, sports, bio);
         setImageFile(imageFile);
+        ImageHandler.copyImageFile(imageFile);
     }
 
     //-----------------------------------------------------------------
@@ -93,8 +87,8 @@ public class User {
         return userName;
     }
 
-    public File getImageFile() {
-        return imageFile;
+    public String getImageFile() {
+        return imageFile.getName();
     }
     
     //-----------------------------------------------------------------
@@ -119,7 +113,7 @@ public class User {
             throw new IllegalArgumentException("Password must be shorter than 20 characters");
     }
 
-    public void setImageFile(File imageFile) throws IOException {
+    public void setImageFile(File imageFile) throws IOException, SQLException {
         this.imageFile = imageFile;
     }
 
@@ -129,10 +123,6 @@ public class User {
 
     public void setSports(String sports) {
         this.sports = sports;
-    }
-
-    public void setUserID(int userID) {
-        this.userID = userID;
     }
 
     public void addFriend(User friend) {

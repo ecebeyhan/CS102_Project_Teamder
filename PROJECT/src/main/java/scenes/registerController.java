@@ -1,7 +1,6 @@
 package scenes;
 
 import classes.Database;
-import classes.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -67,8 +66,6 @@ public class registerController {
             passwordField.clear();
             return;
         }
-
-
         if ( !(footballCB.isSelected() || tennisCB.isSelected() || basketCB.isSelected() || volleyballCB.isSelected())) {
             label.setText("Select (a) sport(s)!");
             return;

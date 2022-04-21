@@ -1,22 +1,19 @@
 package scenes;
 
 import java.io.IOException;
-import java.net.URL;
-import java.security.NoSuchAlgorithmException;
 import java.sql.*;
-import java.util.ResourceBundle;
 
 import classes.Database;
-import classes.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
-public class loginController implements Initializable {
+public class loginController {
     @FXML
     private TextField userNameTField;
     @FXML
@@ -30,17 +27,9 @@ public class loginController implements Initializable {
     @FXML
     private Label errorLabel;
 
-    /**
-     * This method is used to login the user
-     * First it connects to the database
-     * Then it checks whether the user with the specified username exists
-     * If it does, it checks whether the password is correct
-     * If it is, it logs in the user
-     * Finally, opens the profile page with the user's information
-     * @param event
-     */
+
     @FXML
-    protected void clickOnLogin(ActionEvent event) throws IOException, NoSuchAlgorithmException {
+    protected void clickOnLogin(ActionEvent event) throws IOException, SQLException {
         String uName = userNameTField.getText();
         String uPass = passTField.getText();
 
@@ -76,9 +65,4 @@ public class loginController implements Initializable {
         sc.changeScenes(event, "Welcome_To_Teamder.fxml", "Teamder | Welcome Page");
     }
 
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        errorLabel.setText("");
-    }
 }

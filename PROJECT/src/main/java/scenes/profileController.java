@@ -1,29 +1,23 @@
 package scenes;
 
-import classes.Database;
 import classes.ImageHandler;
 import classes.User;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.sql.SQLException;
 
-public class profileController implements MainController, Initializable {
+public class profileController implements MainController  {
 
     @FXML
     private Button logOutButton;
@@ -45,7 +39,6 @@ public class profileController implements MainController, Initializable {
     private ImageView imageView;
 
     private File imageFile;
-    private boolean imgChanged;
     private User user;
 
     /**
@@ -85,8 +78,8 @@ public class profileController implements MainController, Initializable {
      * @param event the event that triggers this method
      */
     @FXML
-    protected void clickOnEditImage(ActionEvent event) throws IOException {
-        ImageHandler.editImage(event, imageFile, imageView, imgChanged);
+    protected void clickOnEditImage(ActionEvent event) throws IOException, SQLException {
+        ImageHandler.editImage(event, imageFile, imageView, user);
     }
 
     /**
@@ -94,30 +87,21 @@ public class profileController implements MainController, Initializable {
      * @param user the user to be loaded
      */
     @Override
-    public void preloadData(User user) {
+    public void preloadData(User user) throws IOException {
         this.user = user;
         userNameLabel.setText(user.getName());
         sportsLabel.setText(user.getSports());
         bioText.setText(user.getBio());
-    }
 
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        imgChanged = false;
-
-        // load the default image to profile image view
-        try {
-            imageFile = new File("./src/main/java/images/defaultPerson.png");
-            BufferedImage img = ImageIO.read(imageFile);
-            Image image = SwingFXUtils.toFXImage(img, null);
-            imageView.setImage(image);
-
-        } catch (IOException e) {
-            System.err.println("Error: " + e.getMessage());
+        try{
+            imageFile = new File(ImageHandler.IMAGE_PATH + user.getImageFile());
+            BufferedImage bufferedImage = ImageIO.read(imageFile);
+            Image img = SwingFXUtils.toFXImage(bufferedImage, null);
+            imageView.setImage(img);
         }
-
+        catch (IOException e)
+        {
+            System.err.println(e.getMessage());
+        }
     }
 }
