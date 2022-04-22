@@ -18,19 +18,58 @@ public class Database {
     private final static String username = "iepnsbnu";
     private final static String password = "RucLTf_zMlhMaa99HMxypHICcednwQix";
 
+    public static void main(String[] args) {
+        Database db = new Database();
+        db.connect();
+    }
     // to connect to the database
     public void connect() {
         try {
             Connection myConnection = DriverManager.getConnection(url, username, password);
             System.out.println("Connected!!");
             Statement myStat = myConnection.createStatement();
-            ResultSet myRs = myStat.executeQuery("SELECT * FROM public.user"); // write sql command
+            ResultSet myRs = myStat.executeQuery("SELECT * FROM public.usermatch WHERE name = 'basar123'"); // write sql command
             while (myRs.next()) {
-                System.out.printf("User Name: %s\n Password: %s\n Sports: %s\n Bio: %s\n", myRs.getString("userName"),
-                        myRs.getString("pass"), myRs.getString("sports"), myRs.getString("bio"));
+                System.out.println(myRs.getString("name"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void addMatch(User user, Match match) throws SQLException {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+
+            // 1 connect to db
+            conn = DriverManager.getConnection(url, username, password);
+            System.out.println("Connected!!");
+
+            // 2 create a query ( with ? for user input)
+            String query = "INSERT INTO usermatch(name, matchid) VALUES ( '?', ?)";
+
+            // 3 prepare the statement wanted to run on the sql
+            stmt = conn.prepareStatement(query);
+
+            // 4 establish the '?' created in 'step 2'
+            stmt.setString(1, user.getName());
+            stmt.setInt(2, match.getID());
+
+            // 5 execute the query
+            rs = stmt.executeQuery();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+            if (stmt != null) {
+                stmt.close();
+            }
         }
     }
 
