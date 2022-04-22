@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="428d6320-1634-4431-9e66-193031e02ddc" name="Changes" comment="" />
+    <list default="true" id="428d6320-1634-4431-9e66-193031e02ddc" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PROJECT/src/main/java/classes/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/PROJECT/src/main/java/classes/Database.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PROJECT/src/main/java/classes/Match.java" beforeDir="false" afterPath="$PROJECT_DIR$/PROJECT/src/main/java/classes/Match.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PROJECT/target/classes/classes/Database.class" beforeDir="false" afterPath="$PROJECT_DIR$/PROJECT/target/classes/classes/Database.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -11,7 +16,7 @@
     <option name="done" value="true" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/PROJECT" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -33,6 +38,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.DirectoryMappings" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -44,5 +50,10 @@
       <updated>1650560389792</updated>
     </task>
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/PROJECT" />
+    </ignored-roots>
   </component>
 </project>
