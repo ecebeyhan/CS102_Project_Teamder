@@ -1,5 +1,6 @@
 package classes;
 
+import javafx.scene.chart.PieChart;
 import javafx.scene.image.Image;
 
 import java.io.File;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 public class User {
 
     public static void main(String[] args) throws IOException, SQLException {
-        User user = new User("basar", "3111", "tenis", "mbgci ",
+        User user = new User("basar", "3111", "patates", "eski csci ",
                         new File ("./src/main/java/images/denemefoto.png"));
                         System.out.println(user);
         Database.insertUserToDB(user);
@@ -23,6 +24,7 @@ public class User {
     private String sports;  // interested sports (gostermelik)
     private String bio;
     private File imageFile;
+    private ArrayList<Match> matchList;
     private Rate rating;
 
     /**
@@ -38,6 +40,7 @@ public class User {
         setBio(bio);
         setPassword(password);
         setSports(sports);
+        matchList = new ArrayList<Match>();
         setImageFile(new File("./src/main/java/images/defaultPerson.png"));
     }
 
@@ -51,6 +54,7 @@ public class User {
      */
     public User(String name, String password, String sports, String bio, File imageFile) throws IOException, SQLException {
         this(name, password, sports, bio);
+        matchList = new ArrayList<Match>();
         setImageFile(imageFile);
         ImageHandler.copyImageFile(imageFile);
     }
@@ -85,7 +89,11 @@ public class User {
     public String getImageFile() {
         return imageFile.getName();
     }
-    
+
+    public ArrayList<Match> getMatchList() {
+        return matchList;
+    }
+
     //-----------------------------------------------------------------
     //  Setter methods for all instance variables
     //-----------------------------------------------------------------
@@ -114,6 +122,15 @@ public class User {
 
     public void setSports(String sports) {
         this.sports = sports;
+    }
+
+    public void setMatchList(ArrayList<Match> matchList) {
+        this.matchList = matchList;
+    }
+
+    public void addMatch(Match match) throws SQLException {
+        matchList.add(match);
+        Database.addMatch(this, match);
     }
 
     /**

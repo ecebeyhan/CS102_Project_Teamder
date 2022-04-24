@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import scenes.SceneChanger;
 import scenes.profileController;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.sql.*;
@@ -21,6 +22,7 @@ public class Database {
     public static void main(String[] args) {
         Database db = new Database();
         db.connect();
+
     }
     // to connect to the database
     public void connect() {
@@ -37,7 +39,61 @@ public class Database {
         }
     }
 
-    public void addMatch(User user, Match match) throws SQLException {
+    public static User getUser(String name) throws SQLException {
+        Connection conn = null;
+        Statement myStat = null;
+        User user = null;
+        try {
+            conn = DriverManager.getConnection(url, username, password);
+            System.out.println("Connected!!");
+            myStat = conn.createStatement();
+            ResultSet myRs = myStat.executeQuery("SELECT * FROM users WHERE name = '" + name + "'"); // write sql command
+            while (myRs.next()) {
+                user = new User(myRs.getString("name"),
+                        myRs.getString("password"),
+                        myRs.getString("sport"),
+                        myRs.getString("bio"),
+                        new File(ImageHandler.IMAGE_PATH + myRs.getString("image")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+            if (myStat != null) {
+                myStat.close();
+            }
+        }
+        return user;
+    }
+
+    public static void getMatches(User user) throws SQLException {
+        Connection conn = null;
+        Statement myStat = null;
+        try {
+            conn = DriverManager.getConnection(url, username, password);
+            System.out.println("Connected!!");
+            myStat = conn.createStatement();
+            ResultSet myRs = myStat.executeQuery("SELECT * FROM public.usermatch WHERE name = '" + user.getName() + "'"); // write sql command
+            while (myRs.next()) {
+                System.out.println(myRs.getString("matchid"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+            if (myStat != null) {
+                myStat.close();
+            }
+        }
+    }
+
+    public static void addMatch(User user, Match match) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -74,7 +130,7 @@ public class Database {
     }
 
     // A Method to add a user to the database
-    public void insert(int ID, String userName, String pass, String sports, String bio) {
+    public static void insert(int ID, String userName, String pass, String sports, String bio) {
         try {
             Connection myConnection = DriverManager.getConnection(url, username, password);
             System.out.println("Connected!!");
