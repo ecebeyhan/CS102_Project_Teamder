@@ -8,7 +8,6 @@ import javafx.event.ActionEvent;
 import scenes.SceneChanger;
 import scenes.profileController;
 
-import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.sql.*;
@@ -19,10 +18,8 @@ public class Database {
     private final static String username = "iepnsbnu";
     private final static String password = "RucLTf_zMlhMaa99HMxypHICcednwQix";
 
-    public static void main(String[] args) {
-        Database db = new Database();
-        db.connect();
-
+    public static void main(String[] args) throws SQLException {
+        getMatches(getUser("basar123"));
     }
     // to connect to the database
     public void connect() {
@@ -39,6 +36,10 @@ public class Database {
         }
     }
 
+    /**
+     * Get user according to the username
+     * @param name the username to get the user for
+     */
     public static User getUser(String name) throws SQLException {
         Connection conn = null;
         Statement myStat = null;
@@ -51,9 +52,9 @@ public class Database {
             while (myRs.next()) {
                 user = new User(myRs.getString("name"),
                         myRs.getString("password"),
-                        myRs.getString("sport"),
+                        myRs.getString("sports"),
                         myRs.getString("bio"),
-                        new File(ImageHandler.IMAGE_PATH + myRs.getString("image")));
+                        new File(ImageHandler.IMAGE_PATH + myRs.getString("imagefile")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -70,6 +71,10 @@ public class Database {
         return user;
     }
 
+    /**
+     * Get matches for the user
+     * @param user the user to get the matches for
+     */
     public static void getMatches(User user) throws SQLException {
         Connection conn = null;
         Statement myStat = null;
@@ -93,6 +98,11 @@ public class Database {
         }
     }
 
+    /**
+     * Add a match linked to the user
+     * @param user the user to add the match to
+     * @param match the match to add
+     */
     public static void addMatch(User user, Match match) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
