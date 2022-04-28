@@ -70,9 +70,10 @@ public class profileController implements MainController  {
      * @param event the event that triggers the method
      */
     @FXML
-    protected void clickOnStart(ActionEvent event) throws IOException {
+    protected void clickOnStart(ActionEvent event) throws IOException, SQLException {
         SceneChanger sc = new SceneChanger();
-        sc.changeScenes(event, "Create_Match_Page.fxml", "Teamder | Create Match Page");
+        MainController controllerClass = new createMatchController();
+        sc.changeScenes(event, "Create_Match_Page.fxml", "Teamder | Create Match Page", user.getName(), controllerClass);
 
     }
 
@@ -107,5 +108,10 @@ public class profileController implements MainController  {
         {
             System.err.println(e.getMessage());
         }
+    }
+
+    @Override
+    public void setLabel(String name) {
+        return;
     }
 }

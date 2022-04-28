@@ -9,4 +9,6 @@ import java.util.ResourceBundle;
 
 public interface MainController {
     public abstract void preloadData(User volunteer) throws IOException;
+
+    void setLabel(String name);
 }
