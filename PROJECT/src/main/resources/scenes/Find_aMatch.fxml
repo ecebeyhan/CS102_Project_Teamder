@@ -92,7 +92,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Button fx:id="cancelButton" layoutX="1.0" layoutY="2.0" mnemonicParsing="false" text="BACK" />
+                  <Button fx:id="cancelButton" layoutX="1.0" layoutY="2.0" mnemonicParsing="false" onAction="#clickOnCancel" text="CANCEL" />
                   <RadioButton fx:id="footballRadioButton" layoutX="18.0" layoutY="87.0" mnemonicParsing="false" text="Football">
                      <toggleGroup>
                         <ToggleGroup fx:id="sports" />
