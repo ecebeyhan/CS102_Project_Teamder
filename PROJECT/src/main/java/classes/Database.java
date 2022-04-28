@@ -314,7 +314,6 @@ public class Database {
             // 4. put values into the parameters
             preparedStatement.setString(1, u.getName());
             preparedStatement.setString(2, u.getPassword());
-//            preparedStatement.setString(3, imageFile.getName());
             preparedStatement.setString(3, u.getSports());
             preparedStatement.setString(4, u.getBio());
 
@@ -350,7 +349,7 @@ public class Database {
             conn = DriverManager.getConnection(url, username, password);
 
             // 2. create a String holding query with ? as user inputs
-            String sql = "INSERT INTO match (name, spors, place, date, starTime, endTime) VALUES (?, ?, ?, ?, ? ,?);";
+            String sql = "INSERT INTO match (name, spors, place, \"date \", \"startTime\", \"endTime\") VALUES (?, ?, ?, ?, ? ,?);";
 
             // 3. create the query
             preparedStatement = conn.prepareStatement(sql);
