@@ -31,6 +31,8 @@ public class createMatchController {
     private Button create;
     @FXML
     private Button cancel;
+    @FXML
+    private Label nameLabel;
 
 
     @FXML
@@ -40,7 +42,7 @@ public class createMatchController {
     @FXML
     protected void clickOnCancel(ActionEvent event) throws IOException {
         SceneChanger sc = new SceneChanger();
-//        sc.changeScenes(event,"Profile_Page.fxml", "Teamder | Profile Page", SceneChanger.getLoggedInUser(), );
+        sc.changeScenes(event,"Profile_Page.fxml", "Teamder | Profile Page");
     }
 
 
