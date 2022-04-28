@@ -57,9 +57,7 @@ public class Database {
                         myRs.getString("bio"),
                         new File(ImageHandler.IMAGE_PATH + myRs.getString("imagefile")));
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (SQLException | IOException e) {
             e.printStackTrace();
         } finally {
             if (conn != null) {
@@ -147,7 +145,6 @@ public class Database {
 
             // 4 establish the '?' created in 'step 2'
             stmt.setString(1, user.getName());
-            stmt.setInt(2, match.getID());
 
             // 5 execute the query
             rs = stmt.executeQuery();
@@ -249,9 +246,7 @@ public class Database {
             while (resultSet.next()) {
 
                 dbPassword = resultSet.getString("password");
-//
                 sports = resultSet.getString("sports");
-//
                 bio = resultSet.getString("bio");
 
                 imageFile = new File(ImageHandler.IMAGE_PATH + resultSet.getString("imagefile"));
