@@ -5,6 +5,7 @@ package classes;
  */
 
 import javafx.event.ActionEvent;
+import scenes.MainController;
 import scenes.SceneChanger;
 import scenes.profileController;
 
@@ -98,6 +99,30 @@ public class Database {
         }
     }
 
+
+    public static Match getMatch(int id) throws SQLException {
+        Connection conn = null;
+        Statement myStat = null;
+        Match match = null;
+        try {
+            conn = DriverManager.getConnection(url, username, password);
+            myStat = conn.createStatement();
+            ResultSet myRs = myStat.executeQuery("SELECT * FROM match WHERE matchid = '" + id + "'"); // write sql command
+            while (myRs.next()) {
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+            if (myStat != null) {
+                myStat.close();
+            }
+        }
+        return match;
+    }
     /**
      * Add a match linked to the user
      * @param user the user to add the match to
@@ -239,7 +264,7 @@ public class Database {
 
             if (uPass.equals(dbPassword)) {
                 SceneChanger.setLoggedInUser(user);
-                profileController controllerClass = new profileController();
+                MainController controllerClass = new profileController();
                 sc.changeScenes(event, "Profile_Page.fxml", "Teamder | Profile Page", user, controllerClass);
                 return true;
             } else

@@ -68,8 +68,9 @@ public class profileController implements MainController  {
      * @param event the event that triggers the method
      */
     @FXML
-    protected void clickOnStart(ActionEvent event) {
-
+    protected void clickOnStart(ActionEvent event) throws IOException {
+        SceneChanger sc = new SceneChanger();
+        sc.changeScenes(event, "Create_Match_Page.fxml", "Teamder | Create Match Page");
     }
 
     /**
