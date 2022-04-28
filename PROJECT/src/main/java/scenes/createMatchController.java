@@ -1,5 +1,6 @@
 package scenes;
 
+import classes.Database;
 import classes.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -45,7 +46,7 @@ public class createMatchController implements  MainController{
         SceneChanger sc = new SceneChanger();
 //        sc.changeScenes(event,"Profile_Page.fxml", "Teamder | Profile Page");
         MainController controllerClass = new profileController();
-        sc.changeScenes(event, "Profile_Page.fxml", "Teamder", uniLabel.getText(), controllerClass);
+        sc.changeScenes(event, "Profile_Page.fxml", "Teamder", SceneChanger.getLoggedInUser(), controllerClass);
     }
 
 
