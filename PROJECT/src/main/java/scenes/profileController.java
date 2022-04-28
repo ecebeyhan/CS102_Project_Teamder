@@ -73,7 +73,7 @@ public class profileController implements MainController  {
     protected void clickOnStart(ActionEvent event) throws IOException, SQLException {
         SceneChanger sc = new SceneChanger();
         MainController controllerClass = new createMatchController();
-        sc.changeScenes(event, "Create_Match_Page.fxml", "Teamder | Create Match Page", user.getName(), controllerClass);
+        sc.changeScenes(event, "Create_Match_Page.fxml", "Teamder | Create Match Page");
 
     }
 
@@ -92,7 +92,7 @@ public class profileController implements MainController  {
      * @param user the user to be loaded
      */
     @Override
-    public void preloadData(User user) throws IOException {
+    public void preloadData(User user) {
         this.user = user;
         userNameLabel.setText(user.getName());
         sportsLabel.setText(user.getSports());
@@ -110,8 +110,4 @@ public class profileController implements MainController  {
         }
     }
 
-    @Override
-    public void setLabel(String name) {
-        return;
-    }
 }
