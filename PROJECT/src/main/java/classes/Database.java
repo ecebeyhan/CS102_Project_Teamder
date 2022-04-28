@@ -309,7 +309,7 @@ public class Database {
             conn = DriverManager.getConnection(url, username, password);
 
             // 2. create a String holding query with ? as user inputs
-            String sql = "INSERT INTO users (name, password, imagefile, sports, bio) VALUES (?, ?, ?, ?, ?);";
+            String sql = "INSERT INTO users (name, password, sports, bio) VALUES (?, ?, ?, ?);";
 
             // 3. create the query
             preparedStatement = conn.prepareStatement(sql);
@@ -318,8 +318,8 @@ public class Database {
             preparedStatement.setString(1, u.getName());
             preparedStatement.setString(2, u.getPassword());
 //            preparedStatement.setString(3, imageFile.getName());
-            preparedStatement.setString(4, u.getSports());
-            preparedStatement.setString(5, u.getBio());
+            preparedStatement.setString(3, u.getSports());
+            preparedStatement.setString(4, u.getBio());
 
             preparedStatement.executeUpdate();
 
