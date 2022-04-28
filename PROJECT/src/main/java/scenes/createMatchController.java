@@ -1,7 +1,6 @@
 package scenes;
 
-import classes.Database;
-import classes.User;
+import classes.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -34,24 +33,33 @@ public class createMatchController implements  MainController{
     @FXML
     private Button cancel;
     @FXML
-    private Label uniLabel;
+    private Label errorLabel;
 
 
     @FXML
     protected void clickOnCreate(ActionEvent event) {
-
+        if (matchName.getText().isEmpty() || time.getText().isEmpty() || date.getValue() == null || sport.getValue() == null || place.getValue() == null) {
+            errorLabel.setText("Please fill all the fields!");
+        }
+        else {
+            int minutes = 0;
+            Sport preferredSport = null;
+            if (min30.isSelected()) { minutes = 30; }
+            if (min45.isSelected()) { minutes = 45; }
+            if (min60.isSelected()) { minutes = 60; }
+            if (min90.isSelected()) { minutes = 90; }
+            if (sport.getValue().equals("Football")) { preferredSport = new Football(); }
+            if (sport.getValue().equals("Basketball")) { preferredSport = new Basketball(); }
+            if (sport.getValue().equals("Volleyball")) { preferredSport = new Volleyball(); }
+            if (sport.getValue().equals("Tennis")) { preferredSport = new Tennis(); }
+            Database.createMatch(matchName.getText(), preferredSport, place.toString(), date.getValue(), time.getText(), minutes);
+        }
     }
     @FXML
     protected void clickOnCancel(ActionEvent event) throws IOException, SQLException {
         SceneChanger sc = new SceneChanger();
-//        sc.changeScenes(event,"Profile_Page.fxml", "Teamder | Profile Page");
         MainController controllerClass = new profileController();
         sc.changeScenes(event, "Profile_Page.fxml", "Teamder", SceneChanger.getLoggedInUser(), controllerClass);
-    }
-
-
-    public void datePick(ActionEvent event) {
-
     }
 
     @Override
@@ -59,7 +67,4 @@ public class createMatchController implements  MainController{
 
     }
 
-    public void setLabel(String name) {
-        uniLabel.setText(name);
-    }
 }

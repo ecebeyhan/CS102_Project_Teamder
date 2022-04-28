@@ -1,7 +1,7 @@
 package classes;
 
-import java.util.Date;
 import java.time.*;
+import java.sql.Time;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -10,9 +10,11 @@ public class Match {
 
     private Sport sport;
     private String place;
-    private Date date;
+    private LocalDate date;
+    private LocalTime startTime;
+    private int duration;
     private LocalDateTime matchDateTime;
-    private boolean isActive; //
+    private boolean isActive;
     private String name;
 
     /**
@@ -20,16 +22,18 @@ public class Match {
      * @param name the name of the match
      * @param sport the sport of the match
      * @param place the city the match will take place
-     * @param bio the day, month and the year of the match
+     * @param date the day, month and the year of the match
      * @param startTime the hour the match will start
-     * @param endTime the hour the match will end
      */
-    public Match(String name, Sport sport, String place, LocalDate date, LocalTime startTime, LocalTime endTime) throws IOException, SQLException{
+    public Match(String name, Sport sport, String place, LocalDate date, LocalTime startTime, int duration) throws IOException, SQLException{
         setActive(true);
         setPlace(place);
         setSport(sport);
         setName(name);
-        setDateTime(date, endTime);
+        this.date = date;
+        this.startTime = startTime;
+        this.duration = duration;
+        setDateTime(date, startTime);
     }
 
     //-----------------------------------------------------------------
@@ -63,6 +67,10 @@ public class Match {
         }
     }
 
+    public LocalTime endTime() {
+        return startTime.plusMinutes(this.duration);
+    }
+
     //-----------------------------------------------------------------
     //  Getter methods
     //-----------------------------------------------------------------
@@ -74,10 +82,6 @@ public class Match {
         return sport;
     }
 
-    public Date getDate() {
-        return date;
-    }
-
     public String getPlace() {
         return place;
     }
@@ -86,5 +90,19 @@ public class Match {
         return isActive;
     }
 
+    public LocalDateTime getMatchDateTime() {
+        return matchDateTime;
+    }
 
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public LocalTime getStartTime() {
+        return startTime;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
 }
