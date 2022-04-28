@@ -43,7 +43,7 @@ public class SceneChanger {
         stage.show();
     }
 
-    public void changeScenes(ActionEvent event, String viewName, String title, String label,MainController controllerClass) throws IOException, SQLException {
+    public void changeScenes(ActionEvent event, String viewName, String title, String name,MainController controllerClass) throws IOException, SQLException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource(viewName));
         Parent parent = loader.load();
@@ -52,8 +52,8 @@ public class SceneChanger {
 
         //access the controller class and preloaded the User data
         controllerClass = loader.getController();
-        controllerClass.preloadData(Database.getUser(label));
-
+        controllerClass.preloadData(Database.getUser(name));
+        controllerClass.setLabel(name);
         //get the stage from the event that was passed in
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 

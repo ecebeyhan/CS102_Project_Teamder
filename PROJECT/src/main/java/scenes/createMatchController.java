@@ -6,8 +6,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
-public class createMatchController {
+public class createMatchController implements  MainController{
 
     @FXML
     private ComboBox place;
@@ -32,7 +33,7 @@ public class createMatchController {
     @FXML
     private Button cancel;
     @FXML
-    private Label nameLabel;
+    private Label uniLabel;
 
 
     @FXML
@@ -40,13 +41,24 @@ public class createMatchController {
 
     }
     @FXML
-    protected void clickOnCancel(ActionEvent event) throws IOException {
+    protected void clickOnCancel(ActionEvent event) throws IOException, SQLException {
         SceneChanger sc = new SceneChanger();
-        sc.changeScenes(event,"Profile_Page.fxml", "Teamder | Profile Page");
+//        sc.changeScenes(event,"Profile_Page.fxml", "Teamder | Profile Page");
+        MainController controllerClass = new profileController();
+        sc.changeScenes(event, "Profile_Page.fxml", "Teamder", uniLabel.getText(), controllerClass);
     }
 
 
     public void datePick(ActionEvent event) {
 
+    }
+
+    @Override
+    public void preloadData(User volunteer) throws IOException {
+
+    }
+
+    public void setLabel(String name) {
+        uniLabel.setText(name);
     }
 }
