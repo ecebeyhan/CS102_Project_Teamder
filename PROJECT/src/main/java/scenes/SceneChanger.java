@@ -40,7 +40,7 @@ public class SceneChanger {
         stage.setScene(scene);
         stage.show();
     }
-    
+
     /**
      * This method will change scenes and preload the next scene with specified User object
      * @param event ActionEvent that triggered the change
@@ -54,20 +54,21 @@ public class SceneChanger {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource(viewName));
         Parent parent = loader.load();
-        
+
         Scene scene = new Scene(parent);
-        
+
         //access the controller class and preloaded the User data
         controllerClass = loader.getController();
         controllerClass.preloadData(user);
-        
+
         //get the stage from the event that was passed in
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
+
         stage.setTitle(title);
         stage.setScene(scene);
         stage.show();
     }
+
     
     public static User getLoggedInUser() {
         return loggedInUser;

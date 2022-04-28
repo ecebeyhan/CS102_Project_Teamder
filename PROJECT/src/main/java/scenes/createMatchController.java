@@ -40,7 +40,7 @@ public class createMatchController {
     @FXML
     protected void clickOnCancel(ActionEvent event) throws IOException {
         SceneChanger sc = new SceneChanger();
-//        sc.changeScenes(event,"Profile_Page.fxml", "Teamder | Profile Page", User user, loginController)
+//        sc.changeScenes(event,"Profile_Page.fxml", "Teamder | Profile Page", SceneChanger.getLoggedInUser(), );
     }
 
 
