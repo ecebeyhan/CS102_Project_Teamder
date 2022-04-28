@@ -5,6 +5,7 @@ import classes.User;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
@@ -40,6 +41,7 @@ public class profileController implements MainController  {
 
     private File imageFile;
     private User user;
+    private SceneChanger sceneChanger;
 
     /**
      * This method is called when the user clicks on the Log Out button.
@@ -71,6 +73,7 @@ public class profileController implements MainController  {
     protected void clickOnStart(ActionEvent event) throws IOException {
         SceneChanger sc = new SceneChanger();
         sc.changeScenes(event, "Create_Match_Page.fxml", "Teamder | Create Match Page");
+
     }
 
     /**
