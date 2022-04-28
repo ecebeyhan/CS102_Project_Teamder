@@ -1,22 +1,28 @@
 package scenes;
 
-import classes.Database;
-import classes.User;
+import classes.*;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+
+import java.net.URL;
+import java.time.LocalTime;
+import java.util.ResourceBundle;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
-public class createMatchController implements  MainController{
+public class createMatchController implements  MainController, Initializable {
 
     @FXML
     private ComboBox place;
     @FXML
     private DatePicker date;
     @FXML
-    private ComboBox sport;
+    private ComboBox<String> sport;
     @FXML
     private TextField matchName;
     @FXML
@@ -30,28 +36,33 @@ public class createMatchController implements  MainController{
     @FXML
     private RadioButton min90;
     @FXML
-    private Button create;
-    @FXML
-    private Button cancel;
-    @FXML
-    private Label uniLabel;
+    private Label errorLabel;
 
 
     @FXML
-    protected void clickOnCreate(ActionEvent event) {
-
+    protected void clickOnCreate(ActionEvent event) throws SQLException, IOException {
+        if (matchName.getText().isEmpty() || time.getText().isEmpty() || date.getValue() == null || sport.getValue() == null || place.getValue() == null) {
+            errorLabel.setText("Please fill all the fields!");
+        }
+        else {
+            int minutes = 0;
+            Sport preferredSport = null;
+            if (min30.isSelected()) { minutes = 30; }
+            if (min45.isSelected()) { minutes = 45; }
+            if (min60.isSelected()) { minutes = 60; }
+            if (min90.isSelected()) { minutes = 90; }
+            if (sport.getValue().equals("Football")) { preferredSport = new Football(); }
+            if (sport.getValue().equals("Basketball")) { preferredSport = new Basketball(); }
+            if (sport.getValue().equals("Volleyball")) { preferredSport = new Volleyball(); }
+            if (sport.getValue().equals("Tennis")) { preferredSport = new Tennis(); }
+            Database.createMatch(matchName.getText(), preferredSport, (String) place.getValue(), date.getValue(), LocalTime.parse(time.getText()), minutes);
+        }
     }
     @FXML
     protected void clickOnCancel(ActionEvent event) throws IOException, SQLException {
         SceneChanger sc = new SceneChanger();
-//        sc.changeScenes(event,"Profile_Page.fxml", "Teamder | Profile Page");
         MainController controllerClass = new profileController();
         sc.changeScenes(event, "Profile_Page.fxml", "Teamder", SceneChanger.getLoggedInUser(), controllerClass);
-    }
-
-
-    public void datePick(ActionEvent event) {
-
     }
 
     @Override
@@ -59,7 +70,9 @@ public class createMatchController implements  MainController{
 
     }
 
-    public void setLabel(String name) {
-        uniLabel.setText(name);
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        sport.setItems(FXCollections.observableArrayList("Football", "Basketball", "Tennis", "Volleyball"));
+        place.setItems(FXCollections.observableArrayList("Trabzon", "Ankara", "İstanbul", "İzmir", "İzmit"));
     }
 }

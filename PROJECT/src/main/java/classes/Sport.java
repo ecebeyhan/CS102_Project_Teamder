@@ -22,4 +22,6 @@ public abstract class Sport {
     public void setTeams(int playerCount) {
 
     }
+
+    public abstract String getName();
 }

@@ -1,22 +1,39 @@
 package classes;
 
-import java.util.Date;
+import java.time.*;
+import java.sql.Time;
+
+import java.io.IOException;
+import java.sql.SQLException;
 
 public class Match {
 
     private Sport sport;
     private String place;
-    private Date date;
-    private boolean isActive; //
+    private LocalDate date;
+    private LocalTime startTime;
+    private int duration;
+    private LocalDateTime matchDateTime;
+    private boolean isActive;
     private String name;
-    private int ID; // unique id
 
-    public Match(Sport sport, String place, Date date, boolean isActive, String name) {
-        setActive(isActive);
+    /**
+     * Create a new match with the given name, sport, place, date, time and automatically active
+     * @param name the name of the match
+     * @param sport the sport of the match
+     * @param place the city the match will take place
+     * @param date the day, month and the year of the match
+     * @param startTime the hour the match will start
+     */
+    public Match(String name, Sport sport, String place, LocalDate date, LocalTime startTime, int duration) throws IOException, SQLException{
+        setActive(true);
         setPlace(place);
-        setDate(date);
         setSport(sport);
         setName(name);
+        this.date = date;
+        this.startTime = startTime;
+        this.duration = duration;
+        setDateTime(date, startTime);
     }
 
     //-----------------------------------------------------------------
@@ -26,8 +43,8 @@ public class Match {
         isActive = active;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDateTime(LocalDate date, LocalTime time) {
+        matchDateTime = LocalDateTime.of(date, time);
     }
 
     public void setName(String name) {
@@ -41,6 +58,18 @@ public class Match {
     public void setSport(Sport sport) {
         this.sport = sport;
     }
+    
+    //compares endTime with the local time to upregade the boolean active 
+    public void compareTme(){
+        LocalDateTime local = LocalDateTime.now();
+        if(local.isAfter(matchDateTime)){//time of the match has passed
+            setActive(false);
+        }
+    }
+
+    public LocalTime endTime() {
+        return startTime.plusMinutes(this.duration);
+    }
 
     //-----------------------------------------------------------------
     //  Getter methods
@@ -49,16 +78,8 @@ public class Match {
         return name;
     }
 
-    public int getID() {
-        return ID;
-    }
-
     public Sport getSport() {
         return sport;
-    }
-
-    public Date getDate() {
-        return date;
     }
 
     public String getPlace() {
@@ -69,5 +90,19 @@ public class Match {
         return isActive;
     }
 
+    public LocalDateTime getMatchDateTime() {
+        return matchDateTime;
+    }
 
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public LocalTime getStartTime() {
+        return startTime;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
 }

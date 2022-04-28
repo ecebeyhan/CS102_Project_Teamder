@@ -38,7 +38,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <DatePicker fx:id="datePicker" layoutX="106.0" layoutY="119.0" onAction="#datePick" prefHeight="25.0" prefWidth="193.0" />
+            <DatePicker fx:id="datePicker" layoutX="106.0" layoutY="119.0" prefHeight="25.0" prefWidth="193.0" />
             <TextField fx:id="matchNameTextField" layoutX="448.0" layoutY="56.0" prefHeight="26.0" prefWidth="175.0" promptText="Enter match name" />
             <TextField fx:id="timeTextField" layoutX="448.0" layoutY="119.0" prefHeight="25.0" prefWidth="100.0" promptText="Enter time" />
             <Separator layoutX="103.0" layoutY="99.0" prefWidth="200.0" />
@@ -72,7 +72,7 @@
                   <Button fx:id="create" mnemonicParsing="false" onAction="#clickOnCreate" prefHeight="25.0" prefWidth="112.0" text="Create Match" />
               </buttons>
             </ButtonBar>
-            <Label fx:id="uniLabel" layoutX="48.0" layoutY="14.0" text="username" />
+            <Label fx:id="errorLabel" layoutX="413.0" layoutY="186.0" />
       </children>
     </AnchorPane>
   </children>

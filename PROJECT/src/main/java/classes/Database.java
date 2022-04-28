@@ -12,6 +12,8 @@ import scenes.profileController;
 import java.io.File;
 import java.io.IOException;
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class Database {
 
@@ -57,9 +59,7 @@ public class Database {
                         myRs.getString("bio"),
                         new File(ImageHandler.IMAGE_PATH + myRs.getString("imagefile")));
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (SQLException | IOException e) {
             e.printStackTrace();
         } finally {
             if (conn != null) {
@@ -140,14 +140,14 @@ public class Database {
             System.out.println("Connected!!");
 
             // 2 create a query ( with ? for user input)
-            String query = "INSERT INTO usermatch(name, matchid) VALUES ( '?', ?)";
+            String query = "INSERT INTO usermatch(name, matchname) VALUES ( '?', ?)";
 
             // 3 prepare the statement wanted to run on the sql
             stmt = conn.prepareStatement(query);
 
             // 4 establish the '?' created in 'step 2'
             stmt.setString(1, user.getName());
-            stmt.setInt(2, match.getID());
+            stmt.setString(2, match.getName());
 
             // 5 execute the query
             rs = stmt.executeQuery();
@@ -249,9 +249,7 @@ public class Database {
             while (resultSet.next()) {
 
                 dbPassword = resultSet.getString("password");
-//
                 sports = resultSet.getString("sports");
-//
                 bio = resultSet.getString("bio");
 
                 imageFile = new File(ImageHandler.IMAGE_PATH + resultSet.getString("imagefile"));
@@ -286,11 +284,10 @@ public class Database {
     /**
      * Creates a new user and adds it to the database.
      */
-    public static void createUser(String uName, String pass, String sport, String bio) throws SQLException, IOException {
+    public static void createMatch(String name, Sport sport, String place, LocalDate date, LocalTime startTime, int duration) throws SQLException, IOException {
 
-        // create the User object with the information from the text fields
-        User user = new User(uName, pass, sport, bio);
-        insertUserToDB(user); // add into database
+        Match match = new Match(name, sport, place, date, startTime, duration);
+        insertMatchToDB(match); // add into database
     }
 
     /**
@@ -317,9 +314,53 @@ public class Database {
             // 4. put values into the parameters
             preparedStatement.setString(1, u.getName());
             preparedStatement.setString(2, u.getPassword());
-//            preparedStatement.setString(3, imageFile.getName());
             preparedStatement.setString(3, u.getSports());
             preparedStatement.setString(4, u.getBio());
+
+            preparedStatement.executeUpdate();
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
+
+    public static void createUser(String uName, String pass, String sport, String bio) throws SQLException, IOException {
+
+        // create the User object with the information from the text fields
+        User user = new User(uName, pass, sport, bio);
+        insertUserToDB(user); // add into database
+    }
+
+    public static void insertMatchToDB(Match match) throws SQLException {
+        Connection conn = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            // 1. database connection
+            conn = DriverManager.getConnection(url, username, password);
+
+            // 2. create a String holding query with ? as user inputs
+            String sql = "INSERT INTO match (name, spors, place, \"date \", \"startTime\", \"endTime\") VALUES (?, ?, ?, ?, ? ,?);";
+
+            // 3. create the query
+            preparedStatement = conn.prepareStatement(sql);
+
+            // 4. put values into the parameters
+            preparedStatement.setString(1, match.getName());
+            preparedStatement.setString(2, (match.getSport()).getName());
+            preparedStatement.setString(3, match.getPlace());
+            preparedStatement.setDate(4, Date.valueOf(match.getDate()));
+            preparedStatement.setTime(5, Time.valueOf(match.getStartTime()));
+            preparedStatement.setTime(6, Time.valueOf(match.endTime()));
 
             preparedStatement.executeUpdate();
 

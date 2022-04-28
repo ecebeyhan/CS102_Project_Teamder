@@ -38,13 +38,13 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <DatePicker fx:id="datePicker" layoutX="106.0" layoutY="119.0" onAction="#datePick" prefHeight="25.0" prefWidth="193.0" />
-            <TextField fx:id="matchNameTextField" layoutX="448.0" layoutY="56.0" prefHeight="26.0" prefWidth="175.0" promptText="Enter match name" />
-            <TextField fx:id="timeTextField" layoutX="448.0" layoutY="119.0" prefHeight="25.0" prefWidth="100.0" promptText="Enter time" />
+            <DatePicker fx:id="date" layoutX="106.0" layoutY="119.0" prefHeight="25.0" prefWidth="193.0" />
+            <TextField fx:id="matchName" layoutX="448.0" layoutY="56.0" prefHeight="26.0" prefWidth="175.0" promptText="Enter match name" />
+            <TextField fx:id="time" layoutX="448.0" layoutY="119.0" prefHeight="25.0" prefWidth="100.0" promptText="Enter time" />
             <Separator layoutX="103.0" layoutY="99.0" prefWidth="200.0" />
             <Separator layoutX="103.0" layoutY="163.0" prefHeight="3.0" prefWidth="200.0" />
-            <ComboBox layoutX="103.0" layoutY="181.0" prefHeight="26.0" prefWidth="200.0" promptText="Football" />
-            <ComboBox layoutX="103.0" layoutY="56.0" prefHeight="26.0" prefWidth="200.0" promptText="Ankara" />
+            <ComboBox fx:id="sport" layoutX="103.0" layoutY="181.0" prefHeight="26.0" prefWidth="200.0" promptText="Football" />
+            <ComboBox fx:id="place" layoutX="103.0" layoutY="56.0" prefHeight="26.0" prefWidth="200.0" promptText="Ankara" />
             <Separator layoutX="448.0" layoutY="99.0" prefHeight="3.0" prefWidth="175.0" />
             <GridPane layoutX="115.0" layoutY="247.0" prefHeight="27.0" prefWidth="505.0">
               <columnConstraints>
@@ -57,22 +57,22 @@
                 <RowConstraints />
               </rowConstraints>
                <children>
-                  <RadioButton mnemonicParsing="false" text="30 min." underline="true">
+                  <RadioButton fx:id="min30" mnemonicParsing="false" text="30 min." underline="true">
                      <toggleGroup>
                         <ToggleGroup fx:id="duration" />
                      </toggleGroup></RadioButton>
-                  <RadioButton mnemonicParsing="false" prefHeight="17.0" prefWidth="61.0" text="45min." toggleGroup="$duration" underline="true" GridPane.columnIndex="1" />
-                  <RadioButton mnemonicParsing="false" selected="true" text="60min." toggleGroup="$duration" underline="true" GridPane.columnIndex="2" />
-                  <RadioButton mnemonicParsing="false" text="90min." toggleGroup="$duration" underline="true" GridPane.columnIndex="3" />
+                  <RadioButton fx:id="min45" mnemonicParsing="false" prefHeight="17.0" prefWidth="61.0" text="45min." toggleGroup="$duration" underline="true" GridPane.columnIndex="1" />
+                  <RadioButton fx:id="min60" mnemonicParsing="false" selected="true" text="60min." toggleGroup="$duration" underline="true" GridPane.columnIndex="2" />
+                  <RadioButton fx:id="min90" mnemonicParsing="false" text="90min." toggleGroup="$duration" underline="true" GridPane.columnIndex="3" />
                </children>
             </GridPane>
             <ButtonBar layoutX="548.0" layoutY="274.0" prefHeight="40.0" prefWidth="226.0">
               <buttons>
-                  <Button fx:id="cancel" minWidth="32.0" mnemonicParsing="false" onAction="#clickOnCancel" prefHeight="25.0" prefWidth="74.0" text="Cancel" />
-                  <Button fx:id="create" mnemonicParsing="false" onAction="#clickOnCreate" prefHeight="25.0" prefWidth="112.0" text="Create Match" />
+                  <Button minWidth="32.0" mnemonicParsing="false" onAction="#clickOnCancel" prefHeight="25.0" prefWidth="74.0" text="Cancel" />
+                  <Button mnemonicParsing="false" onAction="#clickOnCreate" prefHeight="25.0" prefWidth="112.0" text="Create Match" />
               </buttons>
             </ButtonBar>
-            <Label fx:id="uniLabel" layoutX="48.0" layoutY="14.0" text="username" />
+            <Label fx:id="errorLabel" layoutX="413.0" layoutY="186.0" />
       </children>
     </AnchorPane>
   </children>
