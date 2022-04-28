@@ -60,7 +60,10 @@ public class profileController implements MainController  {
      * @param event the event that triggers the method
      */
     @FXML
-    protected void clickOnJoin(ActionEvent event) {
+    protected void clickOnJoin(ActionEvent event) throws IOException {
+        SceneChanger sc = new SceneChanger();
+        MainController controllerClass = new FindMatchController();
+        sc.changeScenes(event, "Find_aMatch.fxml", "Teamder | Find a Match Page");
 
     }
 
