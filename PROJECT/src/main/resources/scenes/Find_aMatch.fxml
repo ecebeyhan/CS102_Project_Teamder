@@ -33,39 +33,36 @@
 -->
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="383.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FindMatch">
+<VBox prefHeight="383.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scenes.FindMatchController">
   <children>
       <SplitPane prefHeight="385.0" prefWidth="640.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="403.0" prefWidth="638.0">
                <children>
                   <Label layoutX="12.0" layoutY="62.0" text="Sports" />
-                  <CheckBox layoutX="13.0" layoutY="82.0" mnemonicParsing="false" text="Football" />
-                  <CheckBox layoutX="13.0" layoutY="102.0" mnemonicParsing="false" text="Volleyball" />
-                  <CheckBox layoutX="13.0" layoutY="123.0" mnemonicParsing="false" text="Basketball" />
-                  <CheckBox layoutX="13.0" layoutY="143.0" mnemonicParsing="false" text="Tennis" />
                   <Label layoutX="15.0" layoutY="172.0" text="City" />
-                  <ComboBox layoutX="13.0" layoutY="192.0" prefWidth="150.0" promptText="Ankara" />
+                  <ComboBox fx:id="cityComboBox" layoutX="13.0" layoutY="192.0" prefWidth="150.0" promptText="Ankara" />
                   <Label layoutX="13.0" layoutY="230.0" text="Date" />
-                  <DatePicker layoutX="11.0" layoutY="250.0" promptText="DD/MM/YYYY" />
+                  <DatePicker fx:id="datePicker" layoutX="11.0" layoutY="250.0" promptText="DD/MM/YYYY" />
                   <ScrollPane layoutX="230.0" layoutY="-3.0" prefHeight="385.0" prefWidth="409.0">
                      <content>
                         <Pane prefHeight="600.0" prefWidth="397.0">
                            <children>
-                              <TextField layoutX="17.0" layoutY="39.0" promptText="Enter match name" />
+                              <TextField fx:id="matchNameTField" layoutX="17.0" layoutY="39.0" promptText="Enter match name" />
                               <Label layoutX="17.0" layoutY="68.0" prefHeight="20.0" prefWidth="247.0" text="2 Matches found">
                                  <font>
                                     <Font size="18.0" />
@@ -85,7 +82,7 @@
                                     <Label layoutX="4.0" layoutY="45.0" text="Date: 2022/04/03" />
                                  </children>
                               </Pane>
-                              <Button layoutX="177.0" layoutY="39.0" mnemonicParsing="false" onAction="#clickSearchButton" text="SEARCH" />
+                              <Button fx:id="searchButton" layoutX="177.0" layoutY="39.0" mnemonicParsing="false" onAction="#clickSearchButton" text="SEARCH" />
                            </children>
                         </Pane>
                      </content>
@@ -95,7 +92,15 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Button layoutX="1.0" layoutY="2.0" mnemonicParsing="false" text="BACK" />
+                  <Button fx:id="cancelButton" layoutX="1.0" layoutY="2.0" mnemonicParsing="false" text="BACK" />
+                  <RadioButton fx:id="footballRadioButton" layoutX="18.0" layoutY="87.0" mnemonicParsing="false" text="Football">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="sports" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="VolleyRadioButton" layoutX="18.0" layoutY="107.0" mnemonicParsing="false" text="Volleyball" toggleGroup="$sports" />
+                  <RadioButton fx:id="basketRadioButton" layoutX="18.0" layoutY="128.0" mnemonicParsing="false" text="Basketball" toggleGroup="$sports" />
+                  <RadioButton fx:id="tennisRadioButton" layoutX="18.0" layoutY="150.0" mnemonicParsing="false" text="Tennis" toggleGroup="$sports" />
                </children>
             </AnchorPane>
         </items>
