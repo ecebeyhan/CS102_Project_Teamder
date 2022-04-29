@@ -18,7 +18,7 @@ import java.util.ResourceBundle;
 public class createMatchController implements  MainController, Initializable {
 
     @FXML
-    private ComboBox place;
+    private ComboBox<String> place;
     @FXML
     private DatePicker date;
     @FXML
@@ -73,6 +73,6 @@ public class createMatchController implements  MainController, Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         sport.setItems(FXCollections.observableArrayList("Football", "Basketball", "Tennis", "Volleyball"));
-        place.setItems(FXCollections.observableArrayList("Trabzon", "Ankara", "İstanbul", "İzmir", "İzmit"));
+        place.setItems(FXCollections.observableArrayList("Trabzon", "Ankara", "Istanbul", "Izmir", "Izmit"));
     }
 }

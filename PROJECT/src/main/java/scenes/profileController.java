@@ -21,14 +21,6 @@ import java.sql.SQLException;
 public class profileController implements MainController  {
 
     @FXML
-    private Button logOutButton;
-    @FXML
-    private Button joinButton;
-    @FXML
-    private Button startButton;
-    @FXML
-    private Button imageButton;
-    @FXML
     private Text userNameLabel;
     @FXML
     private Text sportsLabel;
@@ -41,7 +33,6 @@ public class profileController implements MainController  {
 
     private File imageFile;
     private User user;
-    private SceneChanger sceneChanger;
 
     /**
      * This method is called when the user clicks on the Log Out button.
