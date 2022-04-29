@@ -1,6 +1,7 @@
 package scenes;
 
 import classes.Database;
+import classes.Match;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -62,6 +63,30 @@ public class SceneChanger {
         //access the controller class and preloaded the User data
         controllerClass = loader.getController();
         controllerClass.preloadData(user);
+
+        //get the stage from the event that was passed in
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+        stage.setTitle(title);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void changeScenes(ActionEvent event, String viewName, String title, User user, Match match, MatchController matchControllerClass, MainController controllerClass) throws IOException
+    {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource(viewName));
+        Parent parent = loader.load();
+
+        Scene scene = new Scene(parent);
+
+        //access the controller class and preloaded the User data
+        controllerClass = loader.getController();
+        controllerClass.preloadData(user);
+
+        //access the controller class and preloaded the Match data
+        matchControllerClass = loader.getController();
+        matchControllerClass.preLoadMatch(match);
 
         //get the stage from the event that was passed in
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();

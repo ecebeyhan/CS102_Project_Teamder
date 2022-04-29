@@ -66,7 +66,7 @@ public class createMatchController implements  MainController, Initializable {
     }
 
     @Override
-    public void preloadData(User volunteer) throws IOException {
+    public void preloadData(User user) throws IOException {
 
     }
 

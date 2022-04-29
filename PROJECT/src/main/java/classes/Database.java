@@ -353,6 +353,10 @@ public class Database {
         Match match = new Match(name, sport, place, date, startTime, duration);
         insertMatchToDB(match); // add into database
         addMatch(SceneChanger.getLoggedInUser(), match);
+
+        SceneChanger sc = new SceneChanger();
+        sc.changeScenes(null, "Main_Page.fxml", "Teamder | Main Page", SceneChanger.getLoggedInUser(), null);
+
     }
 
     /**
