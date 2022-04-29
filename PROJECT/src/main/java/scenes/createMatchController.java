@@ -13,7 +13,6 @@ import java.util.ResourceBundle;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
 
 public class createMatchController implements  MainController, Initializable {
 

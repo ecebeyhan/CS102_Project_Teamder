@@ -32,11 +32,6 @@
             <TextField prefHeight="40.0" prefWidth="174.0" promptText="type" />
          </children>
       </HBox>
-      <Label layoutX="15.0" layoutY="480.0" text="Creator:">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
       <Label layoutX="29.0" layoutY="510.0" text="Place:">
          <font>
             <Font size="14.0" />
@@ -52,7 +47,6 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Text fx:id="userNameText" layoutX="72.0" layoutY="495.0" strokeType="OUTSIDE" strokeWidth="0.0" text="USERNAME" wrappingWidth="140.177734375" />
       <Text fx:id="placeText" layoutX="72.0" layoutY="525.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLACE" wrappingWidth="119.177734375" />
       <Text fx:id="timeText" layoutX="72.0" layoutY="554.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TIME" wrappingWidth="63.177734375" />
       <Text fx:id="dateText" layoutX="72.0" layoutY="584.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DATE" wrappingWidth="119.177734375" />
