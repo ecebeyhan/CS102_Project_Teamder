@@ -7,5 +7,7 @@ module com.example.teamder {
 
 
     opens scenes to javafx.fxml;
+    opens classes to javafx.fxml;
     exports scenes;
+    exports classes;
 }
