@@ -362,7 +362,7 @@ public class Database {
             preparedStatement.setTime(5, Time.valueOf(match.getStartTime()));
             preparedStatement.setTime(6, Time.valueOf(match.endTime()));
 
-            preparedStatement.executeUpdate();
+            preparedStatement.execute();
 
 
         } catch (Exception e) {
