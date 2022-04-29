@@ -5,6 +5,7 @@ package classes;
  */
 
 import javafx.event.ActionEvent;
+import javafx.scene.control.Label;
 import scenes.MainController;
 import scenes.SceneChanger;
 import scenes.profileController;
@@ -12,8 +13,10 @@ import scenes.profileController;
 import java.io.File;
 import java.io.IOException;
 import java.sql.*;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 public class Database {
 
@@ -24,6 +27,65 @@ public class Database {
     public static void main(String[] args) throws SQLException {
         getMatches(getUser("basar123"));
     }
+
+    /**
+     * Filter matches according to the user's preferences
+     * @param sportPreffered the user's sport preference
+     * @param city the user's place
+     * @param date the user's date
+     * @param matchName the match's name
+     * @param resultLabel the label to display the result
+     * @return the arraylist of filtered matches
+     */
+    public static ArrayList<Match> filterMatches(String sportPreffered, String city, LocalDate date, String matchName, Label resultLabel) throws SQLException {
+        ArrayList<Match> matches = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        int count = 0;
+        try {
+            conn = DriverManager.getConnection(url, username, password);
+            System.out.println("Connected!!");
+            stmt = conn.prepareStatement("SELECT * FROM match WHERE spors = ? AND place = ? AND \"date \" = ? AND name LIKE ?");
+
+            stmt.setString(1, sportPreffered);
+            stmt.setString(2, city);
+            stmt.setDate(3, Date.valueOf(date));
+            stmt.setString(4, "%"+matchName+"%");
+
+            ResultSet rs = stmt.executeQuery();
+
+            Sport preferredSport = null;
+            if (sportPreffered.equals("Football")) { preferredSport = new Football(); }
+            if (sportPreffered.equals("Basketball")) { preferredSport = new Basketball(); }
+            if (sportPreffered.equals("Volleyball")) { preferredSport = new Volleyball(); }
+            if (sportPreffered.equals("Tennis")) { preferredSport = new Tennis(); }
+
+            while (rs.next()) {
+                int duration = 0;
+                duration = (int) Duration.between(rs.getTime("startTime").toLocalTime() , rs.getTime("endTime").toLocalTime()).toMinutes();
+
+                matches.add(new Match( rs.getString("name"),
+                        preferredSport, // sport object
+                        rs.getString("place"), // place string
+                        rs.getDate("date ").toLocalDate(), // date object
+                        rs.getTime("startTime").toLocalTime(), // start time object
+                        duration)); // duration int
+                count++;
+            }
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+            if (stmt != null) {
+                stmt.close();
+            }
+        }
+        resultLabel.setText("Found " + count + " match(es)");
+        return matches;
+    }
+
     // to connect to the database
     public void connect() {
         try {

@@ -44,7 +44,7 @@
                <children>
                   <Label layoutX="12.0" layoutY="62.0" text="Sports" />
                   <Label layoutX="15.0" layoutY="172.0" text="City" />
-                  <ComboBox fx:id="cityComboBox" layoutX="13.0" layoutY="192.0" prefWidth="150.0" promptText="Ankara" />
+                  <ComboBox fx:id="cityComboBox" editable="true" layoutX="13.0" layoutY="192.0" prefWidth="150.0" promptText="Trabzon" />
                   <Label layoutX="13.0" layoutY="230.0" text="Date" />
                   <DatePicker fx:id="datePicker" layoutX="11.0" layoutY="250.0" promptText="DD/MM/YYYY" />
                   <ScrollPane layoutX="230.0" layoutY="-3.0" prefHeight="385.0" prefWidth="409.0">
@@ -52,7 +52,7 @@
                         <Pane prefHeight="600.0" prefWidth="397.0">
                            <children>
                               <TextField fx:id="matchNameTField" layoutX="17.0" layoutY="39.0" promptText="Enter match name" />
-                              <Label fx:id="matchFoundLabel" layoutX="17.0" layoutY="68.0" prefHeight="20.0" prefWidth="247.0" text="2 Matches found">
+                              <Label fx:id="matchFoundLabel" layoutX="17.0" layoutY="68.0" prefHeight="20.0" prefWidth="247.0">
                                  <font>
                                     <Font size="18.0" />
                                  </font>

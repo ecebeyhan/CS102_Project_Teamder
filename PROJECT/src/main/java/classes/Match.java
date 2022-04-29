@@ -59,8 +59,8 @@ public class Match {
         this.sport = sport;
     }
     
-    //compares endTime with the local time to upregade the boolean active 
-    public void compareTme(){
+    //compares endTime with the local time to upgrade the boolean active
+    public void compareTime(){
         LocalDateTime local = LocalDateTime.now();
         if(local.isAfter(matchDateTime)){//time of the match has passed
             setActive(false);
