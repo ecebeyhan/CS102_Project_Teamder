@@ -4,6 +4,9 @@ package classes;
  * THIS CLASS CONTAINS ALL THE DATABASE ACCESS METHODS
  */
 
+import javafx.beans.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
 import scenes.MainController;
@@ -37,8 +40,8 @@ public class Database {
      * @param resultLabel the label to display the result
      * @return the arraylist of filtered matches
      */
-    public static ArrayList<Match> filterMatches(String sportPreffered, String city, LocalDate date, String matchName, Label resultLabel) throws SQLException {
-        ArrayList<Match> matches = new ArrayList<>();
+    public static ObservableList<Match> filterMatches(String sportPreffered, String city, LocalDate date, String matchName, Label resultLabel) throws SQLException {
+        ObservableList<Match> matches = FXCollections.observableArrayList();
         Connection conn = null;
         PreparedStatement stmt = null;
         int count = 0;
@@ -193,7 +196,6 @@ public class Database {
     public static void addMatch(User user, Match match) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
-        ResultSet rs = null;
 
         try {
 
@@ -202,7 +204,7 @@ public class Database {
             System.out.println("Connected!!");
 
             // 2 create a query ( with ? for user input)
-            String query = "INSERT INTO usermatch(name, matchname) VALUES ( '?', ?)";
+            String query = "INSERT INTO usermatch(name, matchname) VALUES (?, ?)";
 
             // 3 prepare the statement wanted to run on the sql
             stmt = conn.prepareStatement(query);
@@ -212,7 +214,7 @@ public class Database {
             stmt.setString(2, match.getName());
 
             // 5 execute the query
-            rs = stmt.executeQuery();
+            stmt.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -350,6 +352,7 @@ public class Database {
 
         Match match = new Match(name, sport, place, date, startTime, duration);
         insertMatchToDB(match); // add into database
+        addMatch(SceneChanger.getLoggedInUser(), match);
     }
 
     /**
