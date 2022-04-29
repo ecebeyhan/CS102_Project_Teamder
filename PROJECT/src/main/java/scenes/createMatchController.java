@@ -13,7 +13,6 @@ import java.util.ResourceBundle;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
 
 public class createMatchController implements  MainController, Initializable {
 
@@ -66,7 +65,7 @@ public class createMatchController implements  MainController, Initializable {
     }
 
     @Override
-    public void preloadData(User volunteer) throws IOException {
+    public void preloadData(User user) throws IOException {
 
     }
 

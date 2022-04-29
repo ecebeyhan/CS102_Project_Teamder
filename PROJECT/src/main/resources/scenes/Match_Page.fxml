@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
@@ -13,75 +10,45 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #93732;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<Pane prefHeight="612.0" prefWidth="860.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/18" fx:controller="scenes.matchPageController">
    <children>
-      <VBox alignment="CENTER" layoutX="407.0" prefHeight="400.0" prefWidth="194.0">
-         <children>
-            <TextField alignment="CENTER" text="Chat">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </TextField>
-            <TextArea prefHeight="361.0" prefWidth="194.0" text="&#10;Player1: Heyy!!&#10;&#10;Player2: Hi what's up?" />
-            <Line endX="574.1368408203125" endY="435.77166748046875" startX="382.7368469238281" startY="435.77166748046875" stroke="#999797" />
-            <HBox prefHeight="14.0" prefWidth="194.0">
-               <children>
-                  <TextField prefHeight="40.0" prefWidth="157.0" promptText="type" />
-                  <VBox alignment="CENTER" prefHeight="39.0" prefWidth="38.0">
-                     <children>
-                        <Polygon fill="#7300ff" points="0.0, -38.79998779296875, 17.492919921875, -49.199981689453125, 0.0, -60.0" stroke="#7300ff" strokeType="INSIDE" style="-fx-blend-mode: #000000;" />
-                     </children>
-                  </VBox>
-                  <Line endX="380.4440002441406" endY="475.0787658691406" layoutX="-209.0" layoutY="-427.0" startX="380.4439697265625" startY="437.3858642578125" stroke="#999797" />
-               </children>
-            </HBox>
-         </children>
-      </VBox>
-      <RadioButton layoutX="118.0" layoutY="193.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="111.0" style="-fx-background-color: #ffffff; -fx-border-color: #949393;" text="Join the match" />
-      <TextField alignment="CENTER" layoutX="86.0" layoutY="19.0" prefHeight="40.0" prefWidth="236.0" text="Toplanın Gençler!">
+      <Button layoutX="21.0" layoutY="19.0" mnemonicParsing="false" onAction="#clickOnCancel" text="Cancel" />
+      <TextField fx:id="matchNameTField" alignment="CENTER" editable="false" layoutX="228.0" layoutY="19.0" prefHeight="40.0" prefWidth="315.0" text="Match Name">
          <font>
             <Font size="18.0" />
          </font>
       </TextField>
-      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="BACK" />
-      <VBox layoutX="55.0" layoutY="279.0" prefHeight="200.0" prefWidth="127.0">
+      <TextArea layoutX="641.0" layoutY="11.0" prefHeight="515.0" prefWidth="206.0" />
+      <HBox layoutX="644.0" layoutY="530.0" prefHeight="40.0" prefWidth="206.0">
          <children>
-            <Label text="Creator: doruk_isik">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <Label text="Place: Ankara">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <Label text="Date: 10.04.2022">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <Label text="Time: 20.00-21.00">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-         </children>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </VBox>
-      <VBox layoutX="229.0" layoutY="59.0" prefHeight="43.0" prefWidth="114.0" style="-fx-background-color: #ffffff; -fx-border-color: #949393;">
-         <children>
-            <Label prefHeight="18.0" prefWidth="106.0" text="Rate: 4/5" />
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <VBox alignment="CENTER" prefHeight="40.0" prefWidth="30.0">
                <children>
-                  <Label prefHeight="28.0" prefWidth="42.0" text="Profile: " />
-                  <Hyperlink prefHeight="24.0" prefWidth="70.0" text="ece_beyhan" />
+                  <Polygon fill="#7300ff" points="0.0, -38.79998779296875, 17.492919921875, -49.199981689453125, 0.0, -60.0" stroke="#7300ff" strokeType="INSIDE" style="-fx-blend-mode: #000000;" />
                </children>
-            </HBox>
+            </VBox>
+            <Line endX="380.4440002441406" endY="475.0787658691406" layoutX="-209.0" layoutY="-427.0" startX="380.4439697265625" startY="437.3858642578125" stroke="#999797" />
+            <TextField prefHeight="40.0" prefWidth="174.0" promptText="type" />
          </children>
-      </VBox>
+      </HBox>
+      <Label layoutX="29.0" layoutY="510.0" text="Place:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="30.0" layoutY="570.0" text="Date:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="30.0" layoutY="540.0" text="Time:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Text fx:id="placeText" layoutX="72.0" layoutY="525.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLACE" wrappingWidth="119.177734375" />
+      <Text fx:id="timeText" layoutX="72.0" layoutY="554.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TIME" wrappingWidth="63.177734375" />
+      <Text fx:id="dateText" layoutX="72.0" layoutY="584.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DATE" wrappingWidth="119.177734375" />
    </children>
 </Pane>
