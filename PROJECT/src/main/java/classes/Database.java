@@ -28,7 +28,8 @@ public class Database {
     private final static String password = "RucLTf_zMlhMaa99HMxypHICcednwQix";
 
     public static void main(String[] args) throws SQLException {
-        getMatches(getUser("basar123"));
+        System.out.println(getMatch("asdads").getMatchDateTime().toString());
+
     }
 
     /**
@@ -165,19 +166,39 @@ public class Database {
     }
 
 
-    public static Match getMatch(int id) throws SQLException {
+    public static Match getMatch(String name) throws SQLException {
         Connection conn = null;
         Statement myStat = null;
         Match match = null;
+        Sport preferredSport = null;
+        String sportPreferred = null;
+
         try {
             conn = DriverManager.getConnection(url, username, password);
             myStat = conn.createStatement();
-            ResultSet myRs = myStat.executeQuery("SELECT * FROM match WHERE matchid = '" + id + "'"); // write sql command
-            while (myRs.next()) {
+            ResultSet myRs = myStat.executeQuery("SELECT * FROM match WHERE name = '" + name + "'"); // write sql command
 
+            while (myRs.next()) {
+                int duration = 0;
+                duration = (int) Duration.between(myRs.getTime("startTime").toLocalTime() , myRs.getTime("endTime").toLocalTime()).toMinutes();
+
+                sportPreferred = myRs.getString("spors");
+                if (sportPreferred.equals("Football")) { preferredSport = new Football(); }
+                if (sportPreferred.equals("Basketball")) { preferredSport = new Basketball(); }
+                if (sportPreferred.equals("Volleyball")) { preferredSport = new Volleyball(); }
+                if (sportPreferred.equals("Tennis")) { preferredSport = new Tennis(); }
+
+                match = new Match(myRs.getString("name"),
+                        preferredSport,
+                        myRs.getString("place"),
+                        myRs.getDate("date ").toLocalDate(),
+                        myRs.getTime("startTime").toLocalTime(),
+                        duration);
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         } finally {
             if (conn != null) {
                 conn.close();
