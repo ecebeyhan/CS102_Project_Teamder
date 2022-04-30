@@ -1,5 +1,7 @@
 package classes;
 
+import javafx.scene.control.Hyperlink;
+
 import java.time.*;
 import java.sql.Time;
 
@@ -16,6 +18,7 @@ public class Match {
     private LocalDateTime matchDateTime;
     private boolean isActive;
     private String name;
+    private Hyperlink matchLink;
 
     /**
      * Create a new match with the given name, sport, place, date, time and automatically active
@@ -34,6 +37,7 @@ public class Match {
         this.startTime = startTime;
         this.duration = duration;
         setDateTime(date, startTime);
+        matchLink = new Hyperlink(name);
     }
 
     //-----------------------------------------------------------------
@@ -104,5 +108,9 @@ public class Match {
 
     public int getDuration() {
         return duration;
+    }
+
+    public Hyperlink getMatchLink(){
+        return matchLink;
     }
 }

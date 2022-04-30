@@ -6,6 +6,7 @@ import classes.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -13,6 +14,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
@@ -37,11 +40,12 @@ public class FindMatchController implements MainController, Initializable {
     @FXML
     private TableView<Match> matchTable;
     @FXML
-    private TableColumn<Match, String> matchNameColumn;
+    private TableColumn<Match, Hyperlink> matchNameColumn;
     @FXML
     private TableColumn<Match, LocalDate> matchDateColumn;
     @FXML
     private TableColumn<Match, String> matchCityColumn;
+    private ObservableList<Hyperlink> links;
 
     @FXML
     protected void clickOnCancel(ActionEvent event) throws IOException, SQLException {
@@ -84,9 +88,16 @@ public class FindMatchController implements MainController, Initializable {
             e.getStackTrace();
         }
         assert matches != null;
-        matchTable.getItems().addAll(matches);
-
-
+        ObservableList<Match> anyMatches = matchTable.getItems(); //Gets matches from Tableview object if there are any.
+        if( anyMatches.size() > 0 ){
+            matchTable.getItems().clear();
+            matchTable.getItems().addAll(matches);
+            createLinks();
+        }
+        else{
+            matchTable.getItems().addAll(matches);
+            createLinks();
+        }
     }
 
     @Override
@@ -94,10 +105,39 @@ public class FindMatchController implements MainController, Initializable {
 
     }
 
+    private void createLinks(){
+        links = FXCollections.observableArrayList();;
+        for( int i = 0; i < matchTable.getItems().size(); i++){
+            Match m = matchTable.getItems().get(i);
+            TableColumn col = matchTable.getColumns().get(0);
+            Hyperlink link = (Hyperlink) col.getCellObservableValue(m).getValue();
+            links.add(link);
+        }
+        for( int i = 0; i < links.size(); i++){
+            links.get(i).setOnAction(new EventHandler<ActionEvent>() {
+
+                @Override
+                public void handle(ActionEvent t) {
+                    SceneChanger sc = new SceneChanger();
+                    try {
+                        Match match = Database.getMatch( ((Hyperlink)t.getSource()).getText());
+                        matchPageController page = new matchPageController();
+                        sc.changeScenes(t, "Match_Page.fxml", "Teamder | Match Page", SceneChanger.getLoggedInUser(), match, page, page );
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            });
+        }
+    }
+
     @Override
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
         cityComboBox.setItems(FXCollections.observableArrayList("Trabzon", "Ankara", "Istanbul", "Izmir", "Izmit"));
-        matchNameColumn.setCellValueFactory( new PropertyValueFactory<Match, String>("name"));
+        matchNameColumn.setCellValueFactory( new PropertyValueFactory<Match, Hyperlink>("matchLink"));
         matchDateColumn.setCellValueFactory( new PropertyValueFactory<Match, LocalDate>("date"));
         matchCityColumn.setCellValueFactory( new PropertyValueFactory<Match, String>("place"));
     }
