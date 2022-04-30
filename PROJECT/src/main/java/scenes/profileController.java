@@ -1,13 +1,17 @@
 package scenes;
 
 import classes.ImageHandler;
+import classes.Match;
 import classes.User;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
@@ -17,8 +21,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
-public class profileController implements MainController  {
+public class profileController implements MainController, Initializable  {
 
     @FXML
     private Text userNameLabel;
@@ -30,6 +35,18 @@ public class profileController implements MainController  {
     private TextArea bioText;
     @FXML
     private ImageView imageView;
+    @FXML
+    private TableView<Match> currentMatchTable;
+    @FXML
+    private TableColumn<Match, Hyperlink> matchNameColumn;
+    private ObservableList<Hyperlink> currentMatchLinks;
+    @FXML
+    private TableView<Match> joinedMatchTable;
+    @FXML
+    private TableColumn<Match, String> joinedMNameColumn;
+    @FXML
+    private TableColumn<Match, Hyperlink> rateColumn;
+    private ObservableList<Hyperlink> rateLinks;
 
     private File imageFile;
     private User user;
@@ -104,4 +121,10 @@ public class profileController implements MainController  {
         }
     }
 
+    @Override
+    public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
+        matchNameColumn.setCellValueFactory( new PropertyValueFactory<Match, Hyperlink>("matchLink"));
+        joinedMNameColumn.setCellValueFactory( new PropertyValueFactory<Match, String>("name"));
+        rateColumn.setCellValueFactory( new PropertyValueFactory<Match, Hyperlink>("rateLink"));
+    }
 }
