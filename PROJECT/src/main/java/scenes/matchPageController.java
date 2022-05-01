@@ -1,5 +1,6 @@
 package scenes;
 
+import classes.Database;
 import classes.ImageHandler;
 import classes.Match;
 import classes.User;
@@ -71,8 +72,6 @@ public class matchPageController implements MatchController, MainController{
 
         Optional<ButtonType> result = alert.showAndWait();
 
-        int position = getPositionSelection(event);
-
         if(result.get() == ButtonType.OK)
         {
             Alert infoAlert = new Alert(Alert.AlertType.NONE);
@@ -81,12 +80,26 @@ public class matchPageController implements MatchController, MainController{
             infoAlert.initOwner(stage);
             infoAlert.getDialogPane().setContentText("You successfully joined the match!");
             infoAlert.show();
-            //Pozisyona göre eklemiyor
-            /*try {
 
+            int position = getPositionSelection(event);
+
+            //Pozisyona göre eklemiyor
+            try {
                 Database.addMatch(user,match);
             }
             catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+
+            SceneChanger sc = new SceneChanger();
+            MatchController matchCont = new JoinedMatchPageController();
+            MainController mainCont = new JoinedMatchPageController();
+
+            //User oyuna katıldıktan sonra Joined_Match_Page'e geçilmesi lazım
+            /*try {
+                sc.changeScenes(e, "Joined_Match_Page.fxml", "Teamder", user, match, matchCont, mainCont);
+            }
+            catch (IOException ex) {
                 throw new RuntimeException(ex);
             }*/
         }
@@ -132,6 +145,6 @@ public class matchPageController implements MatchController, MainController{
 
     @Override
     public void preloadData(User user) throws IOException {
-
+        this.user = user;
     }
 }
