@@ -19,6 +19,7 @@ public class Match {
     private boolean isActive;
     private String name;
     private Hyperlink matchLink;
+    private Hyperlink rateLink;
 
     /**
      * Create a new match with the given name, sport, place, date, time and automatically active
@@ -38,6 +39,7 @@ public class Match {
         this.duration = duration;
         setDateTime(date, startTime);
         matchLink = new Hyperlink(name);
+        rateLink = new Hyperlink("rate");
     }
 
     //-----------------------------------------------------------------
@@ -112,5 +114,9 @@ public class Match {
 
     public Hyperlink getMatchLink(){
         return matchLink;
+    }
+
+    public Hyperlink getRateLink(){
+        return rateLink;
     }
 }
