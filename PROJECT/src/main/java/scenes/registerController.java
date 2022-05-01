@@ -68,7 +68,6 @@ public class registerController {
         }
         if ( !(footballCB.isSelected() || tennisCB.isSelected() || basketCB.isSelected() || volleyballCB.isSelected())) {
             label.setText("Select (a) sport(s)!");
-            return;
         }
         else {
             String sports = "";
@@ -78,9 +77,9 @@ public class registerController {
             if (volleyballCB.isSelected()) { sports += "Volleyball, "; }
             if (sports.length() > 0) { sports = sports.substring(0,sports.length()-2); }
 
-            Database.createUser(nameTextField.getText(), passwordField.getText(), bioTextArea.getText(), sports);
+            Database.createUser(nameTextField.getText(), passwordField.getText(), sports, bioTextArea.getText());
             label.setText("Account has been created!");
-            label2.setText(" Click on 'Cancel' to return Login Page.");
+            label2.setText("Click on 'Cancel' to return Login Page.");
         }
     }
 

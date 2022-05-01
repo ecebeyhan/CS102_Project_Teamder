@@ -72,7 +72,6 @@ public class profileController implements MainController, Initializable  {
         SceneChanger sc = new SceneChanger();
         MainController controllerClass = new FindMatchController();
         sc.changeScenes(event, "Find_aMatch.fxml", "Teamder | Find a Match Page");
-
     }
 
     /**

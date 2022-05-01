@@ -45,7 +45,6 @@ public class FindMatchController implements MainController, Initializable {
     private TableColumn<Match, LocalDate> matchDateColumn;
     @FXML
     private TableColumn<Match, String> matchCityColumn;
-    private ObservableList<Hyperlink> links;
 
     @FXML
     protected void clickOnCancel(ActionEvent event) throws IOException, SQLException {
@@ -101,8 +100,11 @@ public class FindMatchController implements MainController, Initializable {
 
     }
 
+    /**
+     * Creates hyperlinks for each match in the table.
+     */
     private void createLinks(){
-        links = FXCollections.observableArrayList();;
+        ObservableList<Hyperlink> links = FXCollections.observableArrayList();
         for( int i = 0; i < matchTable.getItems().size(); i++){
             Match m = matchTable.getItems().get(i);
             TableColumn col = matchTable.getColumns().get(0);
