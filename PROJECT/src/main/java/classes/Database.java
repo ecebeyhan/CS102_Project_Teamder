@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.sql.*;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
@@ -26,8 +27,8 @@ public class Database {
     private final static String password = "RucLTf_zMlhMaa99HMxypHICcednwQix";
 
     public static void main(String[] args) throws SQLException {
-        System.out.println(getMatch("asdads").getMatchDateTime().toString());
-
+//        System.out.println(getMatch("asdads").getMatchDateTime().toString());
+        matchActivity();
     }
 
     /**
@@ -396,7 +397,7 @@ public class Database {
             conn = DriverManager.getConnection(url, username, password);
 
             // 2. create a String holding query with ? as user inputs
-            String sql = "INSERT INTO users (name, password, sports, bio) VALUES (?, ?, ?, ?);";
+            String sql = "INSERT INTO users (name, password, sports, bio, imagefile) VALUES (?, ?, ?, ?, ?);";
 
             // 3. create the query
             preparedStatement = conn.prepareStatement(sql);
@@ -406,6 +407,7 @@ public class Database {
             preparedStatement.setString(2, u.getPassword());
             preparedStatement.setString(3, u.getSports());
             preparedStatement.setString(4, u.getBio());
+            preparedStatement.setString(5, "defaultPerson.png");
 
             preparedStatement.executeUpdate();
 
@@ -467,4 +469,118 @@ public class Database {
             }
         }
     }
+
+    public static void matchActivity() throws SQLException {
+        Connection conn = null;
+        PreparedStatement preparedStatement = null;
+        LocalDateTime now = LocalDateTime.now();
+
+        //matches properties for comparison
+        LocalTime endTime = null;
+        LocalDate matchDate = null;
+
+        ArrayList<String> matchName = new ArrayList<>(); // matches to be set inactive
+
+        try {
+            // 1. database connection
+            conn = DriverManager.getConnection(url, username, password);
+
+            // 2. create a String holding query
+            String sql = "SELECT * FROM match";
+
+            // 3. create the query
+            preparedStatement = conn.prepareStatement(sql);
+
+            // 4. execute the query
+            ResultSet rs = preparedStatement.executeQuery();
+
+            // 5. print the results
+            while (rs.next()) {
+                endTime = rs.getTime("endTime").toLocalTime();
+                matchDate = rs.getDate("date ").toLocalDate();
+                if (now.toLocalDate().isAfter(matchDate) && now.toLocalTime().isAfter(endTime)) { // compare if match's date and time with now
+                    matchName.add(rs.getString("name")); // add to list of matches to be set inactive
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        for (String name : matchName) {
+            setMatchInactive(name);
+        }
+    }
+
+    /**
+     * Set match inactive
+     * @param name match name
+     */
+    public static void setMatchInactive(String name) throws SQLException {
+        Connection conn = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            // 1. database connection
+            conn = DriverManager.getConnection(url, username, password);
+
+            // 2. create a String holding query
+            String sql = "UPDATE match SET active = false WHERE name = ?;";
+
+            // 3. create the query
+            preparedStatement = conn.prepareStatement(sql);
+
+            // 4. put values into the parameters
+            preparedStatement.setString(1, name);
+
+            preparedStatement.execute();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
+
+    /**
+     * Sets the match to active
+     * @param name name of the match
+     */
+    public static void setMatchActive(String name) throws SQLException {
+        Connection conn = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            // 1. database connection
+            conn = DriverManager.getConnection(url, username, password);
+
+            // 2. create a String holding query
+            String sql = "UPDATE match SET active = true WHERE name = ?;";
+
+            // 3. create the query
+            preparedStatement = conn.prepareStatement(sql);
+
+            // 4. put values into the parameters
+            preparedStatement.setString(1, name);
+
+            preparedStatement.execute();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
+
+
 }

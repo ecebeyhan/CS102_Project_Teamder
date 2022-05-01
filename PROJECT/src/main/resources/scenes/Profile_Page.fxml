@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollBar?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -15,38 +13,34 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml/" fx:controller="scenes.profileController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/18" fx:controller="scenes.profileController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
             <Button layoutX="15.0" layoutY="359.0" mnemonicParsing="false" onAction="#clickOnJoin" text="Join a match" />
             <Button layoutX="109.0" layoutY="359.0" mnemonicParsing="false" onAction="#clickOnStart" prefWidth="95.0" text="Start a match" />
-            <Pane layoutX="441.0" layoutY="144.0" prefHeight="184.0" prefWidth="168.0">
+            <Pane layoutX="458.0" layoutY="144.0" prefHeight="184.0" prefWidth="168.0">
                <children>
-                  <ScrollBar layoutY="26.0" orientation="VERTICAL" prefHeight="158.0" prefWidth="14.0" />
-                  <Label prefHeight="18.0" prefWidth="168.0" text="Friends">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
-                  <Hyperlink layoutX="16.0" layoutY="18.0" prefHeight="24.0" prefWidth="157.0" text="Friend1" />
-                  <Hyperlink layoutX="16.0" layoutY="42.0" prefHeight="24.0" prefWidth="157.0" text="Friend2" />
+                  <TableView fx:id="currentMatchTable1" layoutX="-27.0" prefHeight="200.0" prefWidth="205.0">
+                     <columns>
+                        <TableColumn fx:id="matchNameColumn1" prefWidth="204.0" text="Friend List" />
+                     </columns>
+                  </TableView>
                </children>
             </Pane>
             <Pane layoutX="205.0" layoutY="144.0" prefHeight="234.0" prefWidth="205.0">
                <children>
-                  <TableView fx:id="currentMatchTable" prefHeight="200.0" prefWidth="205.0">
+                  <TableView fx:id="currentMatchTable" layoutX="6.0" prefHeight="200.0" prefWidth="205.0">
                     <columns>
                       <TableColumn fx:id="matchNameColumn" prefWidth="204.0" text="Current Matches" />
                     </columns>
                   </TableView>
                </children>
             </Pane>
-            <Separator layoutX="196.0" layoutY="152.0" orientation="VERTICAL" prefHeight="184.0" prefWidth="6.0" />
-            <Separator layoutX="416.0" layoutY="152.0" orientation="VERTICAL" prefHeight="184.0" prefWidth="0.0" />
-            <Separator layoutX="8.0" layoutY="141.0" prefHeight="6.0" prefWidth="625.0" />
-            <Text fx:id="userNameLabel" layoutX="186.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-            <Text fx:id="sportsLabel" layoutX="210.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+            <Separator layoutX="201.0" layoutY="152.0" orientation="VERTICAL" prefHeight="184.0" prefWidth="6.0" />
+            <Separator layoutX="8.0" layoutY="138.0" prefHeight="6.0" prefWidth="625.0" />
+            <Text fx:id="userNameLabel" layoutX="187.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+            <Text fx:id="sportsLabel" layoutX="214.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" />
             <Text fx:id="avgLabel" layoutX="163.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" />
             <TextArea fx:id="bioText" editable="false" layoutX="441.0" layoutY="20.0" prefHeight="88.0" prefWidth="183.0" />
             <Label layoutX="129.0" layoutY="20.0" text="Username:" />
@@ -69,14 +63,15 @@
             </Button>
             <Pane layoutX="-2.0" layoutY="144.0" prefHeight="208.0" prefWidth="190.0">
                <children>
-                  <TableView fx:id="joinedMatchTable" prefHeight="200.0" prefWidth="196.0">
+                  <TableView fx:id="joinedMatchTable" layoutX="7.0" prefHeight="200.0" prefWidth="190.0">
                     <columns>
                       <TableColumn fx:id="joinedMNameColumn" prefWidth="142.0" text="Joined Matches" />
-                      <TableColumn fx:id="rateColumn" prefWidth="53.0" />
+                      <TableColumn fx:id="rateColumn" prefWidth="53.0" text="Rate" />
                     </columns>
                   </TableView>
                </children>
             </Pane>
+            <Separator layoutX="422.0" layoutY="150.0" orientation="VERTICAL" prefHeight="184.0" prefWidth="0.0" />
       </children>
     </AnchorPane>
   </children>
