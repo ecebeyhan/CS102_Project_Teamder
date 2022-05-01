@@ -9,9 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
-import scenes.MainController;
-import scenes.SceneChanger;
-import scenes.profileController;
+import scenes.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -369,14 +367,16 @@ public class Database {
     /**
      * Creates a new user and adds it to the database.
      */
-    public static void createMatch(String name, Sport sport, String place, LocalDate date, LocalTime startTime, int duration) throws SQLException, IOException {
+    public static void createMatch(ActionEvent event, String name, Sport sport, String place, LocalDate date, LocalTime startTime, int duration) throws SQLException, IOException {
 
         Match match = new Match(name, sport, place, date, startTime, duration);
         insertMatchToDB(match); // add into database
         addMatch(SceneChanger.getLoggedInUser(), match);
 
         SceneChanger sc = new SceneChanger();
-        sc.changeScenes(null, "Main_Page.fxml", "Teamder | Main Page", SceneChanger.getLoggedInUser(), null);
+        MainController userPage = new matchPageController();
+        MatchController matchPage = new matchPageController();
+        sc.changeScenes(event, "Match_Page.fxml", "Teamder | Match Page", SceneChanger.getLoggedInUser(), match, matchPage, userPage);
 
     }
 

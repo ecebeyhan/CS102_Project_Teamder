@@ -54,7 +54,7 @@ public class createMatchController implements  MainController, Initializable {
             if (sport.getValue().equals("Basketball")) { preferredSport = new Basketball(); }
             if (sport.getValue().equals("Volleyball")) { preferredSport = new Volleyball(); }
             if (sport.getValue().equals("Tennis")) { preferredSport = new Tennis(); }
-            Database.createMatch(matchName.getText(), preferredSport, (String) place.getValue(), date.getValue(), LocalTime.parse(time.getText()), minutes);
+            Database.createMatch(event, matchName.getText(), preferredSport, (String) place.getValue(), date.getValue(), LocalTime.parse(time.getText()), minutes);
         }
     }
     @FXML

@@ -26,7 +26,7 @@
             <Label alignment="CENTER" layoutX="22.0" layoutY="240.0" style="&#10;" text="Duration:" textAlignment="CENTER" wrapText="false">
                <font>
                   <Font size="18.0" />
-               </font>
+               </font>'
             </Label>
             <Label fx:id="matchNameLabel" alignment="CENTER" layoutX="320.0" layoutY="55.0" style="&#10;" text="Match Name:" textAlignment="CENTER" wrapText="false">
                <font>
