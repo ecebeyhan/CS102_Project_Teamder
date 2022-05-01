@@ -72,6 +72,15 @@ public class SceneChanger {
         stage.show();
     }
 
+    /**
+     * This method will change scenes and preload the next scene with specified Match & User objects
+     * @param viewName .fxml file name for the view (for example "Log_In.fxml")
+     * @param title Title of the new scene
+     * @param user User object that will be preloaded in the next scene
+     * @param match Match object that will be preloaded in the next scene
+     * @param matchControllerClass Class of the controller for the next scene
+     * @param controllerClass Class of the controller for the next scene
+     */
     public void changeScenes(ActionEvent event, String viewName, String title, User user, Match match, MatchController matchControllerClass, MainController controllerClass) throws IOException
     {
         FXMLLoader loader = new FXMLLoader();

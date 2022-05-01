@@ -91,13 +91,9 @@ public class FindMatchController implements MainController, Initializable {
         ObservableList<Match> anyMatches = matchTable.getItems(); //Gets matches from Tableview object if there are any.
         if( anyMatches.size() > 0 ){
             matchTable.getItems().clear();
-            matchTable.getItems().addAll(matches);
-            createLinks();
         }
-        else{
-            matchTable.getItems().addAll(matches);
-            createLinks();
-        }
+        matchTable.getItems().addAll(matches);
+        createLinks();
     }
 
     @Override
@@ -113,23 +109,21 @@ public class FindMatchController implements MainController, Initializable {
             Hyperlink link = (Hyperlink) col.getCellObservableValue(m).getValue();
             links.add(link);
         }
-        for( int i = 0; i < links.size(); i++){
-            links.get(i).setOnAction(new EventHandler<ActionEvent>() {
+        for (Hyperlink link : links) {
+            link.setOnAction(new EventHandler<ActionEvent>() {
 
                 @Override
                 public void handle(ActionEvent t) {
                     SceneChanger sc = new SceneChanger();
                     try {
-                        Match match = Database.getMatch( ((Hyperlink)t.getSource()).getText());
-                        matchPageController page = new matchPageController();
-                        sc.changeScenes(t, "Match_Page.fxml", "Teamder | Match Page", SceneChanger.getLoggedInUser(), match, page, page );
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (SQLException e) {
+                        Match match = Database.getMatch(((Hyperlink) t.getSource()).getText());
+                        MainController MatchPage = new matchPageController();
+                        MatchController userPage = new matchPageController();
+                        sc.changeScenes(t, "Match_Page.fxml", "Teamder | Match Page", SceneChanger.getLoggedInUser(), match, userPage, MatchPage);
+                    } catch (IOException | SQLException e) {
                         e.printStackTrace();
                     }
                 }
-
             });
         }
     }
