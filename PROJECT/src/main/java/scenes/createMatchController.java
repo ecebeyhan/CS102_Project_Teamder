@@ -8,6 +8,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
 
@@ -42,6 +44,13 @@ public class createMatchController implements  MainController, Initializable {
     protected void clickOnCreate(ActionEvent event) throws SQLException, IOException {
         if (matchName.getText().isEmpty() || time.getText().isEmpty() || date.getValue() == null || sport.getValue() == null || place.getValue() == null) {
             errorLabel.setText("Please fill all the fields!");
+        }
+        else if ( date.getValue() != null) {
+            LocalDate d = date.getValue();
+            LocalDateTime now = LocalDateTime.now();
+            if (now.toLocalDate().isAfter(d) || now.toLocalDate().equals(d)) {
+                errorLabel.setText("Please select a valid date and time");
+            }
         }
         else {
             int minutes = 0;

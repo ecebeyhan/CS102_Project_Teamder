@@ -151,7 +151,7 @@ public class profileController implements MainController, Initializable  {
         assert joinedMatches != null;
         joinedMatchTable.getItems().addAll(joinedMatches);
         createCurrentMLinks();
-        //createRateLinks();
+        createRateLinks();
 
 
         try{
@@ -197,7 +197,7 @@ public class profileController implements MainController, Initializable  {
 
     }
 
-    /*private void createRateLinks(){
+    private void createRateLinks(){
         ObservableList<Hyperlink> links = FXCollections.observableArrayList();
         ObservableList<Match> matches = FXCollections.observableArrayList();
         for( int i = 0; i < joinedMatchTable.getItems().size(); i++){
@@ -225,7 +225,7 @@ public class profileController implements MainController, Initializable  {
                 }
             });
         }
-    }*/
+    }
 
     @Override
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
