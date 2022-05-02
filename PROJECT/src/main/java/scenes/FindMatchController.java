@@ -136,6 +136,7 @@ public class FindMatchController implements MainController, Initializable {
         matchNameColumn.setCellValueFactory( new PropertyValueFactory<Match, Hyperlink>("matchLink"));
         matchDateColumn.setCellValueFactory( new PropertyValueFactory<Match, LocalDate>("date"));
         matchCityColumn.setCellValueFactory( new PropertyValueFactory<Match, String>("place"));
+        matchFoundLabel.setText("Found 0 match(es)");
     }
 
 
