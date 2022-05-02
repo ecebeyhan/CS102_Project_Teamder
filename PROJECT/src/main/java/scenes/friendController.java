@@ -22,9 +22,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
 
 public class friendController implements MainController, Initializable {
 
@@ -57,7 +55,6 @@ public class friendController implements MainController, Initializable {
     private ObservableList<User> userObservableList;
 
     private File imageFile;
-    private User user;
 
     public void clickOnBack(ActionEvent event) throws IOException {
         SceneChanger sc = new SceneChanger();
@@ -67,11 +64,9 @@ public class friendController implements MainController, Initializable {
     @Override
     public void preloadData(User user) throws IOException {
         this.database = new Database();
-        this.user = user;
         userNameLabel.setText(user.getName());
         sportsLabel.setText(user.getSports());
         bioText.setText(user.getBio());
-
 
         try {
             userObservableList = database.getFriends(user);
@@ -95,18 +90,19 @@ public class friendController implements MainController, Initializable {
         });
 
         ObservableList<Match> currentMatches = null;
-        //ObservableList<Match> joinedMatches = null;
+        ObservableList<Match> joinedMatches = null;
         try {
             currentMatches = Database.getActiveMatches(user);
+            joinedMatches = Database.getInactiveMatches(user);
         } catch (SQLException e) {
             e.getStackTrace();
         }
+        assert currentMatches != null;
         currentMatchTable.getItems().addAll(currentMatches);
-        //joinedMatchTable.getItems().addAll(joinedMatches);
+        assert joinedMatches != null;
+        joinedMatchTable.getItems().addAll(joinedMatches);
         createCurrentMLinks();
 
-
-      
         try{
             imageFile = new File(ImageHandler.IMAGE_PATH + user.getImageFile());
             BufferedImage bufferedImage = ImageIO.read(imageFile);
@@ -124,7 +120,7 @@ public class friendController implements MainController, Initializable {
         ObservableList<Hyperlink> links = FXCollections.observableArrayList();
         for (int i = 0; i < currentMatchTable.getItems().size(); i++) {
             Match m = currentMatchTable.getItems().get(i);
-            TableColumn col = currentMatchTable.getColumns().get(0);
+            TableColumn<Match, ?> col = currentMatchTable.getColumns().get(0);
             Hyperlink link = (Hyperlink) col.getCellObservableValue(m).getValue();
             links.add(link);
         }
@@ -136,9 +132,7 @@ public class friendController implements MainController, Initializable {
                     SceneChanger sc = new SceneChanger();
                     try {
                         Match match = Database.getMatch(((Hyperlink) t.getSource()).getText());
-                        MainController MatchPage = new matchPageController();
-                        MatchController userPage = new matchPageController();
-                        sc.changeScenes(t, "Match_Page.fxml", "Teamder | Match Page", SceneChanger.getLoggedInUser(), match, userPage, MatchPage);
+                        sc.changeScenes(t, "Match_Page.fxml", "Teamder | Match Page", SceneChanger.getLoggedInUser(), match, new matchPageController(), new matchPageController());
                     } catch (IOException | SQLException e) {
                         e.printStackTrace();
                     }
