@@ -669,4 +669,47 @@ public class Database {
         }
         return friends;
     }
+
+    public static boolean isUserInMatch(String uName,String matchName) throws SQLException
+    {
+        Connection conn = null;
+        PreparedStatement myStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            // 1 connect to db
+            conn = DriverManager.getConnection(url, username, password);
+
+            // 2 create a query ( with ? for match input)
+            String query = "SELECT * FROM usermatch WHERE matchname = ?";
+
+            System.out.println(query);
+            // 3 prepare the statement wanted to run on the sql
+            myStatement = conn.prepareStatement(query);
+
+            // 4 establish the '?' created in 'step 2'
+            myStatement.setString(1, matchName);
+
+            // 5 execute the query
+            resultSet = myStatement.executeQuery();
+
+            // 6 get all users of the match from the db, check if one of them is the user
+            while (resultSet.next()) {
+                if(resultSet.getString("name").equals(uName))
+                {
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+            if (myStatement != null) {
+                myStatement.close();
+            }
+        }
+        return false;
+    }
 }

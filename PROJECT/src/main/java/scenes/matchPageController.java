@@ -60,21 +60,25 @@ public class matchPageController implements MatchController, MainController{
     //If the user is not in the match and the selected position is not occupied, confirmWindow emerges
     //If the user is in the match and the selected position is not occupied, informationWindow emerges
     //If the selected position is occupied, profileWindow of the player in that position emerges
-
     @FXML
     public void clickOnPosition(ActionEvent event) throws IOException, SQLException {
-        //if(user is not in match && the position is not occupied)
-            //confirmWindow(event);
-        profileWindow(event);
+        if(Database.isUserInMatch(currentUser.getUserName(), match.getName()))
+        //pozisyonun doluluğuna bakmıyor
+        {
+            profileWindow(event);
+        }
+        else //if(user is not in match && the position is not occupied)
+        {
+            confirmWindow(event);
+        }
         /*else if(position is occupied)
         {
-
+            profileWindow(event);
         }
-        else if(user is in the match && the position is not occupied)
+        else if(Database.isUserInMatch(currentUser.getUserName(), match.getName()) && the position is not occupied)
         {
             errorWindow(event);
         }*/
-
     }
 
     //creates a window for user to confirm they want to join the match
