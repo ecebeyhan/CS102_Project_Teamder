@@ -26,10 +26,10 @@ public class Database {
     private final static String username = "iepnsbnu";
     private final static String password = "RucLTf_zMlhMaa99HMxypHICcednwQix";
 
-    public static void main(String[] args) throws SQLException {
+//    public static void main(String[] args) throws SQLException {
 //        System.out.println(getMatch("asdads").getMatchDateTime().toString());
-        matchActivity();
-    }
+//        matchActivity();
+//    }
 
     /**
      * Filter matches according to the user's preferences
@@ -169,12 +169,10 @@ public class Database {
         ObservableList<Match> matches = FXCollections.observableArrayList();
         ArrayList<String> allMatches = getMatches(user);
         ArrayList<String> activeMatches = new ArrayList<>();
-        Connection conn = null;
+
         PreparedStatement st = null;
         ResultSet myRs = null;
-
-        try {
-            conn = DriverManager.getConnection(url, username, password);
+        try (Connection conn = DriverManager.getConnection(url, username, password)) {
 
             for (String match : allMatches) {
                 st = conn.prepareStatement("SELECT * FROM match WHERE name = ? AND active = ?");
@@ -189,12 +187,43 @@ public class Database {
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
-        } finally {
-            if (conn != null) {
-                conn.close();
-            }
         }
         for (String match : activeMatches) {
+            matches.add(getMatch(match));
+        }
+        return matches;
+    }
+
+    /**
+     * Get inactive matches of the user
+     * @param user the user to get the inactive matches for
+     * @return the inactive matches
+     */
+    public static ObservableList<Match> getInactiveMatches(User user) throws SQLException {
+//        matchActivity(); // some delay to make sure the matches are updated
+        ObservableList<Match> matches = FXCollections.observableArrayList();
+        ArrayList<String> allMatches = getMatches(user);
+        ArrayList<String> inActiveMatches = new ArrayList<>();
+
+        PreparedStatement st = null;
+        ResultSet myRs = null;
+        try (Connection conn = DriverManager.getConnection(url, username, password)) {
+
+            for (String match : allMatches) {
+                st = conn.prepareStatement("SELECT * FROM match WHERE name = ? AND active = ?");
+                st.setString(1, match);
+                st.setBoolean(2, false);
+
+                myRs = st.executeQuery();
+
+                while (myRs.next()) {
+                    inActiveMatches.add(myRs.getString("name"));
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        for (String match : inActiveMatches) {
             matches.add(getMatch(match));
         }
         return matches;
@@ -618,11 +647,7 @@ public class Database {
 
     public ObservableList<User> getFriends(User user) throws SQLException {
         ObservableList<User> friends = FXCollections.observableArrayList();
-        Connection conn = null;
-        PreparedStatement stmt = null;
-        try {
-            conn = DriverManager.getConnection(url, username, password);
-            stmt = conn.prepareStatement("SELECT user2 FROM useruser WHERE user1 = ?");
+        try (Connection conn = DriverManager.getConnection(url, username, password); PreparedStatement stmt = conn.prepareStatement("SELECT user2 FROM useruser WHERE user1 = ?")) {
 
             stmt.setString(1, user.getName());
 
@@ -641,13 +666,6 @@ public class Database {
 
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (conn != null) {
-                conn.close();
-            }
-            if (stmt != null) {
-                stmt.close();
-            }
         }
         return friends;
     }

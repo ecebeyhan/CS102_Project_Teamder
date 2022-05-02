@@ -11,23 +11,18 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
-import javafx.scene.input.PickResult;
 import javafx.scene.text.Text;
-import javafx.scene.control.Labeled;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.time.LocalDate;
 
 public class profileController implements MainController, Initializable  {
 
@@ -144,14 +139,17 @@ public class profileController implements MainController, Initializable  {
         });
 
         ObservableList<Match> currentMatches = null;
-        //ObservableList<Match> joinedMatches = null;
+        ObservableList<Match> joinedMatches = null;
         try {
             currentMatches = Database.getActiveMatches(user);
+            joinedMatches = Database.getInactiveMatches(user);
         } catch (SQLException e) {
             e.getStackTrace();
         }
+        assert currentMatches != null;
         currentMatchTable.getItems().addAll(currentMatches);
-        //joinedMatchTable.getItems().addAll(joinedMatches);
+        assert joinedMatches != null;
+        joinedMatchTable.getItems().addAll(joinedMatches);
         createCurrentMLinks();
         //createRateLinks();
 
@@ -172,7 +170,7 @@ public class profileController implements MainController, Initializable  {
         ObservableList<Hyperlink> links = FXCollections.observableArrayList();
         for( int i = 0; i < currentMatchTable.getItems().size(); i++){
             Match m = currentMatchTable.getItems().get(i);
-            TableColumn col = currentMatchTable.getColumns().get(0);
+            TableColumn<Match, ?> col = currentMatchTable.getColumns().get(0);
             Hyperlink link = (Hyperlink) col.getCellObservableValue(m).getValue();
             links.add(link);
         }
