@@ -57,7 +57,7 @@ public class matchPageController implements MatchController, MainController{
     //When a user clicks on an available position, an alert pops up in order for the user to confirm joining the game
     //When the user confirms, it adds the user to the match in the preferred position
     @FXML
-    public void clickOnSelectPosition(ActionEvent event) throws IOException{
+    public void clickOnSelectPosition(ActionEvent event) throws IOException, SQLException {
         Stage stage = (Stage) myPane.getScene().getWindow();
         Alert.AlertType type = Alert.AlertType.NONE;
         Alert alert = new Alert(type,"");
@@ -96,12 +96,12 @@ public class matchPageController implements MatchController, MainController{
             MainController mainCont = new JoinedMatchPageController();
 
             //User oyuna katıldıktan sonra Joined_Match_Page'e geçilmesi lazım
-            /*try {
-                sc.changeScenes(e, "Joined_Match_Page.fxml", "Teamder", user, match, matchCont, mainCont);
+            try {
+                sc.changeScenes(event, "Joined_Match_Page.fxml", "Teamder", user, match, matchCont, mainCont);
             }
             catch (IOException ex) {
                 throw new RuntimeException(ex);
-            }*/
+            }
         }
     }
 

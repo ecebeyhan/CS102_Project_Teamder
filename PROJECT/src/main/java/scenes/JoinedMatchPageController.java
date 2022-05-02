@@ -47,6 +47,9 @@ public class JoinedMatchPageController implements MatchController, MainControlle
     private Match match;
     private File fieldFile; // the image file of the field
 
+    public JoinedMatchPageController() {
+
+    }
     @FXML
     public void clickOnCancel(ActionEvent event) throws IOException {
         SceneChanger sc = new SceneChanger();
@@ -58,37 +61,46 @@ public class JoinedMatchPageController implements MatchController, MainControlle
     //When a user clicks on an available position, an alert pops up in order for the user to confirm joining the game
     //When the user confirms, it adds the user to the match in the preferred position
     @FXML
-    public void clickOnSelectPlayer(ActionEvent event) throws IOException{
-        Stage stage = new Stage();
-
-        Label labelUser = new Label();
-        labelUser.setText("Player: userName");
-
-        Label labelRate = new Label();
-        labelRate.setText("Rate: RATE");
-
+    public void clickOnSelectPlayer(ActionEvent event) throws IOException, SQLException {
         int playerPosition = getPlayerSelection(event);
 
+        Stage stage = new Stage();
+
+        Label labelRate = new Label();
+        labelRate.setText("Rate: " ); // + users[playerPosition].getRating() users pozisyona göre database den alınamıyor
+
         Hyperlink profile = new Hyperlink();
-        profile.setText("userName");
+        profile.setText("userName"); // + users[playerPosition].getName() users pozisyona göre database den alınamıyor
 
         SceneChanger sc = new SceneChanger();
         MainController controllerClass = new profileController();
 
-        //eğer kendi profili değilse Friend_Page
-        //if(users[playerPosition.equals(currentUser)])
+        //eğer kendi profili ise Profile_Page
+        //if(users[playerPosition].equals(currentUser))  daha users pozisyona göre database den alınamıyor
         profile.setOnAction(e -> {
             try {
-                sc.changeScenes(e, "Friend_Page.fxml", "Teamder", users[playerPosition], controllerClass);
+                stage.close();
+                sc.changeScenes(event, "Profile_Page.fxml", "Teamder", currentUser, controllerClass);
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
         });
 
+        //
+        /*else if(!users[playerPosition].equals(currentUser)){
+        profile.setOnAction(e -> {
+                    try {
+                        sc.changeScenes(e, "Friend_Page.fxml", "Teamder", users[playerPosition], controllerClass);
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
+        }*/
+
         //eğer kendi profili ise Profile_Page
 
         VBox layout = new VBox(10);
-        layout.getChildren().addAll(labelUser,labelRate,profile);
+        layout.getChildren().addAll(labelRate,profile);
         layout.setAlignment(Pos.CENTER);
 
         Scene scene = new Scene(layout);
@@ -141,6 +153,6 @@ public class JoinedMatchPageController implements MatchController, MainControlle
 
     @Override
     public void preloadData(User user) throws IOException {
-
+        currentUser = user;
     }
 }
