@@ -47,8 +47,9 @@ public class createMatchController implements  MainController, Initializable {
         }
         else {
             LocalDate d = date.getValue();
+            LocalTime t = LocalTime.parse(time.getText());
             LocalDateTime now = LocalDateTime.now();
-            if (now.toLocalDate().isAfter(d) || now.toLocalDate().equals(d)) {
+            if ((now.toLocalDate().isAfter(d))|| (now.toLocalDate().equals(d) && now.toLocalTime().isAfter(t) ) ) {
                 errorLabel.setText("Please select a valid date and time");
                 return;
             }
