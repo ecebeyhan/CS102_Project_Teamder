@@ -8,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -45,14 +46,14 @@ public class profileController implements MainController, Initializable  {
     private TableView<Match> currentMatchTable;
     @FXML
     private TableColumn<Match, Hyperlink> matchNameColumn;
-    private ObservableList<Hyperlink> currentMatchLinks;
+
     @FXML
     private TableView<Match> joinedMatchTable;
     @FXML
     private TableColumn<Match, String> joinedMNameColumn;
     @FXML
     private TableColumn<Match, Hyperlink> rateColumn;
-    private ObservableList<Hyperlink> rateLinks;
+
 
     @FXML
     private TableView<User> friendListTable;
@@ -142,6 +143,19 @@ public class profileController implements MainController, Initializable  {
             }
         });
 
+        /*ObservableList<Match> currentMatches = null;
+        ObservableList<Match> joinedMatches = null;
+        try {
+            //Database methods to create currentMatches, joinedMatches
+        } catch (SQLException e) {
+            e.getStackTrace();
+        }
+        currentMatchTable.getItems().addAll(currentMatches);
+        joinedMatchTable.getItems().addAll(joinedMatches);
+        createCurrentMLinks();
+        createRateLinks();
+        */
+
         try{
             imageFile = new File(ImageHandler.IMAGE_PATH + user.getImageFile());
             BufferedImage bufferedImage = ImageIO.read(imageFile);
@@ -153,6 +167,67 @@ public class profileController implements MainController, Initializable  {
             System.err.println(e.getMessage());
         }
     }
+
+    /*private void createCurrentMLinks(){
+        ObservableList<Hyperlink> links = FXCollections.observableArrayList();
+        for( int i = 0; i < currentMatchTable.getItems().size(); i++){
+            Match m = currentMatchTable.getItems().get(i);
+            TableColumn col = currentMatchTable.getColumns().get(0);
+            Hyperlink link = (Hyperlink) col.getCellObservableValue(m).getValue();
+            links.add(link);
+        }
+        for (Hyperlink link : links) {
+            link.setOnAction(new EventHandler<ActionEvent>() {
+
+                @Override
+                public void handle(ActionEvent t) {
+                    SceneChanger sc = new SceneChanger();
+                    try {
+                        Match match = Database.getMatch(((Hyperlink) t.getSource()).getText());
+                        MainController MatchPage = new matchPageController();
+                        MatchController userPage = new matchPageController();
+                        sc.changeScenes(t, "Match_Page.fxml", "Teamder | Match Page", SceneChanger.getLoggedInUser(), match, userPage, MatchPage);
+                    } catch (IOException | SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
+
+
+
+
+    }
+
+    private void createRateLinks(){
+        ObservableList<Hyperlink> links = FXCollections.observableArrayList();
+        ObservableList<Match> matches = FXCollections.observableArrayList();
+        for( int i = 0; i < joinedMatchTable.getItems().size(); i++){
+            Match m = joinedMatchTable.getItems().get(i);
+            matches.add(m);
+            TableColumn col = joinedMatchTable.getColumns().get(1);
+            Hyperlink link = (Hyperlink) col.getCellObservableValue(m).getValue();
+            links.add(link);
+        }
+        for (int j = 0; j < joinedMatchTable.getItems().size(); j++) {
+            int finalJ = j;
+            links.get(j).setOnAction(new EventHandler<ActionEvent>() {
+
+                @Override
+                public void handle(ActionEvent t) {
+                    SceneChanger sc = new SceneChanger();
+                    try {
+                        Match match = Database.getMatch(matches.get(finalJ).getName());
+                        MainController userPage = new ratePageController();
+                        MatchController matchPage = new ratePageController();
+                        sc.changeScenes(t, "Rate.fxml", "Teamder | Rate Page", SceneChanger.getLoggedInUser(), match, matchPage, userPage);
+                    } catch (IOException | SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
+    }*/
 
     @Override
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
