@@ -52,7 +52,7 @@ public class friendController implements MainController, Initializable {
 
     public void clickOnBack(ActionEvent event) throws IOException {
         SceneChanger sc = new SceneChanger();
-        sc.changeScenes(event, "Profile_Page.fxml", "Teamder | Profile Page", sc.loggedInUser, new profileController());
+        sc.changeScenes(event, "Profile_Page.fxml", "Teamder | Profile Page", SceneChanger.loggedInUser, new profileController());
     }
 
     @Override

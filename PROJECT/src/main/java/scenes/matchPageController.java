@@ -48,7 +48,6 @@ public class matchPageController implements MatchController, MainController{
     private User currentUser;
     private User[] users;
     private Match match;
-    private File fieldFile; // the image file of the field
 
     @FXML
     public void clickOnCancel(ActionEvent event) throws IOException {
@@ -130,14 +129,13 @@ public class matchPageController implements MatchController, MainController{
         profile.setText("userName"); // + users[playerPosition].getName() users pozisyona göre database den alınamıyor
 
         SceneChanger sc = new SceneChanger();
-        MainController controllerClass = new profileController();
 
         //eğer kendi profili ise Profile_Page
         //if(users[playerPosition].equals(currentUser))  daha users pozisyona göre database den alınamıyor
         profile.setOnAction(e -> {
             try {
                 stage.close();
-                sc.changeScenes(event, "Profile_Page.fxml", "Teamder", currentUser, controllerClass);
+                sc.changeScenes(event, "Profile_Page.fxml", "Teamder", currentUser, new profileController());
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
@@ -202,7 +200,8 @@ public class matchPageController implements MatchController, MainController{
         this.match = match;
 
         try{
-            fieldFile = new File(ImageHandler.IMAGE_PATH + "football_field.jpeg");
+            // the image file of the field
+            File fieldFile = new File(ImageHandler.IMAGE_PATH + "football_field.jpeg");
             BufferedImage bufferedImage = ImageIO.read(fieldFile);
             Image img = SwingFXUtils.toFXImage(bufferedImage, null);
             footballField.setImage(img);
