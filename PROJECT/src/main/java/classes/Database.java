@@ -47,7 +47,6 @@ public class Database {
         int count = 0;
         try {
             conn = DriverManager.getConnection(url, username, password);
-            System.out.println("Connected!!");
             stmt = conn.prepareStatement("SELECT * FROM match WHERE spors = ? AND place = ? AND \"date \" = ? AND name LIKE ?");
 
             stmt.setString(1, sportPreffered);
@@ -93,7 +92,6 @@ public class Database {
     public void connect() {
         try {
             Connection myConnection = DriverManager.getConnection(url, username, password);
-            System.out.println("Connected!!");
             Statement myStat = myConnection.createStatement();
             ResultSet myRs = myStat.executeQuery("SELECT * FROM public.usermatch WHERE name = 'basar123'"); // write sql command
             while (myRs.next()) {
@@ -114,7 +112,6 @@ public class Database {
         User user = null;
         try {
             conn = DriverManager.getConnection(url, username, password);
-            System.out.println("Connected!!");
             myStat = conn.createStatement();
             ResultSet myRs = myStat.executeQuery("SELECT * FROM users WHERE name = '" + name + "'"); // write sql command
             while (myRs.next()) {
@@ -145,31 +142,65 @@ public class Database {
     /**
      * Get matches for the user
      * @param user the user to get the matches for
+     * @return the name of the matches
      */
-    public static void getMatches(User user) throws SQLException {
-        Connection conn = null;
-        Statement myStat = null;
-        try {
-            conn = DriverManager.getConnection(url, username, password);
-            System.out.println("Connected!!");
-            myStat = conn.createStatement();
-            ResultSet myRs = myStat.executeQuery("SELECT * FROM public.usermatch WHERE name = '" + user.getName() + "'"); // write sql command
+    public static ArrayList<String> getMatches(User user) throws SQLException {
+        ArrayList<String> matches = new ArrayList<>();
+
+        try (Connection conn = DriverManager.getConnection(url, username, password); Statement myStat = conn.createStatement()) {
+
+            ResultSet myRs = myStat.executeQuery("SELECT * FROM usermatch WHERE name = '" + user.getName() + "'"); // write sql command
             while (myRs.next()) {
-                System.out.println(myRs.getString("matchid"));
+                matches.add(myRs.getString("matchname"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (conn != null) {
-                conn.close();
-            }
-            if (myStat != null) {
-                myStat.close();
-            }
         }
+        return matches;
     }
 
+    /**
+     * Get active matches of the user
+     * @param user the user to get the active matches for
+     * @return the active matches
+     */
+    public static ObservableList<Match> getActiveMatches(User user) throws SQLException {
+        matchActivity(); // some delay to make sure the matches are updated
+        ObservableList<Match> matches = FXCollections.observableArrayList();
+        ArrayList<String> allMatches = getMatches(user);
+        ArrayList<String> activeMatches = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet myRs = null;
 
+        try {
+            conn = DriverManager.getConnection(url, username, password);
+
+            for (String match : allMatches) {
+                st = conn.prepareStatement("SELECT * FROM matches WHERE name = ? AND active = ?");
+                st.setString(1, match);
+                st.setBoolean(2, true);
+
+                myRs = st.executeQuery();
+
+                while (myRs.next()) {
+                    activeMatches.add(myRs.getString("name"));
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        for (String match : activeMatches) {
+            matches.add(getMatch(match));
+        }
+        return matches;
+    }
+
+    /**
+     * Get the match according to the name of the match
+     * @param name the name of the match to get the match for
+     * @return the match object
+     */
     public static Match getMatch(String name) throws SQLException {
         Connection conn = null;
         Statement myStat = null;
@@ -226,7 +257,6 @@ public class Database {
 
             // 1 connect to db
             conn = DriverManager.getConnection(url, username, password);
-            System.out.println("Connected!!");
 
             // 2 create a query ( with ? for user input)
             String query = "INSERT INTO usermatch(name, matchname) VALUES (?, ?)";
@@ -257,7 +287,6 @@ public class Database {
     public static void insert(int ID, String userName, String pass, String sports, String bio) {
         try {
             Connection myConnection = DriverManager.getConnection(url, username, password);
-            System.out.println("Connected!!");
             Statement myStat = myConnection.createStatement();
             myStat.execute("INSERT INTO public.\"user\" (\" ID\", \"userName\", pass, sports, bio) VALUES ('" +
                     ID + "'::smallint, '" + userName + "'::character varying, '" + pass + "'::character varying, '" + sports + "'::character varying, '" + bio + "'::character varying) returning \" ID\";");
@@ -380,10 +409,7 @@ public class Database {
         addMatch(SceneChanger.getLoggedInUser(), match);
 
         SceneChanger sc = new SceneChanger();
-        MainController userPage = new matchPageController();
-        MatchController matchPage = new matchPageController();
-        sc.changeScenes(event, "Match_Page.fxml", "Teamder | Match Page", SceneChanger.getLoggedInUser(), match, matchPage, userPage);
-
+        sc.changeScenes(event, "Match_Page.fxml", "Teamder | Match Page", SceneChanger.getLoggedInUser(), match, new matchPageController(), new matchPageController());
     }
 
     /**
@@ -415,7 +441,6 @@ public class Database {
             preparedStatement.setString(5, "defaultPerson.png");
 
             preparedStatement.executeUpdate();
-
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -593,7 +618,6 @@ public class Database {
         PreparedStatement stmt = null;
         try {
             conn = DriverManager.getConnection(url, username, password);
-            System.out.println("Connected!!");
             stmt = conn.prepareStatement("SELECT user2 FROM useruser WHERE user1 = ?");
 
             stmt.setString(1, user.getName());
@@ -606,8 +630,8 @@ public class Database {
                 friendUsernames.add(friendUsername);
             }
 
-            for(int i = 0; i < friendUsernames.size(); i++) {
-                User friend = getUser(friendUsernames.get(i));
+            for (String friendUsername : friendUsernames) {
+                User friend = getUser(friendUsername);
                 friends.add(friend);
             }
 
@@ -623,6 +647,4 @@ public class Database {
         }
         return friends;
     }
-
-
 }
