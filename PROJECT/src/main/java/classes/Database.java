@@ -165,7 +165,7 @@ public class Database {
      * @return the active matches
      */
     public static ObservableList<Match> getActiveMatches(User user) throws SQLException {
-        matchActivity(); // some delay to make sure the matches are updated
+//        matchActivity(); // some delay to make sure the matches are updated
         ObservableList<Match> matches = FXCollections.observableArrayList();
         ArrayList<String> allMatches = getMatches(user);
         ArrayList<String> activeMatches = new ArrayList<>();
@@ -177,7 +177,7 @@ public class Database {
             conn = DriverManager.getConnection(url, username, password);
 
             for (String match : allMatches) {
-                st = conn.prepareStatement("SELECT * FROM matches WHERE name = ? AND active = ?");
+                st = conn.prepareStatement("SELECT * FROM match WHERE name = ? AND active = ?");
                 st.setString(1, match);
                 st.setBoolean(2, true);
 
@@ -189,6 +189,10 @@ public class Database {
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
         }
         for (String match : activeMatches) {
             matches.add(getMatch(match));
