@@ -143,18 +143,18 @@ public class profileController implements MainController, Initializable  {
             }
         });
 
-        /*ObservableList<Match> currentMatches = null;
-        ObservableList<Match> joinedMatches = null;
+        ObservableList<Match> currentMatches = null;
+        //ObservableList<Match> joinedMatches = null;
         try {
-            //Database methods to create currentMatches, joinedMatches
+            currentMatches = Database.getActiveMatches(user);
         } catch (SQLException e) {
             e.getStackTrace();
         }
         currentMatchTable.getItems().addAll(currentMatches);
-        joinedMatchTable.getItems().addAll(joinedMatches);
+        //joinedMatchTable.getItems().addAll(joinedMatches);
         createCurrentMLinks();
-        createRateLinks();
-        */
+        //createRateLinks();
+
 
         try{
             imageFile = new File(ImageHandler.IMAGE_PATH + user.getImageFile());
@@ -168,7 +168,7 @@ public class profileController implements MainController, Initializable  {
         }
     }
 
-    /*private void createCurrentMLinks(){
+    private void createCurrentMLinks(){
         ObservableList<Hyperlink> links = FXCollections.observableArrayList();
         for( int i = 0; i < currentMatchTable.getItems().size(); i++){
             Match m = currentMatchTable.getItems().get(i);
@@ -199,7 +199,7 @@ public class profileController implements MainController, Initializable  {
 
     }
 
-    private void createRateLinks(){
+    /*private void createRateLinks(){
         ObservableList<Hyperlink> links = FXCollections.observableArrayList();
         ObservableList<Match> matches = FXCollections.observableArrayList();
         for( int i = 0; i < joinedMatchTable.getItems().size(); i++){

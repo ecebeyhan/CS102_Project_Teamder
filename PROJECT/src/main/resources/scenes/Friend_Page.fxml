@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scenes.friendController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scenes.friendController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
@@ -36,8 +36,7 @@
                <children>
                   <TableView fx:id="joinedMatchTable" layoutX="-3.0" layoutY="6.0" prefHeight="203.0" prefWidth="183.0">
                     <columns>
-                      <TableColumn fx:id="joinedMNameColumn" prefWidth="125.0" text="Joined Matches" />
-                      <TableColumn fx:id="rateColumn" prefWidth="57.0" text="Rate" />
+                      <TableColumn fx:id="joinedMNameColumn" prefWidth="182.0" text="Joined Matches" />
                     </columns>
                   </TableView>
                </children>

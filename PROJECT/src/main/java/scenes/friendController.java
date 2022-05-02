@@ -4,9 +4,11 @@ import classes.Database;
 import classes.ImageHandler;
 import classes.Match;
 import classes.User;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -20,6 +22,9 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
 
 public class friendController implements MainController, Initializable {
 
@@ -43,8 +48,6 @@ public class friendController implements MainController, Initializable {
     private TableView<Match> joinedMatchTable;
     @FXML
     private TableColumn<Match, String> joinedMNameColumn;
-    @FXML
-    private TableColumn<Match, Hyperlink> rateColumn;
 
 
     @FXML
@@ -91,18 +94,18 @@ public class friendController implements MainController, Initializable {
             }
         });
 
-        /*ObservableList<Match> currentMatches = null;
-        ObservableList<Match> joinedMatches = null;
+        ObservableList<Match> currentMatches = null;
+        //ObservableList<Match> joinedMatches = null;
         try {
-            //Database methods to create currentMatches, joinedMatches
+            currentMatches = Database.getActiveMatches(user);
         } catch (SQLException e) {
             e.getStackTrace();
         }
         currentMatchTable.getItems().addAll(currentMatches);
-        joinedMatchTable.getItems().addAll(joinedMatches);
+        //joinedMatchTable.getItems().addAll(joinedMatches);
         createCurrentMLinks();
-        createRateLinks();
-        */
+
+
       
         try{
             imageFile = new File(ImageHandler.IMAGE_PATH + user.getImageFile());
@@ -117,9 +120,9 @@ public class friendController implements MainController, Initializable {
 
     }
 
-    /*private void createCurrentMLinks(){
+    private void createCurrentMLinks() {
         ObservableList<Hyperlink> links = FXCollections.observableArrayList();
-        for( int i = 0; i < currentMatchTable.getItems().size(); i++){
+        for (int i = 0; i < currentMatchTable.getItems().size(); i++) {
             Match m = currentMatchTable.getItems().get(i);
             TableColumn col = currentMatchTable.getColumns().get(0);
             Hyperlink link = (Hyperlink) col.getCellObservableValue(m).getValue();
@@ -142,36 +145,8 @@ public class friendController implements MainController, Initializable {
                 }
             });
         }
+    }
 
-    private void createRateLinks(){
-        ObservableList<Hyperlink> links = FXCollections.observableArrayList();
-        ObservableList<Match> matches = FXCollections.observableArrayList();
-        for( int i = 0; i < joinedMatchTable.getItems().size(); i++){
-            Match m = joinedMatchTable.getItems().get(i);
-            matches.add(m);
-            TableColumn col = joinedMatchTable.getColumns().get(1);
-            Hyperlink link = (Hyperlink) col.getCellObservableValue(m).getValue();
-            links.add(link);
-        }
-        for (int j = 0; j < joinedMatchTable.getItems().size(); j++) {
-            int finalJ = j;
-            links.get(j).setOnAction(new EventHandler<ActionEvent>() {
-
-                @Override
-                public void handle(ActionEvent t) {
-                    SceneChanger sc = new SceneChanger();
-                    try {
-                        Match match = Database.getMatch(matches.get(finalJ).getName());
-                        MainController userPage = new ratePageController();
-                        MatchController matchPage = new ratePageController();
-                        sc.changeScenes(t, "Rate.fxml", "Teamder | Rate Page", SceneChanger.getLoggedInUser(), match, matchPage, userPage);
-                    } catch (IOException | SQLException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-        }
-    }*/
 
 
 
@@ -179,7 +154,7 @@ public class friendController implements MainController, Initializable {
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
         matchNameColumn.setCellValueFactory( new PropertyValueFactory<Match, Hyperlink>("matchLink"));
         joinedMNameColumn.setCellValueFactory( new PropertyValueFactory<Match, String>("name"));
-        rateColumn.setCellValueFactory( new PropertyValueFactory<Match, Hyperlink>("rateLink"));
         friendListColumn.setCellValueFactory(new PropertyValueFactory<User, String>("userName"));
     }
+
 }
