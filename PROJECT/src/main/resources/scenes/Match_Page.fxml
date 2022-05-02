@@ -57,17 +57,17 @@
             <Image url="@../../java/images/football_field.jpeg" />
          </image>
       </ImageView>
-      <Button fx:id="selectPosition0" layoutX="72.0" layoutY="272.0" mnemonicParsing="false" onAction="#clickOnSelectPosition" prefHeight="25.0" prefWidth="44.0" text="join0" />
-      <Button fx:id="selectPosition1" layoutX="158.0" layoutY="188.0" mnemonicParsing="false" onAction="#clickOnSelectPosition" text="join1" />
-      <Button fx:id="selectPosition2" layoutX="137.0" layoutY="271.0" mnemonicParsing="false" onAction="#clickOnSelectPosition" text="join2" />
-      <Button fx:id="selectPosition3" layoutX="158.0" layoutY="352.0" mnemonicParsing="false" onAction="#clickOnSelectPosition" text="join3" />
-      <Button fx:id="selectPosition4" layoutX="267.0" layoutY="231.0" mnemonicParsing="false" onAction="#clickOnSelectPosition" text="join4" />
-      <Button fx:id="selectPosition5" layoutX="267.0" layoutY="306.0" mnemonicParsing="false" onAction="#clickOnSelectPosition" text="join5" />
-      <Button fx:id="selectPosition6" layoutX="353.0" layoutY="231.0" mnemonicParsing="false" onAction="#clickOnSelectPosition" text="join6" />
-      <Button fx:id="selectPosition7" layoutX="353.0" layoutY="306.0" mnemonicParsing="false" onAction="#clickOnSelectPosition" text="join7" />
-      <Button fx:id="selectPosition8" layoutX="434.0" layoutY="188.0" mnemonicParsing="false" onAction="#clickOnSelectPosition" text="join8" />
-      <Button fx:id="selectPosition9" layoutX="455.0" layoutY="272.0" mnemonicParsing="false" onAction="#clickOnSelectPosition" text="join9" />
-      <Button fx:id="selectPosition10" layoutX="431.0" layoutY="352.0" mnemonicParsing="false" onAction="#clickOnSelectPosition" text="join10" />
-      <Button fx:id="selectPosition11" layoutX="524.0" layoutY="272.0" mnemonicParsing="false" onAction="#clickOnSelectPosition" prefHeight="25.0" prefWidth="44.0" text="join11" />
+      <Button fx:id="selectPosition0" layoutX="72.0" layoutY="272.0" mnemonicParsing="false" onAction="#clickOnPosition" prefHeight="25.0" prefWidth="44.0" text="join0" />
+      <Button fx:id="selectPosition1" layoutX="158.0" layoutY="188.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join1" />
+      <Button fx:id="selectPosition2" layoutX="137.0" layoutY="271.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join2" />
+      <Button fx:id="selectPosition3" layoutX="158.0" layoutY="352.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join3" />
+      <Button fx:id="selectPosition4" layoutX="267.0" layoutY="231.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join4" />
+      <Button fx:id="selectPosition5" layoutX="267.0" layoutY="306.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join5" />
+      <Button fx:id="selectPosition6" layoutX="353.0" layoutY="231.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join6" />
+      <Button fx:id="selectPosition7" layoutX="353.0" layoutY="306.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join7" />
+      <Button fx:id="selectPosition8" layoutX="434.0" layoutY="188.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join8" />
+      <Button fx:id="selectPosition9" layoutX="455.0" layoutY="272.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join9" />
+      <Button fx:id="selectPosition10" layoutX="431.0" layoutY="352.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join10" />
+      <Button fx:id="selectPosition11" layoutX="524.0" layoutY="272.0" mnemonicParsing="false" onAction="#clickOnPosition" prefHeight="25.0" prefWidth="44.0" text="join11" />
    </children>
 </Pane>

@@ -6,6 +6,8 @@ import classes.Match;
 import classes.User;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
@@ -13,6 +15,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.*;
 import javafx.event.ActionEvent;
@@ -42,7 +45,8 @@ public class matchPageController implements MatchController, MainController{
     private Pane myPane;
     @FXML
     private Button selectPosition0,selectPosition1,selectPosition2,selectPosition3,selectPosition4,selectPosition5,selectPosition6,selectPosition7,selectPosition8,selectPosition9,selectPosition10,selectPosition11;
-    private User user;
+    private User currentUser;
+    private User[] users;
     private Match match;
     private File fieldFile; // the image file of the field
 
@@ -54,10 +58,30 @@ public class matchPageController implements MatchController, MainController{
     }
 
 
-    //When a user clicks on an available position, an alert pops up in order for the user to confirm joining the game
-    //When the user confirms, it adds the user to the match in the preferred position
+    //If the user is not in the match and the selected position is not occupied, confirmWindow emerges
+    //If the user is in the match and the selected position is not occupied, informationWindow emerges
+    //If the selected position is occupied, profileWindow of the player in that position emerges
+
     @FXML
-    public void clickOnSelectPosition(ActionEvent event) throws IOException, SQLException {
+    public void clickOnPosition(ActionEvent event) throws IOException, SQLException {
+        //if(user is not in match && the position is not occupied)
+            //confirmWindow(event);
+        profileWindow(event);
+        /*else if(position is occupied)
+        {
+
+        }
+        else if(user is in the match && the position is not occupied)
+        {
+            errorWindow(event);
+        }*/
+
+    }
+
+    //creates a window for user to confirm they want to join the match
+    //adds the user to match
+    private void confirmWindow(ActionEvent event)
+    {
         Stage stage = (Stage) myPane.getScene().getWindow();
         Alert.AlertType type = Alert.AlertType.NONE;
         Alert alert = new Alert(type,"");
@@ -85,24 +109,70 @@ public class matchPageController implements MatchController, MainController{
 
             //Pozisyona göre eklemiyor
             try {
-                Database.addMatch(user,match);
+                Database.addMatch(currentUser,match);
             }
             catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }
+        }
+    }
 
-            SceneChanger sc = new SceneChanger();
-            MatchController matchCont = new JoinedMatchPageController();
-            MainController mainCont = new JoinedMatchPageController();
+    private void profileWindow(ActionEvent event)
+    {
+        int playerPosition = getPositionSelection(event);
 
-            //User oyuna katıldıktan sonra Joined_Match_Page'e geçilmesi lazım
+        Stage stage = new Stage();
+
+        Label labelRate = new Label();
+        labelRate.setText("Rate: " ); // + users[playerPosition].getRating() users pozisyona göre database den alınamıyor
+
+        Hyperlink profile = new Hyperlink();
+        profile.setText("userName"); // + users[playerPosition].getName() users pozisyona göre database den alınamıyor
+
+        SceneChanger sc = new SceneChanger();
+        MainController controllerClass = new profileController();
+
+        //eğer kendi profili ise Profile_Page
+        //if(users[playerPosition].equals(currentUser))  daha users pozisyona göre database den alınamıyor
+        profile.setOnAction(e -> {
             try {
-                sc.changeScenes(event, "Joined_Match_Page.fxml", "Teamder", user, match, matchCont, mainCont);
-            }
-            catch (IOException ex) {
+                stage.close();
+                sc.changeScenes(event, "Profile_Page.fxml", "Teamder", currentUser, controllerClass);
+            } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
-        }
+        });
+
+        //
+        /*else if(!users[playerPosition].equals(currentUser)){
+        profile.setOnAction(e -> {
+                    try {
+                        sc.changeScenes(e, "Friend_Page.fxml", "Teamder", users[playerPosition], controllerClass);
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
+        }*/
+
+        VBox layout = new VBox(10);
+        layout.getChildren().addAll(labelRate,profile);
+        layout.setAlignment(Pos.CENTER);
+
+        Scene scene = new Scene(layout);
+        scene.setFill(Color.BLACK);
+        stage.setScene(scene);
+        stage.showAndWait();
+    }
+
+    private void errorWindow(ActionEvent event)
+    {
+        Stage stage = new Stage();
+        Alert alert = new Alert(Alert.AlertType.NONE);
+        alert.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        alert.getDialogPane().lookupButton(ButtonType.OK).setVisible(false);
+        alert.initOwner(stage);
+        alert.getDialogPane().setContentText("You successfully joined the match!");
+        alert.show();
     }
 
     private int getPositionSelection(ActionEvent event)
@@ -145,6 +215,6 @@ public class matchPageController implements MatchController, MainController{
 
     @Override
     public void preloadData(User user) throws IOException {
-        this.user = user;
+        this.currentUser = user;
     }
 }
