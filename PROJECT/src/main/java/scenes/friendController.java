@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
@@ -64,5 +65,8 @@ public class friendController implements MainController, Initializable {
 
     @Override
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
+        matchNameColumn.setCellValueFactory( new PropertyValueFactory<Match, Hyperlink>("matchLink"));
+        joinedMNameColumn.setCellValueFactory( new PropertyValueFactory<Match, String>("name"));
+        rateColumn.setCellValueFactory( new PropertyValueFactory<Match, Hyperlink>("rateLink"));
     }
 }
