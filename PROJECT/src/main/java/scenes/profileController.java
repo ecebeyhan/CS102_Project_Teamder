@@ -1,5 +1,6 @@
 package scenes;
 
+import classes.Database;
 import classes.ImageHandler;
 import classes.Match;
 import classes.User;
@@ -9,12 +10,16 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.PickResult;
 import javafx.scene.text.Text;
+import javafx.scene.control.Labeled;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -25,6 +30,7 @@ import java.time.LocalDate;
 
 public class profileController implements MainController, Initializable  {
 
+    private Database database;
     @FXML
     private Text userNameLabel;
     @FXML
@@ -47,6 +53,12 @@ public class profileController implements MainController, Initializable  {
     @FXML
     private TableColumn<Match, Hyperlink> rateColumn;
     private ObservableList<Hyperlink> rateLinks;
+
+    @FXML
+    private TableView<User> friendListTable;
+    @FXML
+    private TableColumn<User, String> friendListColumn;
+    private ObservableList<User> userObservableList;
 
     private File imageFile;
     private User user;
@@ -103,10 +115,32 @@ public class profileController implements MainController, Initializable  {
      */
     @Override
     public void preloadData(User user) {
+        this.database = new Database();
         this.user = user;
         userNameLabel.setText(user.getName());
         sportsLabel.setText(user.getSports());
         bioText.setText(user.getBio());
+
+        try {
+            userObservableList = database.getFriends(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        friendListTable.setItems(userObservableList);
+        friendListTable.setOnMouseClicked(event -> {
+            if (event.getButton() == MouseButton.PRIMARY) {
+                ActionEvent actionEvent = new ActionEvent(event.getSource(), event.getTarget());
+                SceneChanger sc = new SceneChanger();
+                try {
+                    String username = friendListTable.getSelectionModel().getSelectedItem().getUserName();
+                    User friend = database.getUser(username);
+                    sc.changeScenes(actionEvent, "Friend_Page.fxml", "Teamder | Friend", friend, new friendController());
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
 
         try{
             imageFile = new File(ImageHandler.IMAGE_PATH + user.getImageFile());
@@ -125,5 +159,6 @@ public class profileController implements MainController, Initializable  {
         matchNameColumn.setCellValueFactory( new PropertyValueFactory<Match, Hyperlink>("matchLink"));
         joinedMNameColumn.setCellValueFactory( new PropertyValueFactory<Match, String>("name"));
         rateColumn.setCellValueFactory( new PropertyValueFactory<Match, Hyperlink>("rateLink"));
+        friendListColumn.setCellValueFactory(new PropertyValueFactory<User, String>("userName"));
     }
 }

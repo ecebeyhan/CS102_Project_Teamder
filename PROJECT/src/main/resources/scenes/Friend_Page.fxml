@@ -9,7 +9,7 @@
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
-            <Button layoutX="15.0" layoutY="359.0" mnemonicParsing="false" onAction="#clickOnCancel" text="Cancel" />
+            <Button layoutX="15.0" layoutY="359.0" mnemonicParsing="false" onAction="#clickOnBack" text="Back" />
             <Pane layoutX="13.0" layoutY="144.0" prefHeight="184.0" prefWidth="168.0">
                <children>
                   <ScrollBar layoutY="26.0" orientation="VERTICAL" prefHeight="158.0" prefWidth="14.0" />

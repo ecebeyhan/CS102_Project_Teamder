@@ -21,9 +21,9 @@
             <Button layoutX="109.0" layoutY="359.0" mnemonicParsing="false" onAction="#clickOnStart" prefWidth="95.0" text="Start a match" />
             <Pane layoutX="458.0" layoutY="144.0" prefHeight="184.0" prefWidth="168.0">
                <children>
-                  <TableView fx:id="currentMatchTable1" layoutX="-27.0" prefHeight="200.0" prefWidth="205.0">
+                  <TableView fx:id="friendListTable" layoutX="-27.0" prefHeight="200.0" prefWidth="205.0">
                      <columns>
-                        <TableColumn fx:id="matchNameColumn1" prefWidth="204.0" text="Friend List" />
+                        <TableColumn fx:id="friendListColumn" prefWidth="204.0" text="Friend List" />
                      </columns>
                   </TableView>
                </children>

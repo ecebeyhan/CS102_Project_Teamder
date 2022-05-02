@@ -108,7 +108,7 @@ public class Database {
      * Get user according to the username
      * @param name the username to get the user for
      */
-    public static User getUser(String name) throws SQLException {
+    public User getUser(String name) throws SQLException {
         Connection conn = null;
         Statement myStat = null;
         User user = null;
@@ -118,11 +118,16 @@ public class Database {
             myStat = conn.createStatement();
             ResultSet myRs = myStat.executeQuery("SELECT * FROM users WHERE name = '" + name + "'"); // write sql command
             while (myRs.next()) {
-                user = new User(myRs.getString("name"),
-                        myRs.getString("password"),
-                        myRs.getString("sports"),
-                        myRs.getString("bio"),
-                        new File(ImageHandler.IMAGE_PATH + myRs.getString("imagefile")));
+                String username = myRs.getString("name");
+                String dbPassword = myRs.getString("password");
+                String sports = myRs.getString("sports");
+                String bio = myRs.getString("bio");
+
+                File imageFile = new File(ImageHandler.IMAGE_PATH + myRs.getString("imagefile"));
+                if (imageFile.isFile())
+                    user = new User(username, dbPassword,sports, bio, imageFile);
+                else
+                    user = new User(username, dbPassword,sports, bio);
             }
         } catch (SQLException | IOException e) {
             e.printStackTrace();
@@ -580,6 +585,43 @@ public class Database {
                 conn.close();
             }
         }
+    }
+
+    public ObservableList<User> getFriends(User user) throws SQLException {
+        ObservableList<User> friends = FXCollections.observableArrayList();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        try {
+            conn = DriverManager.getConnection(url, username, password);
+            System.out.println("Connected!!");
+            stmt = conn.prepareStatement("SELECT user2 FROM useruser WHERE user1 = ?");
+
+            stmt.setString(1, user.getName());
+
+            ResultSet rs = stmt.executeQuery();
+
+            ArrayList<String> friendUsernames = new ArrayList<>();
+            while (rs.next()) {
+                String friendUsername = rs.getString("user2");
+                friendUsernames.add(friendUsername);
+            }
+
+            for(int i = 0; i < friendUsernames.size(); i++) {
+                User friend = getUser(friendUsernames.get(i));
+                friends.add(friend);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+            if (stmt != null) {
+                stmt.close();
+            }
+        }
+        return friends;
     }
 
 

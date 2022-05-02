@@ -16,7 +16,7 @@ import java.sql.SQLException;
 
 public class SceneChanger {
     
-    private static User loggedInUser;
+    public static User loggedInUser;
 
     /**
      * This method will accept the title of the new scene, the .fxml file name for
