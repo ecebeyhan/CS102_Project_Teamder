@@ -5,13 +5,11 @@ import classes.ImageHandler;
 import classes.Match;
 import classes.User;
 import javafx.embed.swing.SwingFXUtils;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
@@ -49,6 +47,11 @@ public class matchPageController implements MatchController, MainController{
     private User[] users;
     private Match match;
 
+    /**
+     * This method is called when the user clicks on the Close button.
+     * It changes the scene to the previous page.
+     * @param event the event that triggers the method
+     */
     @FXML
     public void clickOnCancel(ActionEvent event) throws IOException {
         SceneChanger sc = new SceneChanger();
@@ -56,10 +59,13 @@ public class matchPageController implements MatchController, MainController{
         sc.changeScenes(event, "Profile_Page.fxml", "Teamder", SceneChanger.getLoggedInUser(), controllerClass);
     }
 
-
-    //If the user is not in the match and the selected position is not occupied, confirmWindow emerges
-    //If the user is in the match and the selected position is not occupied, informationWindow emerges
-    //If the selected position is occupied, profileWindow of the player in that position emerges
+    /**
+     * This method is called when the user clicks on a position button
+     * If the user is not in the match and the selected position is not occupied, confirmWindow emerges
+     * If the user is in the match and the selected position is not occupied, informationWindow emerges
+     * If the selected position is occupied, profileWindow of the player in that position emerges
+     * @param event the event that triggers the method
+     */
     @FXML
     public void clickOnPosition(ActionEvent event) throws IOException, SQLException {
         if(Database.isUserInMatch(currentUser.getUserName(), match.getName()))
@@ -81,8 +87,11 @@ public class matchPageController implements MatchController, MainController{
         }*/
     }
 
-    //creates a window for user to confirm they want to join the match
-    //adds the user to match
+    /**
+     * This method creates a window for user to confirm that they want to join the match
+     * If they confirm, it adds the user to match
+     * @param event the event that triggers the method
+     */
     private void confirmWindow(ActionEvent event)
     {
         Stage stage = (Stage) myPane.getScene().getWindow();
@@ -120,6 +129,10 @@ public class matchPageController implements MatchController, MainController{
         }
     }
 
+    /**
+     * This method creates a window that contains the rate and the link to the profile of the player in selected position
+     * @param event the event that triggers the method
+     */
     private void profileWindow(ActionEvent event)
     {
         int playerPosition = getPositionSelection(event);
@@ -139,7 +152,9 @@ public class matchPageController implements MatchController, MainController{
         profile.setOnAction(e -> {
             try {
                 stage.close();
-                sc.changeScenes(event, "Profile_Page.fxml", "Teamder", currentUser, new profileController());
+                MatchController matchController = new profileWithCloseButtonController();
+                MainController mainController = new profileWithCloseButtonController();
+                sc.changeScenes(event, "Profile_With_CloseButton.fxml", "Teamder", SceneChanger.getLoggedInUser(),match,matchController, mainController);
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
@@ -166,6 +181,10 @@ public class matchPageController implements MatchController, MainController{
         stage.showAndWait();
     }
 
+    /**
+     * This method creates a window that informs the user that they have already joined the match and can not join again
+     * @param event the event that triggers the method
+     */
     private void errorWindow(ActionEvent event)
     {
         Stage stage = new Stage();
@@ -173,7 +192,7 @@ public class matchPageController implements MatchController, MainController{
         alert.getDialogPane().getButtonTypes().add(ButtonType.OK);
         alert.getDialogPane().lookupButton(ButtonType.OK).setVisible(false);
         alert.initOwner(stage);
-        alert.getDialogPane().setContentText("You successfully joined the match!");
+        alert.getDialogPane().setContentText("You have already joined the match!");
         alert.show();
     }
 
