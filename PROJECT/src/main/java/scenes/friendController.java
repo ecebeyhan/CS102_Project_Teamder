@@ -29,6 +29,8 @@ public class friendController implements MainController, Initializable {
     private User user;
     private Database database;
     @FXML
+    private Button followButton;
+    @FXML
     private Text userNameLabel;
     @FXML
     private Text sportsLabel;
@@ -81,6 +83,14 @@ public class friendController implements MainController, Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        for(int i = 0; i < userObservableList.size(); i++){
+            if(userObservableList.get(i).getUserName().equals(SceneChanger.loggedInUser.getUserName())){
+                followButton.setVisible(false);
+                break;
+            }
+        }
+
 
         friendListTable.setItems(userObservableList);
         friendListTable.setOnMouseClicked(event -> {
