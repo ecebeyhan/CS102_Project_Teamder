@@ -31,6 +31,8 @@ public class friendController implements MainController, Initializable {
     @FXML
     private Button followButton;
     @FXML
+    private Button unfollowButton;
+    @FXML
     private Text userNameLabel;
     @FXML
     private Text sportsLabel;
@@ -69,6 +71,12 @@ public class friendController implements MainController, Initializable {
         database.insertFriend(SceneChanger.loggedInUser, user);
         sc.changeScenes(event, "Profile_Page.fxml", "Teamder | Profile Page", SceneChanger.loggedInUser, new profileController());
     }
+    public void clickOnUnfollow(ActionEvent event) throws IOException, SQLException {
+        SceneChanger sc = new SceneChanger();
+        database.removeFriend(user, SceneChanger.loggedInUser);
+        database.removeFriend(SceneChanger.loggedInUser, user);
+        sc.changeScenes(event, "Profile_Page.fxml", "Teamder | Profile Page", SceneChanger.loggedInUser, new profileController());
+    }
 
     @Override
     public void preloadData(User user) throws IOException {
@@ -84,11 +92,20 @@ public class friendController implements MainController, Initializable {
             e.printStackTrace();
         }
 
+        boolean alreadyFriend = false;
         for(int i = 0; i < userObservableList.size(); i++){
             if(userObservableList.get(i).getUserName().equals(SceneChanger.loggedInUser.getUserName())){
-                followButton.setVisible(false);
+                alreadyFriend = true;
                 break;
             }
+        }
+        if(alreadyFriend){
+            followButton.setVisible(false);
+            unfollowButton.setVisible(true);
+        }
+        else{
+            followButton.setVisible(true);
+            unfollowButton.setVisible(false);
         }
 
 

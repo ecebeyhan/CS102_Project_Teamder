@@ -743,4 +743,35 @@ public class Database {
             }
         }
     }
+    public void removeFriend(User user1, User user2)throws SQLException {
+        Connection conn = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            // 1. database connection
+            conn = DriverManager.getConnection(url, username, password);
+
+            // 2. create a String holding query with ? as user inputs
+            String sql = "DELETE FROM useruser WHERE user1= ? and user2= ?;";
+
+            // 3. create the query
+            preparedStatement = conn.prepareStatement(sql);
+
+            // 4. put values into the parameters
+            preparedStatement.setString(1, user1.getName());
+            preparedStatement.setString(2, user2.getName());
+            preparedStatement.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
 }
