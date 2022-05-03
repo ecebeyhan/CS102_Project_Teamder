@@ -58,6 +58,11 @@ public class FindMatchController implements MainController, Initializable {
 
     @FXML
     void clickSearchButton(ActionEvent event) throws SQLException {
+        matchFoundLabel.setText("Found 0 match(es)");
+        ObservableList<Match> anyMatches = matchTable.getItems(); //Gets matches from Tableview object if there are any.
+        if( anyMatches.size() > 0 ){
+            matchTable.getItems().clear();
+        }
         if( errorLabel.getText() != null){
             errorLabel.setText(null);
         }
@@ -107,10 +112,7 @@ public class FindMatchController implements MainController, Initializable {
             }
         }
         assert matches != null;
-        ObservableList<Match> anyMatches = matchTable.getItems(); //Gets matches from Tableview object if there are any.
-        if( anyMatches.size() > 0 ){
-            matchTable.getItems().clear();
-        }
+
         matchTable.getItems().addAll(matches);
         createLinks();
     }
