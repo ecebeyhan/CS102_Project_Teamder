@@ -90,9 +90,7 @@ public class profileController implements MainController, Initializable  {
     @FXML
     protected void clickOnStart(ActionEvent event) throws IOException, SQLException {
         SceneChanger sc = new SceneChanger();
-        MainController controllerClass = new createMatchController();
         sc.changeScenes(event, "Create_Match_Page.fxml", "Teamder | Create Match Page");
-
     }
 
     /**
@@ -129,6 +127,7 @@ public class profileController implements MainController, Initializable  {
                 ActionEvent actionEvent = new ActionEvent(event.getSource(), event.getTarget());
                 SceneChanger sc = new SceneChanger();
                 try {
+                    assert friendListTable != null;
                     String username = friendListTable.getSelectionModel().getSelectedItem().getUserName();
                     User friend = database.getUser(username);
                     sc.changeScenes(actionEvent, "Friend_Page.fxml", "Teamder | Friend", friend, new friendController());
@@ -203,7 +202,7 @@ public class profileController implements MainController, Initializable  {
         for( int i = 0; i < joinedMatchTable.getItems().size(); i++){
             Match m = joinedMatchTable.getItems().get(i);
             matches.add(m);
-            TableColumn col = joinedMatchTable.getColumns().get(1);
+            TableColumn<Match, ?> col = joinedMatchTable.getColumns().get(1);
             Hyperlink link = (Hyperlink) col.getCellObservableValue(m).getValue();
             links.add(link);
         }
@@ -216,9 +215,7 @@ public class profileController implements MainController, Initializable  {
                     SceneChanger sc = new SceneChanger();
                     try {
                         Match match = Database.getMatch(matches.get(finalJ).getName());
-                        MainController userPage = new ratePageController();
-                        MatchController matchPage = new ratePageController();
-                        sc.changeScenes(t, "Rate.fxml", "Teamder | Rate Page", SceneChanger.getLoggedInUser(), match, matchPage, userPage);
+                        sc.changeScenes(t, "Rate.fxml", "Teamder | Rate Page", SceneChanger.getLoggedInUser(), match, new ratePageController(), new ratePageController());
                     } catch (IOException | SQLException e) {
                         e.printStackTrace();
                     }

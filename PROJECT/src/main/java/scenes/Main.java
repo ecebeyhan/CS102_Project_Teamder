@@ -11,7 +11,7 @@ public class Main extends Application {
 
     /**
      * The start method is called when the application is launched.
-     * It loads the Welcome Page and start the application.
+     * It loads the Welcome Page and starts the application.
      * @param stage the stage of the application
      */
     @Override
