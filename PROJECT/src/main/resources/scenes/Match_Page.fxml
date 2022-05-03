@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
@@ -14,10 +16,15 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane prefHeight="612.0" prefWidth="860.0" xmlns:fx="http://javafx.com/fxml/" fx:controller="scenes.matchPageController" fx:id="myPane">
+<Pane fx:id="myPane" prefHeight="612.0" prefWidth="860.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scenes.matchPageController">
    <children>
       <Button layoutX="21.0" layoutY="19.0" mnemonicParsing="false" onAction="#clickOnCancel" text="Cancel" />
       <TextArea layoutX="641.0" layoutY="11.0" prefHeight="515.0" prefWidth="206.0" />
+      <Text fx:id="matchNameText" layoutX="78.0" layoutY="40.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Match Name" textAlignment="CENTER" wrappingWidth="481.6617431640625">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
       <HBox layoutX="644.0" layoutY="530.0" prefHeight="40.0" prefWidth="206.0">
          <children>
             <VBox alignment="CENTER" prefHeight="40.0" prefWidth="30.0">
@@ -29,45 +36,71 @@
             <TextField prefHeight="40.0" prefWidth="174.0" promptText="type" />
          </children>
       </HBox>
-      <Label layoutX="29.0" layoutY="510.0" text="Place:">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="30.0" layoutY="570.0" text="Date:">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="30.0" layoutY="540.0" text="Time:">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Text fx:id="placeText" layoutX="72.0" layoutY="525.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLACE" wrappingWidth="119.177734375" />
-      <Text fx:id="timeText" layoutX="72.0" layoutY="554.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TIME" wrappingWidth="63.177734375" />
-      <Text fx:id="dateText" layoutX="72.0" layoutY="584.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DATE" wrappingWidth="119.177734375" />
-      <Text fx:id="matchNameText" layoutX="78.0" layoutY="40.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Match Name" textAlignment="CENTER" wrappingWidth="481.6617431640625">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Text>
-      <ImageView fx:id="footballField" fitHeight="403.0" fitWidth="628.0" layoutX="30.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../java/images/football_field.jpeg" />
-         </image>
-      </ImageView>
-      <Button fx:id="selectPosition0" layoutX="72.0" layoutY="272.0" mnemonicParsing="false" onAction="#clickOnPosition" prefHeight="25.0" prefWidth="44.0" text="join0" />
-      <Button fx:id="selectPosition1" layoutX="158.0" layoutY="188.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join1" />
-      <Button fx:id="selectPosition2" layoutX="137.0" layoutY="271.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join2" />
-      <Button fx:id="selectPosition3" layoutX="158.0" layoutY="352.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join3" />
-      <Button fx:id="selectPosition4" layoutX="267.0" layoutY="231.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join4" />
-      <Button fx:id="selectPosition5" layoutX="267.0" layoutY="306.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join5" />
-      <Button fx:id="selectPosition6" layoutX="353.0" layoutY="231.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join6" />
-      <Button fx:id="selectPosition7" layoutX="353.0" layoutY="306.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join7" />
-      <Button fx:id="selectPosition8" layoutX="434.0" layoutY="188.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join8" />
-      <Button fx:id="selectPosition9" layoutX="455.0" layoutY="272.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join9" />
-      <Button fx:id="selectPosition10" layoutX="431.0" layoutY="352.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join10" />
-      <Button fx:id="selectPosition11" layoutX="524.0" layoutY="272.0" mnemonicParsing="false" onAction="#clickOnPosition" prefHeight="25.0" prefWidth="44.0" text="join11" />
+
+      <HBox layoutX="47.0" layoutY="512.0" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <VBox prefHeight="100.0" prefWidth="42.0">
+               <children>
+                  <Label text="Place:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label text="Date:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label text="Time:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox prefHeight="100.0" prefWidth="52.0">
+               <children>
+                  <Text fx:id="placeText" strokeType="OUTSIDE" strokeWidth="0.0" text="PLACE" wrappingWidth="155.97772979736328">
+                     <VBox.margin>
+                        <Insets bottom="8.0" top="2.0" />
+                     </VBox.margin>
+                  </Text>
+                  <Text fx:id="dateText" strokeType="OUTSIDE" strokeWidth="0.0" text="DATE" wrappingWidth="155.97775650024414" />
+                  <Text fx:id="timeText" strokeType="OUTSIDE" strokeWidth="0.0" text="TIME" wrappingWidth="156.77777862548828">
+                     <VBox.margin>
+                        <Insets top="7.5" />
+                     </VBox.margin>
+                  </Text>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <AnchorPane fx:id="matchField" layoutX="14.0" layoutY="-10.0" prefHeight="485.0" prefWidth="512.0">
+         <children>
+            <ImageView fx:id="footballField" fitHeight="403.0" fitWidth="628.0" layoutX="30.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../java/images/football_field.jpeg" />
+               </image>
+            </ImageView>
+            <Button fx:id="selectPosition0" layoutX="72.0" layoutY="272.0" mnemonicParsing="false" onAction="#clickOnPosition" prefHeight="25.0" prefWidth="44.0" text="join0" />
+            <Button fx:id="selectPosition1" layoutX="158.0" layoutY="188.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join1" />
+            <Button fx:id="selectPosition2" layoutX="137.0" layoutY="271.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join2" />
+            <Button fx:id="selectPosition3" layoutX="158.0" layoutY="352.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join3" />
+            <Button fx:id="selectPosition4" layoutX="246.0" layoutY="231.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join4" />
+            <Button fx:id="selectPosition5" layoutX="246.0" layoutY="306.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join5" />
+            <Button fx:id="selectPosition6" layoutX="353.0" layoutY="231.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join6" />
+            <Button fx:id="selectPosition7" layoutX="353.0" layoutY="306.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join7" />
+            <Button fx:id="selectPosition8" layoutX="434.0" layoutY="188.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join8" />
+            <Button fx:id="selectPosition9" layoutX="458.0" layoutY="271.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join9" />
+            <Button fx:id="selectPosition10" layoutX="431.0" layoutY="352.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join10" />
+            <Button fx:id="selectPosition11" layoutX="521.0" layoutY="271.0" mnemonicParsing="false" onAction="#clickOnPosition" prefHeight="25.0" prefWidth="44.0" text="join11" />
+         </children>
+      </AnchorPane>
    </children>
 </Pane>

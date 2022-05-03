@@ -40,7 +40,7 @@
             <Separator layoutX="201.0" layoutY="152.0" orientation="VERTICAL" prefHeight="184.0" prefWidth="6.0" />
             <Separator layoutX="8.0" layoutY="138.0" prefHeight="6.0" prefWidth="625.0" />
             <Text fx:id="userNameLabel" layoutX="243.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-            <Text fx:id="sportsLabel" layoutX="270.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+            <Text fx:id="sportsLabel" layoutX="270.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" />
             <Text fx:id="avgLabel" layoutX="219.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" />
             <TextArea fx:id="bioText" editable="false" layoutX="441.0" layoutY="20.0" prefHeight="88.0" prefWidth="183.0" />
             <Label layoutX="185.0" layoutY="20.0" text="Username:" />
