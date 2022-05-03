@@ -169,7 +169,6 @@ public class profileWithCloseButtonController implements MainController, MatchCo
         createCurrentMLinks();
         createRateLinks();
 
-
         try{
             imageFile = new File(ImageHandler.IMAGE_PATH + user.getImageFile());
             BufferedImage bufferedImage = ImageIO.read(imageFile);
@@ -219,7 +218,7 @@ public class profileWithCloseButtonController implements MainController, MatchCo
         for( int i = 0; i < joinedMatchTable.getItems().size(); i++){
             Match m = joinedMatchTable.getItems().get(i);
             matches.add(m);
-            TableColumn col = joinedMatchTable.getColumns().get(1);
+            TableColumn<Match, ?> col = joinedMatchTable.getColumns().get(1);
             Hyperlink link = (Hyperlink) col.getCellObservableValue(m).getValue();
             links.add(link);
         }
@@ -232,9 +231,7 @@ public class profileWithCloseButtonController implements MainController, MatchCo
                     SceneChanger sc = new SceneChanger();
                     try {
                         Match match = Database.getMatch(matches.get(finalJ).getName());
-                        MainController userPage = new ratePageController();
-                        MatchController matchPage = new ratePageController();
-                        sc.changeScenes(t, "Rate.fxml", "Teamder | Rate Page", SceneChanger.getLoggedInUser(), match, matchPage, userPage);
+                        sc.changeScenes(t, "Rate.fxml", "Teamder | Rate Page", SceneChanger.getLoggedInUser(), match, new ratePageController(), new ratePageController());
                     } catch (IOException | SQLException e) {
                         e.printStackTrace();
                     }
@@ -253,6 +250,6 @@ public class profileWithCloseButtonController implements MainController, MatchCo
 
     @Override
     public void preLoadMatch(Match match) throws IOException {
-        previousMatch = match;
+        this.previousMatch = match;
     }
 }

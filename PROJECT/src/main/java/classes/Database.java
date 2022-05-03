@@ -77,12 +77,8 @@ public class Database {
         } catch (SQLException | IOException e) {
             e.printStackTrace();
         } finally {
-            if (conn != null) {
-                conn.close();
-            }
-            if (stmt != null) {
-                stmt.close();
-            }
+            assert conn != null;
+            conn.close();
         }
         resultLabel.setText("Found " + count + " match(es)");
         return matches;
@@ -129,12 +125,8 @@ public class Database {
         } catch (SQLException | IOException e) {
             e.printStackTrace();
         } finally {
-            if (conn != null) {
-                conn.close();
-            }
-            if (myStat != null) {
-                myStat.close();
-            }
+            assert conn != null;
+            conn.close();
         }
         return user;
     }
@@ -146,15 +138,20 @@ public class Database {
      */
     public static ArrayList<String> getMatches(User user) throws SQLException {
         ArrayList<String> matches = new ArrayList<>();
-
-        try (Connection conn = DriverManager.getConnection(url, username, password); Statement myStat = conn.createStatement()) {
-
+        Connection conn = null;
+        Statement myStat = null;
+        try {
+            conn = DriverManager.getConnection(url, username, password);
+            myStat = conn.createStatement();
             ResultSet myRs = myStat.executeQuery("SELECT * FROM usermatch WHERE name = '" + user.getName() + "'"); // write sql command
             while (myRs.next()) {
                 matches.add(myRs.getString("matchname"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            assert conn != null;
+            conn.close();
         }
         return matches;
     }
@@ -169,11 +166,11 @@ public class Database {
         ObservableList<Match> matches = FXCollections.observableArrayList();
         ArrayList<String> allMatches = getMatches(user);
         ArrayList<String> activeMatches = new ArrayList<>();
-
+        Connection conn = DriverManager.getConnection(url, username, password);
         PreparedStatement st = null;
         ResultSet myRs = null;
-        try (Connection conn = DriverManager.getConnection(url, username, password)) {
-
+        try {
+            conn = DriverManager.getConnection(url, username, password);
             for (String match : allMatches) {
                 st = conn.prepareStatement("SELECT * FROM match WHERE name = ? AND active = ?");
                 st.setString(1, match);
@@ -187,6 +184,9 @@ public class Database {
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
+        } finally {
+           assert conn != null;
+           conn.close();
         }
         for (String match : activeMatches) {
             matches.add(getMatch(match));
@@ -200,14 +200,15 @@ public class Database {
      * @return the inactive matches
      */
     public static ObservableList<Match> getInactiveMatches(User user) throws SQLException {
-//        matchActivity(); // some delay to make sure the matches are updated
         ObservableList<Match> matches = FXCollections.observableArrayList();
         ArrayList<String> allMatches = getMatches(user);
         ArrayList<String> inActiveMatches = new ArrayList<>();
+        Connection conn = null;
 
         PreparedStatement st = null;
         ResultSet myRs = null;
-        try (Connection conn = DriverManager.getConnection(url, username, password)) {
+        try {
+            conn = DriverManager.getConnection(url, username, password);
 
             for (String match : allMatches) {
                 st = conn.prepareStatement("SELECT * FROM match WHERE name = ? AND active = ?");
@@ -222,6 +223,9 @@ public class Database {
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
+        } finally {
+            assert conn != null;
+            conn.close();
         }
         for (String match : inActiveMatches) {
             matches.add(getMatch(match));
@@ -268,12 +272,8 @@ public class Database {
         } catch (IOException e) {
             throw new RuntimeException(e);
         } finally {
-            if (conn != null) {
-                conn.close();
-            }
-            if (myStat != null) {
-                myStat.close();
-            }
+            assert conn != null;
+            conn.close();
         }
         return match;
     }
@@ -307,12 +307,8 @@ public class Database {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            if (conn != null) {
-                conn.close();
-            }
-            if (stmt != null) {
-                stmt.close();
-            }
+            assert conn != null;
+            conn.close();
         }
     }
 
@@ -334,23 +330,19 @@ public class Database {
      * @param user The user to be updated.
      */
     public static void imageChange(File image, User user) throws SQLException, IOException {
-        Connection myConnection = null;
+        Connection conn = null;
         Statement myStat = null;
         boolean operation = false;
         try {
-            myConnection = DriverManager.getConnection(url, username, password);
-            myStat = myConnection.createStatement();
+            conn = DriverManager.getConnection(url, username, password);
+            myStat = conn.createStatement();
             myStat.execute("UPDATE public.\"users\" SET imagefile = '" + image.getName() + "' WHERE \"name\" = '"+ user.getName() + "';");
             operation = true;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            if (myConnection != null) {
-                myConnection.close();
-            }
-            if (myStat != null) {
-                myStat.close();
-            }
+            assert conn != null;
+            conn.close();
         }
         if(operation) {
             user.setImageFile(image);
@@ -421,13 +413,8 @@ public class Database {
         } catch (Exception e) {
             System.err.println(e.getMessage());
         } finally {
-            if (conn != null) {
-                conn.close();
-            }
-            if (myStatement != null) {
-                myStatement.close();
-            }
-
+            assert conn != null;
+            conn.close();
         }
         return false;
     }
@@ -478,13 +465,8 @@ public class Database {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (preparedStatement != null) {
-                preparedStatement.close();
-            }
-
-            if (conn != null) {
-                conn.close();
-            }
+            assert conn != null;
+            conn.close();
         }
     }
 
@@ -523,13 +505,8 @@ public class Database {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (preparedStatement != null) {
-                preparedStatement.close();
-            }
-
-            if (conn != null) {
-                conn.close();
-            }
+            assert conn != null;
+            conn.close();
         }
     }
 
@@ -567,6 +544,9 @@ public class Database {
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            assert conn != null;
+            conn.close();
         }
         for (String name : matchName) {
             setMatchInactive(name);
@@ -599,13 +579,8 @@ public class Database {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (preparedStatement != null) {
-                preparedStatement.close();
-            }
-
-            if (conn != null) {
-                conn.close();
-            }
+            assert conn != null;
+            conn.close();
         }
     }
 
@@ -635,19 +610,18 @@ public class Database {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (preparedStatement != null) {
-                preparedStatement.close();
-            }
-
-            if (conn != null) {
-                conn.close();
-            }
+            assert conn != null;
+            conn.close();
         }
     }
 
     public ObservableList<User> getFriends(User user) throws SQLException {
         ObservableList<User> friends = FXCollections.observableArrayList();
-        try (Connection conn = DriverManager.getConnection(url, username, password); PreparedStatement stmt = conn.prepareStatement("SELECT user2 FROM useruser WHERE user1 = ?")) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        try {
+            conn = DriverManager.getConnection(url, username, password);
+            stmt = conn.prepareStatement("SELECT user2 FROM useruser WHERE user1 = ?");
 
             stmt.setString(1, user.getName());
 
@@ -666,6 +640,9 @@ public class Database {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            assert conn != null;
+            conn.close();
         }
         return friends;
     }
@@ -702,12 +679,8 @@ public class Database {
         } catch (Exception e) {
             System.err.println(e.getMessage());
         } finally {
-            if (conn != null) {
-                conn.close();
-            }
-            if (myStatement != null) {
-                myStatement.close();
-            }
+            assert conn != null;
+            conn.close();
         }
         return false;
     }
@@ -734,13 +707,8 @@ public class Database {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (preparedStatement != null) {
-                preparedStatement.close();
-            }
-
-            if (conn != null) {
-                conn.close();
-            }
+            assert conn != null;
+            conn.close();
         }
     }
     public void removeFriend(User user1, User user2)throws SQLException {
@@ -765,13 +733,8 @@ public class Database {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (preparedStatement != null) {
-                preparedStatement.close();
-            }
-
-            if (conn != null) {
-                conn.close();
-            }
+            assert conn != null;
+            conn.close();
         }
     }
 }
