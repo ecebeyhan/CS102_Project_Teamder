@@ -26,6 +26,7 @@ import java.sql.SQLException;
 
 public class friendController implements MainController, Initializable {
 
+    private User user;
     private Database database;
     @FXML
     private Text userNameLabel;
@@ -60,9 +61,16 @@ public class friendController implements MainController, Initializable {
         SceneChanger sc = new SceneChanger();
         sc.changeScenes(event, "Profile_Page.fxml", "Teamder | Profile Page", SceneChanger.loggedInUser, new profileController());
     }
+    public void clickOnFollow(ActionEvent event) throws IOException, SQLException {
+        SceneChanger sc = new SceneChanger();
+        database.insertFriend(user, SceneChanger.loggedInUser);
+        database.insertFriend(SceneChanger.loggedInUser, user);
+        sc.changeScenes(event, "Profile_Page.fxml", "Teamder | Profile Page", SceneChanger.loggedInUser, new profileController());
+    }
 
     @Override
     public void preloadData(User user) throws IOException {
+        this.user = user;
         this.database = new Database();
         userNameLabel.setText(user.getName());
         sportsLabel.setText(user.getSports());
