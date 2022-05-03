@@ -14,6 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 import javafx.scene.control.TableColumn;
@@ -45,6 +46,8 @@ public class FindMatchController implements MainController, Initializable {
     private TableColumn<Match, LocalDate> matchDateColumn;
     @FXML
     private TableColumn<Match, String> matchCityColumn;
+    @FXML
+    private Label errorLabel;
 
     @FXML
     protected void clickOnCancel(ActionEvent event) throws IOException, SQLException {
@@ -55,6 +58,9 @@ public class FindMatchController implements MainController, Initializable {
 
     @FXML
     void clickSearchButton(ActionEvent event) throws SQLException {
+        if( errorLabel.getText() != null){
+            errorLabel.setText(null);
+        }
         if (!football.isSelected() && !basketball.isSelected() && !tennis.isSelected() && !volleyball.isSelected()) {
             matchFoundLabel.setText("Please select a sport");
             return;
@@ -80,11 +86,25 @@ public class FindMatchController implements MainController, Initializable {
         String city = (String) cityComboBox.getValue();
         LocalDate date = datePicker.getValue();
         String matchName = matchNameTField.getText();
+        LocalDateTime now = LocalDateTime.now();
         ObservableList<Match> matches = null;
-        try {
-            matches = Database.filterMatches(sportPreffered, city, date, matchName, matchFoundLabel);
-        } catch (SQLException e) {
-            e.getStackTrace();
+        if( now.toLocalDate().isAfter(date)){
+            errorLabel.setText("Please select a valid date");
+            return;
+        }
+        else if( now.toLocalDate().equals(date)){
+            try {
+                matches = Database.filterTodaysMatches(sportPreffered, city, date, matchName, matchFoundLabel);
+            } catch (SQLException e) {
+                e.getStackTrace();
+            }
+        }
+        else{
+            try {
+                matches = Database.filterMatches(sportPreffered, city, date, matchName, matchFoundLabel);
+            } catch (SQLException e) {
+                e.getStackTrace();
+            }
         }
         assert matches != null;
         ObservableList<Match> anyMatches = matchTable.getItems(); //Gets matches from Tableview object if there are any.
