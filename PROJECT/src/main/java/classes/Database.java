@@ -47,7 +47,7 @@ public class Database {
         int count = 0;
         try {
             conn = DriverManager.getConnection(url, username, password);
-            stmt = conn.prepareStatement("SELECT * FROM match WHERE spors = ? AND place = ? AND \"date \" = ? AND name LIKE ?");
+            stmt = conn.prepareStatement("SELECT * FROM match WHERE sports = ? AND place = ? AND \"date \" = ? AND name LIKE ?");
 
             stmt.setString(1, sportPreffered);
             stmt.setString(2, city);
@@ -711,5 +711,37 @@ public class Database {
             }
         }
         return false;
+    }
+
+    public void insertFriend(User user1, User user2)throws SQLException {
+        Connection conn = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            // 1. database connection
+            conn = DriverManager.getConnection(url, username, password);
+
+            // 2. create a String holding query with ? as user inputs
+            String sql = "INSERT INTO useruser (user1, user2) VALUES (?, ?);";
+
+            // 3. create the query
+            preparedStatement = conn.prepareStatement(sql);
+
+            // 4. put values into the parameters
+            preparedStatement.setString(1, user1.getName());
+            preparedStatement.setString(2, user2.getName());
+            preparedStatement.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+        }
     }
 }

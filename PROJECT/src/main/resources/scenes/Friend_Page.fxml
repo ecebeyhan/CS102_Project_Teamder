@@ -55,7 +55,7 @@
                   <TableColumn fx:id="friendListColumn" prefWidth="191.0" text="Friends" />
                </columns>
             </TableView>
-            <Button layoutX="137.0" layoutY="95.0" mnemonicParsing="false" onAction="#clickOnBack" text="Follow" />
+            <Button layoutX="137.0" layoutY="95.0" mnemonicParsing="false" onAction="#clickOnFollow" text="Follow" />
       </children>
     </AnchorPane>
   </children>
