@@ -683,7 +683,6 @@ public class Database {
             // 2 create a query ( with ? for match input)
             String query = "SELECT * FROM usermatch WHERE matchname = ?";
 
-            System.out.println(query);
             // 3 prepare the statement wanted to run on the sql
             myStatement = conn.prepareStatement(query);
 
