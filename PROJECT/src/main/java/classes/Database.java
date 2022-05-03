@@ -47,7 +47,7 @@ public class Database {
         int count = 0;
         try {
             conn = DriverManager.getConnection(url, username, password);
-            stmt = conn.prepareStatement("SELECT * FROM match WHERE sports = ? AND place = ? AND \"date \" = ? AND name LIKE ?");
+            stmt = conn.prepareStatement("SELECT * FROM match WHERE spors = ? AND place = ? AND \"date \" = ? AND name LIKE ?");
 
             stmt.setString(1, sportPreffered);
             stmt.setString(2, city);
@@ -738,6 +738,16 @@ public class Database {
         }
     }
 
+    /**
+     * Filters today's matches according to their starting time
+     * @param sportPreffered the user's sport preference
+     * @param city the user's place
+     * @param date the user's date
+     * @param matchName the match's name
+     * @param resultLabel the label to display the result
+     * @return the arraylist of filtered matches
+     * @throws SQLException
+     */
     public static ObservableList<Match> filterTodaysMatches(String sportPreffered, String city, LocalDate date, String matchName, Label resultLabel) throws SQLException {
         ObservableList<Match> matches = FXCollections.observableArrayList();
         matches = filterMatches(sportPreffered, city, date, matchName, resultLabel );
