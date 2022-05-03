@@ -737,4 +737,25 @@ public class Database {
             conn.close();
         }
     }
+
+    public static ObservableList<Match> filterTodaysMatches(String sportPreffered, String city, LocalDate date, String matchName, Label resultLabel) throws SQLException {
+        ObservableList<Match> matches = FXCollections.observableArrayList();
+        matches = filterMatches(sportPreffered, city, date, matchName, resultLabel );
+        LocalDateTime now = LocalDateTime.now();
+        int pos = 0;
+        while( pos < matches.size()){
+            if(now.toLocalTime().isAfter(matches.get(pos).getStartTime())){
+                matches.remove(matches.get(pos));
+            }
+            else{
+                pos++;
+            }
+        }
+        resultLabel.setText("Found " + matches.size() + " match(es)");
+        return matches;
+    }
+
+
+
+
 }
