@@ -1,10 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scenes.createMatchController">
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="scenes.createMatchController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="119.0" prefWidth="786.0" VBox.vgrow="ALWAYS">
       <children>
@@ -39,8 +51,8 @@
                </font>
             </Label>
             <DatePicker fx:id="date" layoutX="106.0" layoutY="119.0" prefHeight="25.0" prefWidth="193.0" />
-            <TextField fx:id="matchName" layoutX="448.0" layoutY="56.0" prefHeight="26.0" prefWidth="175.0" promptText="Enter match name" />
-            <TextField fx:id="time" layoutX="448.0" layoutY="119.0" prefHeight="25.0" prefWidth="100.0" promptText="Enter time" />
+            <TextField fx:id="matchName" layoutX="448.0" layoutY="56.0" prefHeight="26.0" prefWidth="175.0" promptText="Only letters &amp; space" />
+            <TextField fx:id="time" layoutX="448.0" layoutY="119.0" prefHeight="25.0" prefWidth="100.0" promptText="HH:mm" />
             <Separator layoutX="103.0" layoutY="99.0" prefWidth="200.0" />
             <Separator layoutX="103.0" layoutY="163.0" prefHeight="3.0" prefWidth="200.0" />
             <ComboBox fx:id="sport" layoutX="103.0" layoutY="181.0" prefHeight="26.0" prefWidth="200.0" promptText="Football" />

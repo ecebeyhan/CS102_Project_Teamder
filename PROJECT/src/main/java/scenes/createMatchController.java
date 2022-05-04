@@ -17,6 +17,7 @@ import java.util.ResourceBundle;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.regex.Pattern;
 
 public class createMatchController implements  MainController, Initializable {
 
@@ -43,6 +44,7 @@ public class createMatchController implements  MainController, Initializable {
     
     @FXML
     protected void clickOnCreate(ActionEvent event) throws SQLException, IOException {
+
         if(errorLabel.getText() != null){
             errorLabel.setText(null);
         }
@@ -51,6 +53,12 @@ public class createMatchController implements  MainController, Initializable {
         }
         else {
             try{
+                for (int i = 0; i < matchName.getText().length(); i++) {
+                    if (matchName.getText().charAt(i) == '\'') {
+                        errorLabel.setText("Please don't use ' in the name!"); return;
+                    }
+
+                 }
                 LocalDate d = date.getValue();
                 LocalTime t = LocalTime.parse(time.getText());
                 LocalDateTime now = LocalDateTime.now();
@@ -93,8 +101,7 @@ public class createMatchController implements  MainController, Initializable {
 
     @FXML
     protected void clickOnCancel(ActionEvent event) throws IOException, SQLException {
-        SceneChanger sc = new SceneChanger();
-        sc.changeScenes(event, "Profile_Page.fxml", "Teamder", SceneChanger.getLoggedInUser(), new profileController());
+        new SceneChanger().changeScenes(event, "Profile_Page.fxml", "Teamder", SceneChanger.getLoggedInUser(), new profileController());
     }
 
     @Override

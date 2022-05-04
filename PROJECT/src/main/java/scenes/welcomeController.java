@@ -20,8 +20,7 @@ public class welcomeController {
      */
     @FXML
     protected void clickOnCreateButton(ActionEvent event) throws IOException {
-        SceneChanger sc = new SceneChanger();
-        sc.changeScenes(event, "Make_Profile.fxml", "Teamder | Create Account");
+        new SceneChanger().changeScenes(event, "Make_Profile.fxml", "Teamder | Create Account");
     }
 
     /**
@@ -31,7 +30,6 @@ public class welcomeController {
      */
     @FXML
     protected void clickOnLoginButton(ActionEvent event) throws IOException {
-        SceneChanger sc = new SceneChanger();
-        sc.changeScenes(event, "Log_In.fxml", "Teamder | Login");
+        new SceneChanger().changeScenes(event, "Log_In.fxml", "Teamder | Login");
     }
 }
