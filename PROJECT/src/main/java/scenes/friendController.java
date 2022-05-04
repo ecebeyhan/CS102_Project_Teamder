@@ -118,7 +118,12 @@ public class friendController implements MainController, Initializable {
                 try {
                     String username = friendListTable.getSelectionModel().getSelectedItem().getUserName();
                     User friend = database.getUser(username);
-                    sc.changeScenes(actionEvent, "Friend_Page.fxml", "Teamder | Friend", friend, new friendController());
+                    if( SceneChanger.loggedInUser.equals(friend)){
+                        sc.changeScenes(actionEvent, "Profile_Page.fxml", "Teamder | Profile Page", SceneChanger.loggedInUser, new profileController());
+                    }
+                    else {
+                        sc.changeScenes(actionEvent, "Friend_Page.fxml", "Teamder | Friend", friend, new friendController());
+                    }
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
