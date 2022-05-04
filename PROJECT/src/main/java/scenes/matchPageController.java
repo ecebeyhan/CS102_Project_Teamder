@@ -36,6 +36,8 @@ public class matchPageController implements MatchController, MainController{
     @FXML
     public ImageView tennisField;
     @FXML
+    public ImageView basketballField;
+    @FXML
     private Text placeText;
     @FXML
     private Text timeText;
@@ -51,6 +53,8 @@ public class matchPageController implements MatchController, MainController{
     private Button volleyballPosition0,volleyballPosition1,volleyballPosition2,volleyballPosition3,volleyballPosition4,volleyballPosition5,volleyballPosition6,volleyballPosition7;
     @FXML
     private Button tennisPosition0,tennisPosition1,tennisPosition2,tennisPosition3;
+    @FXML
+    private Button basketballPosition0,basketballPosition1,basketballPosition2,basketballPosition3,basketballPosition4,basketballPosition5,basketballPosition6,basketballPosition7,basketballPosition8,basketballPosition9;
     private User currentUser;
     private User[] users;
     private Match match;
@@ -233,6 +237,7 @@ public class matchPageController implements MatchController, MainController{
         {
             setVolleyballFieldInvisible();
             setTennisFieldInvisible();
+            setBasketballFieldInvisible();
             try{
                 // the image file of the field
                 File fieldFile = new File(ImageHandler.IMAGE_PATH + "football_field.jpeg");
@@ -249,6 +254,7 @@ public class matchPageController implements MatchController, MainController{
         {
             setFootballFieldInvisible();
             setTennisFieldInvisible();
+            setBasketballFieldInvisible();
             try{
                 // the image file of the field
                 File fieldFile = new File(ImageHandler.IMAGE_PATH + "volleyball_field.jpeg");
@@ -265,6 +271,7 @@ public class matchPageController implements MatchController, MainController{
         {
             setFootballFieldInvisible();
             setVolleyballFieldInvisible();
+            setBasketballFieldInvisible();
             try{
                 // the image file of the field
                 File fieldFile = new File(ImageHandler.IMAGE_PATH + "tennis_field.jpeg");
@@ -276,6 +283,29 @@ public class matchPageController implements MatchController, MainController{
             {
                 System.err.println(e.getMessage());
             }
+        }
+        else if(sportName.equals("Basketball"))
+        {
+            setFootballFieldInvisible();
+            setVolleyballFieldInvisible();
+            setTennisFieldInvisible();
+            try{
+                // the image file of the field
+                File fieldFile = new File(ImageHandler.IMAGE_PATH + "basketball_field.jpeg");
+                BufferedImage bufferedImage = ImageIO.read(fieldFile);
+                Image img = SwingFXUtils.toFXImage(bufferedImage, null);
+                basketballField.setImage(img);
+            }
+            catch (IOException e)
+            {
+                System.err.println(e.getMessage());
+            }
+        }
+        else{
+            setBasketballFieldInvisible();
+            setTennisFieldInvisible();
+            setVolleyballFieldInvisible();
+            setFootballFieldInvisible();
         }
     }
 
@@ -326,6 +356,24 @@ public class matchPageController implements MatchController, MainController{
         tennisPosition2.setVisible(false);
         tennisPosition3.setVisible(false);
         tennisField.setVisible(false);
+    }
+
+    /**
+     * This method sets the basketball field invisible when the match is not a basketball match
+     */
+    private void setBasketballFieldInvisible()
+    {
+        basketballPosition0.setVisible(false);
+        basketballPosition1.setVisible(false);
+        basketballPosition2.setVisible(false);
+        basketballPosition3.setVisible(false);
+        basketballPosition4.setVisible(false);
+        basketballPosition5.setVisible(false);
+        basketballPosition6.setVisible(false);
+        basketballPosition7.setVisible(false);
+        basketballPosition8.setVisible(false);
+        basketballPosition9.setVisible(false);
+        basketballField.setVisible(false);
     }
 
     @Override

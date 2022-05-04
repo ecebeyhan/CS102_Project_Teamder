@@ -59,6 +59,21 @@
             <Button fx:id="tennisPosition1" layoutX="227.0" layoutY="339.0" mnemonicParsing="false" onAction="#clickOnPosition" prefHeight="25.0" prefWidth="44.0" text="join22" />
             <Button fx:id="tennisPosition2" layoutX="361.0" layoutY="200.0" mnemonicParsing="false" onAction="#clickOnPosition" prefHeight="25.0" prefWidth="44.0" text="join23" />
             <Button fx:id="tennisPosition3" layoutX="361.0" layoutY="339.0" mnemonicParsing="false" onAction="#clickOnPosition" prefHeight="25.0" prefWidth="44.0" text="join24" />
+            <ImageView fx:id="basketballField" fitHeight="403.0" fitWidth="577.0" layoutX="30.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../java/images/basketball_field.jpeg" />
+               </image>
+            </ImageView>
+            <Button fx:id="basketballPosition0" layoutX="94.0" layoutY="175.0" mnemonicParsing="false" onAction="#clickOnPosition" prefHeight="25.0" prefWidth="44.0" text="join25" />
+            <Button fx:id="basketballPosition1" layoutX="136.0" layoutY="218.0" mnemonicParsing="false" onAction="#clickOnPosition" prefHeight="25.0" prefWidth="44.0" text="join26" />
+            <Button fx:id="basketballPosition2" layoutX="116.0" layoutY="352.0" mnemonicParsing="false" onAction="#clickOnPosition" prefHeight="25.0" prefWidth="44.0" text="join27" />
+            <Button fx:id="basketballPosition3" layoutX="235.0" layoutY="272.0" mnemonicParsing="false" onAction="#clickOnPosition" prefHeight="25.0" prefWidth="44.0" text="join29" />
+            <Button fx:id="basketballPosition4" layoutX="200.0" layoutY="326.0" mnemonicParsing="false" onAction="#clickOnPosition" prefHeight="25.0" prefWidth="44.0" text="join28" />
+            <Button fx:id="basketballPosition5" layoutX="357.0" layoutY="272.0" mnemonicParsing="false" onAction="#clickOnPosition" prefHeight="25.0" prefWidth="44.0" text="join30" />
+            <Button fx:id="basketballPosition6" layoutX="395.0" layoutY="326.0" mnemonicParsing="false" onAction="#clickOnPosition" prefHeight="25.0" prefWidth="44.0" text="join31" />
+            <Button fx:id="basketballPosition7" layoutX="458.0" layoutY="218.0" mnemonicParsing="false" onAction="#clickOnPosition" prefHeight="25.0" prefWidth="44.0" text="join32" />
+            <Button fx:id="basketballPosition8" layoutX="474.0" layoutY="352.0" mnemonicParsing="false" onAction="#clickOnPosition" prefHeight="25.0" prefWidth="44.0" text="join33" />
+            <Button fx:id="basketballPosition9" layoutX="502.0" layoutY="175.0" mnemonicParsing="false" onAction="#clickOnPosition" prefHeight="25.0" prefWidth="44.0" text="join34" />
          </children>
       </AnchorPane>
       <Button cancelButton="true" layoutX="21.0" layoutY="19.0" mnemonicParsing="false" onAction="#clickOnCancel" text="Cancel" />
