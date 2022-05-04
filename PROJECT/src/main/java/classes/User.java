@@ -11,14 +11,6 @@ import java.util.ArrayList;
 
 public class User {
 
-    public static void main(String[] args) throws IOException, SQLException {
-        User user = new User("basar", "3111", "patates", "eski csci ",
-                        new File ("./src/main/java/images/denemefoto.png"));
-                        System.out.println(user);
-        Database.insertUserToDB(user);
-
-    }
-
     private String userName;
     private String password;
     private String sports;  // interested sports (gostermelik)

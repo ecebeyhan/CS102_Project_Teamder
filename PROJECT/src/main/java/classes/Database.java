@@ -134,6 +134,25 @@ public class Database {
     }
 
     /**
+     * Get all matches from the database
+     * @return a list of all matches
+     */
+    public static ArrayList<String> getAllMatches() throws SQLException {
+        ArrayList<String> matches = new ArrayList<>();
+        Statement myStat = null;
+        try {
+            myStat = conn.createStatement();
+            ResultSet myRs = myStat.executeQuery("SELECT * FROM match"); // write sql command
+            while (myRs.next()) {
+                matches.add(myRs.getString("name"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return matches;
+    }
+
+    /**
      * Get matches for the user
      * @param user the user to get the matches for
      * @return the name of the matches
