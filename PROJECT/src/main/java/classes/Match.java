@@ -29,7 +29,6 @@ public class Match {
      * @param startTime the hour the match will start
      */
     public Match(String name, Sport sport, String place, LocalDate date, LocalTime startTime, int duration) throws IOException, SQLException{
-        setActive(true);
         setPlace(place);
         setSport(sport);
         setName(name);
@@ -39,13 +38,19 @@ public class Match {
         setDateTime(date, startTime);
         matchLink = new Hyperlink(name);
         rateLink = new Hyperlink("rate");
+        setActivity();
     }
 
     //-----------------------------------------------------------------
     //  Setter methods for all variables
     //-----------------------------------------------------------------
-    public void setActive(boolean active) {
-        isActive = active;
+    public void setActivity() {
+        if(compareTime()){
+            isActive = true;
+        }
+        else{
+            isActive = false;
+        }
     }
 
     public void setDateTime(LocalDate date, LocalTime time) {
@@ -65,11 +70,12 @@ public class Match {
     }
     
     //compares endTime with the local time to upgrade the boolean active
-    public void compareTime(){
+    public boolean compareTime(){
         LocalDateTime local = LocalDateTime.now();
         if(local.isAfter(matchDateTime)){//time of the match has passed
-            setActive(false);
+            return false;
         }
+        return true;
     }
 
     public LocalTime endTime() {

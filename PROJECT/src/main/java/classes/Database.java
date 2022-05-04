@@ -159,7 +159,7 @@ public class Database {
      * @return the active matches
      */
     public static ObservableList<Match> getActiveMatches(User user) throws SQLException {
-//        matchActivity(); // some delay to make sure the matches are updated
+        matchActivity(); // some delay to make sure the matches are updated
         ObservableList<Match> matches = FXCollections.observableArrayList();
         ArrayList<String> allMatches = getMatches(user);
         ArrayList<String> activeMatches = new ArrayList<>();
@@ -192,6 +192,7 @@ public class Database {
      * @return the inactive matches
      */
     public static ObservableList<Match> getInactiveMatches(User user) throws SQLException {
+        matchActivity();
         ObservableList<Match> matches = FXCollections.observableArrayList();
         ArrayList<String> allMatches = getMatches(user);
         ArrayList<String> inActiveMatches = new ArrayList<>();
