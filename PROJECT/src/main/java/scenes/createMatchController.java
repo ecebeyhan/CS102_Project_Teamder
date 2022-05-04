@@ -16,6 +16,7 @@ import java.util.ResourceBundle;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.regex.Pattern;
 
 public class createMatchController implements  MainController, Initializable {
 
@@ -43,6 +44,11 @@ public class createMatchController implements  MainController, Initializable {
 
     @FXML
     protected void clickOnCreate(ActionEvent event) throws SQLException, IOException {
+        for (int i = 0; i < matchName.getText().length(); i++) {
+            if (matchName.getText().charAt(i) == '\'') {
+                errorLabel.setText("Please don't use ' in the name!"); return;
+            }
+        }
         if (matchName.getText().isEmpty() || time.getText().isEmpty() || date.getValue() == null || sport.getValue() == null || place.getValue() == null) {
             errorLabel.setText("Please fill all the fields!");
         }
