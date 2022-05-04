@@ -31,7 +31,9 @@ import java.util.Optional;
 
 public class matchPageController implements MatchController, MainController{
     @FXML
-    public ImageView matchField;
+    public ImageView footballField;
+    @FXML
+    public ImageView volleyballField;
     @FXML
     private Text placeText;
     @FXML
@@ -232,7 +234,7 @@ public class matchPageController implements MatchController, MainController{
                 File fieldFile = new File(ImageHandler.IMAGE_PATH + "football_field.jpeg");
                 BufferedImage bufferedImage = ImageIO.read(fieldFile);
                 Image img = SwingFXUtils.toFXImage(bufferedImage, null);
-                matchField.setImage(img);
+                footballField.setImage(img);
             }
             catch (IOException e)
             {
@@ -247,7 +249,7 @@ public class matchPageController implements MatchController, MainController{
                 File fieldFile = new File(ImageHandler.IMAGE_PATH + "volleyball_field.jpeg");
                 BufferedImage bufferedImage = ImageIO.read(fieldFile);
                 Image img = SwingFXUtils.toFXImage(bufferedImage, null);
-                matchField.setImage(img);
+                volleyballField.setImage(img);
             }
             catch (IOException e)
             {
@@ -273,6 +275,7 @@ public class matchPageController implements MatchController, MainController{
         footballPosition9.setVisible(false);
         footballPosition10.setVisible(false);
         footballPosition11.setVisible(false);
+        footballField.setVisible(false);
     }
 
 
@@ -289,6 +292,7 @@ public class matchPageController implements MatchController, MainController{
         volleyballPosition5.setVisible(false);
         volleyballPosition6.setVisible(false);
         volleyballPosition7.setVisible(false);
+        volleyballField.setVisible(false);
     }
 
     @Override
