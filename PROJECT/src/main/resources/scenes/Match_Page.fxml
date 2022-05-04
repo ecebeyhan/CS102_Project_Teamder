@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:id="myPane" prefHeight="612.0" prefWidth="860.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" fx:controller="scenes.matchPageController">
+<Pane fx:id="myPane" prefHeight="612.0" prefWidth="860.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scenes.matchPageController">
    <children>
       <AnchorPane layoutX="21.0" layoutY="19.0" prefHeight="428.0" prefWidth="532.0">
          <children>
@@ -50,6 +50,15 @@
             <Button fx:id="volleyballPosition5" layoutX="346.0" layoutY="339.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join18" />
             <Button fx:id="volleyballPosition6" layoutX="472.0" layoutY="201.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join19" />
             <Button fx:id="volleyballPosition7" layoutX="472.0" layoutY="339.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join20" />
+            <ImageView fx:id="tennisField" fitHeight="403.0" fitWidth="577.0" layoutX="30.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../java/images/tennis_field.jpeg" />
+               </image>
+            </ImageView>
+            <Button fx:id="tennisPosition0" layoutX="227.0" layoutY="200.0" mnemonicParsing="false" onAction="#clickOnPosition" prefHeight="25.0" prefWidth="44.0" text="join21" />
+            <Button fx:id="tennisPosition1" layoutX="227.0" layoutY="339.0" mnemonicParsing="false" onAction="#clickOnPosition" prefHeight="25.0" prefWidth="44.0" text="join22" />
+            <Button fx:id="tennisPosition2" layoutX="361.0" layoutY="200.0" mnemonicParsing="false" onAction="#clickOnPosition" prefHeight="25.0" prefWidth="44.0" text="join23" />
+            <Button fx:id="tennisPosition3" layoutX="361.0" layoutY="339.0" mnemonicParsing="false" onAction="#clickOnPosition" prefHeight="25.0" prefWidth="44.0" text="join24" />
          </children>
       </AnchorPane>
       <Button cancelButton="true" layoutX="21.0" layoutY="19.0" mnemonicParsing="false" onAction="#clickOnCancel" text="Cancel" />

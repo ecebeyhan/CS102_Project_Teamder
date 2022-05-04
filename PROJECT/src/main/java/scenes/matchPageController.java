@@ -12,7 +12,6 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -35,6 +34,8 @@ public class matchPageController implements MatchController, MainController{
     @FXML
     public ImageView volleyballField;
     @FXML
+    public ImageView tennisField;
+    @FXML
     private Text placeText;
     @FXML
     private Text timeText;
@@ -48,6 +49,8 @@ public class matchPageController implements MatchController, MainController{
     private Button footballPosition0,footballPosition1,footballPosition2,footballPosition3,footballPosition4,footballPosition5,footballPosition6,footballPosition7,footballPosition8,footballPosition9,footballPosition10,footballPosition11;
     @FXML
     private Button volleyballPosition0,volleyballPosition1,volleyballPosition2,volleyballPosition3,volleyballPosition4,volleyballPosition5,volleyballPosition6,volleyballPosition7;
+    @FXML
+    private Button tennisPosition0,tennisPosition1,tennisPosition2,tennisPosition3;
     private User currentUser;
     private User[] users;
     private Match match;
@@ -205,14 +208,14 @@ public class matchPageController implements MatchController, MainController{
     private int getPositionSelection(ActionEvent event)
     {
         Button clickedButton = (Button) event.getTarget();
-        if(clickedButton.equals(footballPosition0)){return 0;}
-        if(clickedButton.equals(footballPosition1)){return 1;}
-        if(clickedButton.equals(footballPosition2)){return 2;}
-        if(clickedButton.equals(footballPosition3)){return 3;}
-        if(clickedButton.equals(footballPosition4)){return 4;}
-        if(clickedButton.equals(footballPosition5)){return 5;}
-        if(clickedButton.equals(footballPosition6)){return 6;}
-        if(clickedButton.equals(footballPosition7)){return 7;}
+        if(clickedButton.equals(footballPosition0)||clickedButton.equals(volleyballPosition0)){return 0;}
+        if(clickedButton.equals(footballPosition1)||clickedButton.equals(volleyballPosition1)){return 1;}
+        if(clickedButton.equals(footballPosition2)||clickedButton.equals(volleyballPosition2)){return 2;}
+        if(clickedButton.equals(footballPosition3)||clickedButton.equals(volleyballPosition3)){return 3;}
+        if(clickedButton.equals(footballPosition4)||clickedButton.equals(volleyballPosition4)){return 4;}
+        if(clickedButton.equals(footballPosition5)||clickedButton.equals(volleyballPosition5)){return 5;}
+        if(clickedButton.equals(footballPosition6)||clickedButton.equals(volleyballPosition6)){return 6;}
+        if(clickedButton.equals(footballPosition7)||clickedButton.equals(volleyballPosition7)){return 7;}
         if(clickedButton.equals(footballPosition8)){return 8;}
         if(clickedButton.equals(footballPosition9)){return 9;}
         if(clickedButton.equals(footballPosition10)){return 10;}
@@ -229,6 +232,7 @@ public class matchPageController implements MatchController, MainController{
         if(sportName.equals("Football"))
         {
             setVolleyballFieldInvisible();
+            setTennisFieldInvisible();
             try{
                 // the image file of the field
                 File fieldFile = new File(ImageHandler.IMAGE_PATH + "football_field.jpeg");
@@ -244,12 +248,29 @@ public class matchPageController implements MatchController, MainController{
         else if(sportName.equals("Volleyball"))
         {
             setFootballFieldInvisible();
+            setTennisFieldInvisible();
             try{
                 // the image file of the field
                 File fieldFile = new File(ImageHandler.IMAGE_PATH + "volleyball_field.jpeg");
                 BufferedImage bufferedImage = ImageIO.read(fieldFile);
                 Image img = SwingFXUtils.toFXImage(bufferedImage, null);
                 volleyballField.setImage(img);
+            }
+            catch (IOException e)
+            {
+                System.err.println(e.getMessage());
+            }
+        }
+        else if(sportName.equals("Tennis"))
+        {
+            setFootballFieldInvisible();
+            setVolleyballFieldInvisible();
+            try{
+                // the image file of the field
+                File fieldFile = new File(ImageHandler.IMAGE_PATH + "tennis_field.jpeg");
+                BufferedImage bufferedImage = ImageIO.read(fieldFile);
+                Image img = SwingFXUtils.toFXImage(bufferedImage, null);
+                tennisField.setImage(img);
             }
             catch (IOException e)
             {
@@ -293,6 +314,18 @@ public class matchPageController implements MatchController, MainController{
         volleyballPosition6.setVisible(false);
         volleyballPosition7.setVisible(false);
         volleyballField.setVisible(false);
+    }
+
+    /**
+     * This method sets the tennis field invisible when the match is not a tennis match
+     */
+    private void setTennisFieldInvisible()
+    {
+        tennisPosition0.setVisible(false);
+        tennisPosition1.setVisible(false);
+        tennisPosition2.setVisible(false);
+        tennisPosition3.setVisible(false);
+        tennisField.setVisible(false);
     }
 
     @Override
