@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scenes.createMatchController">
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="scenes.createMatchController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="119.0" prefWidth="786.0" VBox.vgrow="ALWAYS">
       <children>
