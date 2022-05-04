@@ -482,7 +482,7 @@ public class Database {
             while (rs.next()) {
                 endTime = rs.getTime("endTime").toLocalTime();
                 matchDate = rs.getDate("date ").toLocalDate();
-                if (now.toLocalDate().isAfter(matchDate) && now.toLocalTime().isAfter(endTime)) { // compare if match's date and time with now
+                if (now.toLocalDate().isAfter(matchDate) || (now.toLocalDate().equals(matchDate) && now.toLocalTime().isAfter(endTime)) ){ // compare if match's date and time with now
                     matchName.add(rs.getString("name")); // add to list of matches to be set inactive
                 }
             }
