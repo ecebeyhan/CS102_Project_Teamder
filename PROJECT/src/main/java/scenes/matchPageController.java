@@ -31,7 +31,7 @@ import java.util.Optional;
 
 public class matchPageController implements MatchController, MainController{
     @FXML
-    public ImageView footballField;
+    public ImageView matchField;
     @FXML
     private Text placeText;
     @FXML
@@ -43,7 +43,9 @@ public class matchPageController implements MatchController, MainController{
     @FXML
     private Pane myPane;
     @FXML
-    private Button selectPosition0,selectPosition1,selectPosition2,selectPosition3,selectPosition4,selectPosition5,selectPosition6,selectPosition7,selectPosition8,selectPosition9,selectPosition10,selectPosition11;
+    private Button footballPosition0,footballPosition1,footballPosition2,footballPosition3,footballPosition4,footballPosition5,footballPosition6,footballPosition7,footballPosition8,footballPosition9,footballPosition10,footballPosition11;
+    @FXML
+    private Button volleyballPosition0,volleyballPosition1,volleyballPosition2,volleyballPosition3,volleyballPosition4,volleyballPosition5,volleyballPosition6,volleyballPosition7;
     private User currentUser;
     private User[] users;
     private Match match;
@@ -193,22 +195,100 @@ public class matchPageController implements MatchController, MainController{
         alert.show();
     }
 
+    /**
+     * This method returns the position the user selected according to the button they clicked
+     * @param event the event that triggers the method
+     * @return the position the user selected
+     */
     private int getPositionSelection(ActionEvent event)
     {
         Button clickedButton = (Button) event.getTarget();
-        if(clickedButton.equals(selectPosition0)){return 0;}
-        if(clickedButton.equals(selectPosition1)){return 1;}
-        if(clickedButton.equals(selectPosition2)){return 2;}
-        if(clickedButton.equals(selectPosition3)){return 3;}
-        if(clickedButton.equals(selectPosition4)){return 4;}
-        if(clickedButton.equals(selectPosition5)){return 5;}
-        if(clickedButton.equals(selectPosition6)){return 6;}
-        if(clickedButton.equals(selectPosition7)){return 7;}
-        if(clickedButton.equals(selectPosition8)){return 8;}
-        if(clickedButton.equals(selectPosition9)){return 9;}
-        if(clickedButton.equals(selectPosition10)){return 10;}
-        if(clickedButton.equals(selectPosition11)){return 11;}
+        if(clickedButton.equals(footballPosition0)){return 0;}
+        if(clickedButton.equals(footballPosition1)){return 1;}
+        if(clickedButton.equals(footballPosition2)){return 2;}
+        if(clickedButton.equals(footballPosition3)){return 3;}
+        if(clickedButton.equals(footballPosition4)){return 4;}
+        if(clickedButton.equals(footballPosition5)){return 5;}
+        if(clickedButton.equals(footballPosition6)){return 6;}
+        if(clickedButton.equals(footballPosition7)){return 7;}
+        if(clickedButton.equals(footballPosition8)){return 8;}
+        if(clickedButton.equals(footballPosition9)){return 9;}
+        if(clickedButton.equals(footballPosition10)){return 10;}
+        if(clickedButton.equals(footballPosition11)){return 11;}
         return -1; //invalid position
+    }
+
+    /**
+     * This method arranges the match field according to the sport of the match
+     * @param sportName the sport of the match
+     */
+    private void arrangeMatchField(String sportName)
+    {
+        if(sportName.equals("Football"))
+        {
+            setVolleyballFieldInvisible();
+            try{
+                // the image file of the field
+                File fieldFile = new File(ImageHandler.IMAGE_PATH + "football_field.jpeg");
+                BufferedImage bufferedImage = ImageIO.read(fieldFile);
+                Image img = SwingFXUtils.toFXImage(bufferedImage, null);
+                matchField.setImage(img);
+            }
+            catch (IOException e)
+            {
+                System.err.println(e.getMessage());
+            }
+        }
+        else if(sportName.equals("Volleyball"))
+        {
+            setFootballFieldInvisible();
+            try{
+                // the image file of the field
+                File fieldFile = new File(ImageHandler.IMAGE_PATH + "volleyball_field.jpeg");
+                BufferedImage bufferedImage = ImageIO.read(fieldFile);
+                Image img = SwingFXUtils.toFXImage(bufferedImage, null);
+                matchField.setImage(img);
+            }
+            catch (IOException e)
+            {
+                System.err.println(e.getMessage());
+            }
+        }
+    }
+
+    /**
+     * This method sets the football field invisible when the match is not a football match
+     */
+    private void setFootballFieldInvisible()
+    {
+        footballPosition0.setVisible(false);
+        footballPosition1.setVisible(false);
+        footballPosition2.setVisible(false);
+        footballPosition3.setVisible(false);
+        footballPosition4.setVisible(false);
+        footballPosition5.setVisible(false);
+        footballPosition6.setVisible(false);
+        footballPosition7.setVisible(false);
+        footballPosition8.setVisible(false);
+        footballPosition9.setVisible(false);
+        footballPosition10.setVisible(false);
+        footballPosition11.setVisible(false);
+    }
+
+
+    /**
+     * This method sets the volleyball field invisible when the match is not a volleyball match
+     */
+    private void setVolleyballFieldInvisible()
+    {
+        volleyballPosition0.setVisible(false);
+        volleyballPosition1.setVisible(false);
+        volleyballPosition2.setVisible(false);
+        volleyballPosition3.setVisible(false);
+        volleyballPosition4.setVisible(false);
+        volleyballPosition5.setVisible(false);
+        volleyballPosition6.setVisible(false);
+        volleyballPosition7.setVisible(false);
     }
 
     @Override
@@ -218,20 +298,8 @@ public class matchPageController implements MatchController, MainController{
         dateText.setText(match.getDate().toString());
         matchNameText.setText(match.getName());
         this.match = match;
-
-        try{
-            // the image file of the field
-            File fieldFile = new File(ImageHandler.IMAGE_PATH + "football_field.jpeg");
-            BufferedImage bufferedImage = ImageIO.read(fieldFile);
-            Image img = SwingFXUtils.toFXImage(bufferedImage, null);
-            footballField.setImage(img);
-        }
-        catch (IOException e)
-        {
-            System.err.println(e.getMessage());
-        }
+        arrangeMatchField(match.getSport().getName());
     }
-
     @Override
     public void preloadData(User user) throws IOException {
         this.currentUser = user;
