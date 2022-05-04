@@ -77,6 +77,7 @@ public class registerController {
             if (volleyballCB.isSelected()) { sports += "Volleyball, "; }
             if (sports.length() > 0) { sports = sports.substring(0,sports.length()-2); }
 
+            Database database = new Database();
             Database.createUser(nameTextField.getText(), passwordField.getText(), sports, bioTextArea.getText());
             label.setText("Account has been created!");
             label2.setText("Click on 'Cancel' to return Login Page.");

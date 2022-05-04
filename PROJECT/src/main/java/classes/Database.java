@@ -26,6 +26,18 @@ public class Database {
     private final static String username = "iepnsbnu";
     private final static String password = "RucLTf_zMlhMaa99HMxypHICcednwQix";
 
+    private static Connection conn;
+
+    public Database() {
+        try {
+            if (conn == null) {
+                conn = DriverManager.getConnection(url, username, password);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 //    public static void main(String[] args) throws SQLException {
 //        System.out.println(getMatch("asdads").getMatchDateTime().toString());
 //        matchActivity();
@@ -42,11 +54,9 @@ public class Database {
      */
     public static ObservableList<Match> filterMatches(String sportPreffered, String city, LocalDate date, String matchName, Label resultLabel) throws SQLException {
         ObservableList<Match> matches = FXCollections.observableArrayList();
-        Connection conn = null;
         PreparedStatement stmt = null;
         int count = 0;
         try {
-            conn = DriverManager.getConnection(url, username, password);
             stmt = conn.prepareStatement("SELECT * FROM match WHERE spors = ? AND place = ? AND \"date \" = ? AND name LIKE ?");
 
             stmt.setString(1, sportPreffered);
@@ -76,9 +86,6 @@ public class Database {
             }
         } catch (SQLException | IOException e) {
             e.printStackTrace();
-        } finally {
-            assert conn != null;
-            conn.close();
         }
         resultLabel.setText("Found " + count + " match(es)");
         return matches;
@@ -103,11 +110,9 @@ public class Database {
      * @param name the username to get the user for
      */
     public User getUser(String name) throws SQLException {
-        Connection conn = null;
         Statement myStat = null;
         User user = null;
         try {
-            conn = DriverManager.getConnection(url, username, password);
             myStat = conn.createStatement();
             ResultSet myRs = myStat.executeQuery("SELECT * FROM users WHERE name = '" + name + "'"); // write sql command
             while (myRs.next()) {
@@ -124,9 +129,6 @@ public class Database {
             }
         } catch (SQLException | IOException e) {
             e.printStackTrace();
-        } finally {
-            assert conn != null;
-            conn.close();
         }
         return user;
     }
@@ -138,10 +140,8 @@ public class Database {
      */
     public static ArrayList<String> getMatches(User user) throws SQLException {
         ArrayList<String> matches = new ArrayList<>();
-        Connection conn = null;
         Statement myStat = null;
         try {
-            conn = DriverManager.getConnection(url, username, password);
             myStat = conn.createStatement();
             ResultSet myRs = myStat.executeQuery("SELECT * FROM usermatch WHERE name = '" + user.getName() + "'"); // write sql command
             while (myRs.next()) {
@@ -149,9 +149,6 @@ public class Database {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            assert conn != null;
-            conn.close();
         }
         return matches;
     }
@@ -166,11 +163,9 @@ public class Database {
         ObservableList<Match> matches = FXCollections.observableArrayList();
         ArrayList<String> allMatches = getMatches(user);
         ArrayList<String> activeMatches = new ArrayList<>();
-        Connection conn = DriverManager.getConnection(url, username, password);
         PreparedStatement st = null;
         ResultSet myRs = null;
         try {
-            conn = DriverManager.getConnection(url, username, password);
             for (String match : allMatches) {
                 st = conn.prepareStatement("SELECT * FROM match WHERE name = ? AND active = ?");
                 st.setString(1, match);
@@ -184,9 +179,6 @@ public class Database {
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
-        } finally {
-           assert conn != null;
-           conn.close();
         }
         for (String match : activeMatches) {
             matches.add(getMatch(match));
@@ -203,13 +195,10 @@ public class Database {
         ObservableList<Match> matches = FXCollections.observableArrayList();
         ArrayList<String> allMatches = getMatches(user);
         ArrayList<String> inActiveMatches = new ArrayList<>();
-        Connection conn = null;
 
         PreparedStatement st = null;
         ResultSet myRs = null;
         try {
-            conn = DriverManager.getConnection(url, username, password);
-
             for (String match : allMatches) {
                 st = conn.prepareStatement("SELECT * FROM match WHERE name = ? AND active = ?");
                 st.setString(1, match);
@@ -223,9 +212,6 @@ public class Database {
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
-        } finally {
-            assert conn != null;
-            conn.close();
         }
         for (String match : inActiveMatches) {
             matches.add(getMatch(match));
@@ -239,14 +225,12 @@ public class Database {
      * @return the match object
      */
     public static Match getMatch(String name) throws SQLException {
-        Connection conn = null;
         Statement myStat = null;
         Match match = null;
         Sport preferredSport = null;
         String sportPreferred = null;
 
         try {
-            conn = DriverManager.getConnection(url, username, password);
             myStat = conn.createStatement();
             ResultSet myRs = myStat.executeQuery("SELECT * FROM match WHERE name = '" + name + "'"); // write sql command
 
@@ -271,9 +255,6 @@ public class Database {
             e.printStackTrace();
         } catch (IOException e) {
             throw new RuntimeException(e);
-        } finally {
-            assert conn != null;
-            conn.close();
         }
         return match;
     }
@@ -283,14 +264,9 @@ public class Database {
      * @param match the match to add
      */
     public static void addMatch(User user, Match match) throws SQLException {
-        Connection conn = null;
         PreparedStatement stmt = null;
 
         try {
-
-            // 1 connect to db
-            conn = DriverManager.getConnection(url, username, password);
-
             // 2 create a query ( with ? for user input)
             String query = "INSERT INTO usermatch(name, matchname) VALUES (?, ?)";
 
@@ -306,17 +282,13 @@ public class Database {
 
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            assert conn != null;
-            conn.close();
         }
     }
 
     // A Method to add a user to the database
     public static void insert(int ID, String userName, String pass, String sports, String bio) {
         try {
-            Connection myConnection = DriverManager.getConnection(url, username, password);
-            Statement myStat = myConnection.createStatement();
+            Statement myStat = conn.createStatement();
             myStat.execute("INSERT INTO public.\"user\" (\" ID\", \"userName\", pass, sports, bio) VALUES ('" +
                     ID + "'::smallint, '" + userName + "'::character varying, '" + pass + "'::character varying, '" + sports + "'::character varying, '" + bio + "'::character varying) returning \" ID\";");
         } catch (SQLException e) {
@@ -330,19 +302,14 @@ public class Database {
      * @param user The user to be updated.
      */
     public static void imageChange(File image, User user) throws SQLException, IOException {
-        Connection conn = null;
         Statement myStat = null;
         boolean operation = false;
         try {
-            conn = DriverManager.getConnection(url, username, password);
             myStat = conn.createStatement();
             myStat.execute("UPDATE public.\"users\" SET imagefile = '" + image.getName() + "' WHERE \"name\" = '"+ user.getName() + "';");
             operation = true;
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            assert conn != null;
-            conn.close();
         }
         if(operation) {
             user.setImageFile(image);
@@ -362,13 +329,10 @@ public class Database {
      * @param uPass The password of the user
      */
     public static boolean login(String uName, String uPass, ActionEvent event) throws SQLException {
-        Connection conn = null;
         PreparedStatement myStatement = null;
         ResultSet resultSet = null;
 
         try {
-            // 1 connect to db
-            conn = DriverManager.getConnection(url, username, password);
 
             // 2 create a query ( with ? for user input)
             String query = "SELECT * FROM users WHERE name = ?";
@@ -412,9 +376,6 @@ public class Database {
                 return false;
         } catch (Exception e) {
             System.err.println(e.getMessage());
-        } finally {
-            assert conn != null;
-            conn.close();
         }
         return false;
     }
@@ -440,13 +401,9 @@ public class Database {
      * Finally, execute the statement
      */
     public static void insertUserToDB(User u) throws SQLException {
-        Connection conn = null;
         PreparedStatement preparedStatement = null;
 
         try {
-            // 1. database connection
-            conn = DriverManager.getConnection(url, username, password);
-
             // 2. create a String holding query with ? as user inputs
             String sql = "INSERT INTO users (name, password, sports, bio, imagefile) VALUES (?, ?, ?, ?, ?);";
 
@@ -464,9 +421,6 @@ public class Database {
 
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            assert conn != null;
-            conn.close();
         }
     }
 
@@ -478,13 +432,9 @@ public class Database {
     }
 
     public static void insertMatchToDB(Match match) throws SQLException {
-        Connection conn = null;
         PreparedStatement preparedStatement = null;
 
         try {
-            // 1. database connection
-            conn = DriverManager.getConnection(url, username, password);
-
             // 2. create a String holding query with ? as user inputs
             String sql = "INSERT INTO match (name, spors, place, \"date \", \"startTime\", \"endTime\") VALUES (?, ?, ?, ?, ? ,?);";
 
@@ -504,14 +454,10 @@ public class Database {
 
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            assert conn != null;
-            conn.close();
         }
     }
 
     public static void matchActivity() throws SQLException {
-        Connection conn = null;
         PreparedStatement preparedStatement = null;
         LocalDateTime now = LocalDateTime.now();
 
@@ -522,9 +468,6 @@ public class Database {
         ArrayList<String> matchName = new ArrayList<>(); // matches to be set inactive
 
         try {
-            // 1. database connection
-            conn = DriverManager.getConnection(url, username, password);
-
             // 2. create a String holding query
             String sql = "SELECT * FROM match";
 
@@ -544,9 +487,6 @@ public class Database {
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        } finally {
-            assert conn != null;
-            conn.close();
         }
         for (String name : matchName) {
             setMatchInactive(name);
@@ -558,13 +498,9 @@ public class Database {
      * @param name match name
      */
     public static void setMatchInactive(String name) throws SQLException {
-        Connection conn = null;
         PreparedStatement preparedStatement = null;
 
         try {
-            // 1. database connection
-            conn = DriverManager.getConnection(url, username, password);
-
             // 2. create a String holding query
             String sql = "UPDATE match SET active = false WHERE name = ?;";
 
@@ -578,9 +514,6 @@ public class Database {
 
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            assert conn != null;
-            conn.close();
         }
     }
 
@@ -589,13 +522,9 @@ public class Database {
      * @param name name of the match
      */
     public static void setMatchActive(String name) throws SQLException {
-        Connection conn = null;
         PreparedStatement preparedStatement = null;
 
         try {
-            // 1. database connection
-            conn = DriverManager.getConnection(url, username, password);
-
             // 2. create a String holding query
             String sql = "UPDATE match SET active = true WHERE name = ?;";
 
@@ -609,18 +538,13 @@ public class Database {
 
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            assert conn != null;
-            conn.close();
         }
     }
 
     public ObservableList<User> getFriends(User user) throws SQLException {
         ObservableList<User> friends = FXCollections.observableArrayList();
-        Connection conn = null;
         PreparedStatement stmt = null;
         try {
-            conn = DriverManager.getConnection(url, username, password);
             stmt = conn.prepareStatement("SELECT user2 FROM useruser WHERE user1 = ?");
 
             stmt.setString(1, user.getName());
@@ -640,23 +564,16 @@ public class Database {
 
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            assert conn != null;
-            conn.close();
         }
         return friends;
     }
 
     public static boolean isUserInMatch(String uName,String matchName) throws SQLException
     {
-        Connection conn = null;
         PreparedStatement myStatement = null;
         ResultSet resultSet = null;
 
         try {
-            // 1 connect to db
-            conn = DriverManager.getConnection(url, username, password);
-
             // 2 create a query ( with ? for match input)
             String query = "SELECT * FROM usermatch WHERE matchname = ?";
 
@@ -678,21 +595,14 @@ public class Database {
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());
-        } finally {
-            assert conn != null;
-            conn.close();
         }
         return false;
     }
 
     public void insertFriend(User user1, User user2)throws SQLException {
-        Connection conn = null;
         PreparedStatement preparedStatement = null;
 
         try {
-            // 1. database connection
-            conn = DriverManager.getConnection(url, username, password);
-
             // 2. create a String holding query with ? as user inputs
             String sql = "INSERT INTO useruser (user1, user2) VALUES (?, ?);";
 
@@ -706,19 +616,12 @@ public class Database {
 
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            assert conn != null;
-            conn.close();
         }
     }
     public void removeFriend(User user1, User user2)throws SQLException {
-        Connection conn = null;
         PreparedStatement preparedStatement = null;
 
         try {
-            // 1. database connection
-            conn = DriverManager.getConnection(url, username, password);
-
             // 2. create a String holding query with ? as user inputs
             String sql = "DELETE FROM useruser WHERE user1= ? and user2= ?;";
 
@@ -732,9 +635,6 @@ public class Database {
 
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            assert conn != null;
-            conn.close();
         }
     }
 

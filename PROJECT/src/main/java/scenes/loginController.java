@@ -28,6 +28,7 @@ public class loginController {
 
     @FXML
     protected void clickOnLogin(ActionEvent event) throws IOException, SQLException {
+        Database database = new Database();
         String uName = userNameTField.getText();
         String uPass = passTField.getText();
 
