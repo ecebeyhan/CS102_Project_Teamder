@@ -134,4 +134,11 @@ public class User {
          "User Name: " , getUserName(), " Password: " , getPassword(), " Sports: " , getSports(), " Bio: " , getBio());
     }
 
+    public boolean equals(Object obj){
+        User u = (User) obj;
+        if( this.userName.equals(u.userName) && this.password.equals(u.password)){
+            return true;
+        }
+        return false;
+    }
 }
