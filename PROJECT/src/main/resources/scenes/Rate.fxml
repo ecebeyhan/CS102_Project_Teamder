@@ -7,47 +7,83 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml" fx:controller="scenes.ratePageController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scenes.ratePageController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
-            <Label layoutX="83.0" layoutY="95.0" prefHeight="30.0" prefWidth="145.0" text="Player1">
+            <Label fx:id="label1" layoutX="102.0" layoutY="66.0" prefHeight="0.0" prefWidth="86.0" text="Player1" visible="false">
                <font>
-                  <Font size="20.0" />
+                  <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="83.0" layoutY="140.0" prefHeight="30.0" prefWidth="145.0" text="Player2">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-            <Label layoutX="84.0" layoutY="185.0" prefHeight="30.0" prefWidth="145.0" text="Player3">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-            <Label layoutX="83.0" layoutY="225.0" prefHeight="30.0" prefWidth="145.0" text="Player4">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-            <Label layoutX="83.0" layoutY="271.0" prefHeight="30.0" prefWidth="145.0" text="Player5">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-            <Label layoutX="145.0" layoutY="27.0" prefHeight="45.0" prefWidth="350.0" text="Match is over rate players" textAlignment="CENTER">
+            <Label layoutX="156.0" layoutY="31.0" prefHeight="37.0" prefWidth="390.0" text="Match is over rate players">
                <font>
                   <Font size="30.0" />
                </font>
             </Label>
-            <ComboBox fx:id="rate2" layoutX="229.0" layoutY="142.0" prefWidth="150.0" promptText="5" visibleRowCount="5" />
-            <ComboBox fx:id="rate3" layoutX="229.0" layoutY="187.0" prefWidth="150.0" promptText="5" visibleRowCount="5" />
-            <ComboBox fx:id="rate4" layoutX="229.0" layoutY="225.0" prefWidth="150.0" promptText="5" visibleRowCount="5" />
-            <ComboBox fx:id="rate5" layoutX="229.0" layoutY="271.0" prefWidth="150.0" promptText="5" visibleRowCount="5" />
-            <ComboBox fx:id="rate1" layoutX="229.0" layoutY="97.0" prefWidth="150.0" promptText="5" visibleRowCount="5" />
             <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#clickOnBack" text="Back" />
-            <Button layoutX="500.0" layoutY="329.0" mnemonicParsing="false" onAction="#clickOnRate" prefHeight="37.0" prefWidth="93.0" text="Rate" />
+            <Button layoutX="533.0" layoutY="349.0" mnemonicParsing="false" onAction="#clickOnRate" prefHeight="37.0" prefWidth="93.0" text="Rate" />
+            <ComboBox fx:id="comboBox1" layoutX="102.0" layoutY="89.0" prefWidth="150.0" promptText="3" value="3" visible="false" visibleRowCount="5" />
+            <Label fx:id="label2" layoutX="102.0" layoutY="121.0" prefHeight="0.0" prefWidth="86.0" text="Player2" visible="false">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="comboBox2" layoutX="102.0" layoutY="144.0" prefWidth="150.0" promptText="3" value="3" visible="false" visibleRowCount="5" />
+            <Label fx:id="label3" layoutX="102.0" layoutY="174.0" prefHeight="0.0" prefWidth="86.0" text="Player3" visible="false">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="comboBox3" layoutX="102.0" layoutY="197.0" prefWidth="150.0" promptText="3" value="3" visible="false" visibleRowCount="5" />
+            <Label fx:id="label4" layoutX="102.0" layoutY="229.0" prefHeight="0.0" prefWidth="86.0" text="Player4" visible="false">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="comboBox4" layoutX="102.0" layoutY="252.0" prefWidth="150.0" promptText="3" value="3" visible="false" visibleRowCount="5" />
+            <Label fx:id="label5" layoutX="102.0" layoutY="285.0" prefHeight="0.0" prefWidth="86.0" text="Player5" visible="false">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="comboBox5" layoutX="102.0" layoutY="308.0" prefWidth="150.0" promptText="3" value="3" visible="false" visibleRowCount="5" />
+            <Label fx:id="label6" layoutX="361.0" layoutY="67.0" prefHeight="0.0" prefWidth="86.0" text="Player6" visible="false">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="comboBox6" layoutX="361.0" layoutY="90.0" prefWidth="150.0" promptText="3" value="3" visible="false" visibleRowCount="5" />
+            <Label fx:id="label7" layoutX="361.0" layoutY="122.0" prefHeight="0.0" prefWidth="86.0" text="Player7" visible="false">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="comboBox7" layoutX="361.0" layoutY="145.0" prefWidth="150.0" promptText="3" value="3" visible="false" visibleRowCount="5" />
+            <Label fx:id="label8" layoutX="361.0" layoutY="175.0" prefHeight="0.0" prefWidth="86.0" text="Player8" visible="false">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="comboBox8" layoutX="361.0" layoutY="198.0" prefWidth="150.0" promptText="3" value="3" visible="false" visibleRowCount="5" />
+            <Label fx:id="label9" layoutX="361.0" layoutY="230.0" prefHeight="0.0" prefWidth="86.0" text="Player9" visible="false">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="comboBox9" layoutX="361.0" layoutY="253.0" prefWidth="150.0" promptText="3" value="3" visible="false" visibleRowCount="5" />
+            <Label fx:id="label10" layoutX="361.0" layoutY="286.0" prefHeight="0.0" prefWidth="86.0" text="Player10" visible="false">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="comboBox10" layoutX="361.0" layoutY="309.0" prefWidth="150.0" promptText="3" value="3" visible="false" visibleRowCount="5" />
+            <Label fx:id="label11" layoutX="238.0" layoutY="337.0" prefHeight="0.0" prefWidth="86.0" text="Player11" visible="false">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="comboBox11" layoutX="238.0" layoutY="360.0" prefWidth="150.0" promptText="3" value="3" visible="false" visibleRowCount="5" />
       </children>
     </AnchorPane>
   </children>

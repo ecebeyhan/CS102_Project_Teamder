@@ -126,6 +126,16 @@ public class Database {
                     user = new User(username, dbPassword,sports, bio, imageFile);
                 else
                     user = new User(username, dbPassword,sports, bio);
+
+                double rating = myRs.getDouble("rate");
+                int noOfRaters = myRs.getInt("noofraters");
+                double rate = 0;
+                if(noOfRaters > 0){
+                    rate = rating / noOfRaters;
+                    rate = Math.round(rate * 10.0) / 10.0;
+
+                }
+                user.setRating(rate);
             }
         } catch (SQLException | IOException e) {
             e.printStackTrace();
@@ -170,6 +180,21 @@ public class Database {
             e.printStackTrace();
         }
         return matches;
+    }
+
+    public static ArrayList<String> getPlayersFromMatch(Match match) throws SQLException {
+        ArrayList<String> players = new ArrayList<>();
+        Statement myStat = null;
+        try {
+            myStat = conn.createStatement();
+            ResultSet myRs = myStat.executeQuery("SELECT * FROM usermatch WHERE matchname = '" + match.getName() + "'"); // write sql command
+            while (myRs.next()) {
+                players.add(myRs.getString("name"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return players;
     }
 
     /**
@@ -384,6 +409,15 @@ public class Database {
                     user = new User(uName, dbPassword,sports, bio, imageFile);
                 else
                     user = new User(uName, dbPassword,sports, bio);
+
+                double rating = resultSet.getDouble("rate");
+                int noOfRaters = resultSet.getInt("noofraters");
+                double rate = 0;
+                if(noOfRaters > 0){
+                    rate = rating / noOfRaters;
+                    rate = Math.round(rate * 10.0) / 10.0;
+                }
+                user.setRating(rate);
             }
             SceneChanger sc = new SceneChanger();
 
@@ -617,6 +651,25 @@ public class Database {
             System.err.println(e.getMessage());
         }
         return false;
+    }
+    public static void updateRatings(int value, String playerName){
+        PreparedStatement preparedStatement = null;
+
+        try {
+            // 2. create a String holding query with ? as user inputs
+            String sql = "UPDATE users SET rate = rate + ? , noofraters = noofraters + 1  WHERE name = ?;";
+
+            // 3. create the query
+            preparedStatement = conn.prepareStatement(sql);
+
+            // 4. put values into the parameters
+            preparedStatement.setInt(1, value);
+            preparedStatement.setString(2, playerName);
+            preparedStatement.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void insertFriend(User user1, User user2)throws SQLException {

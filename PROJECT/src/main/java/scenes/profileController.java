@@ -110,6 +110,7 @@ public class profileController implements MainController, Initializable  {
         userNameLabel.setText(user.getName());
         sportsLabel.setText(user.getSports());
         bioText.setText(user.getBio());
+        avgLabel.setText(String.valueOf(user.getRating()) + "/5");
 
         try {
             userObservableList = database.getFriends(user);

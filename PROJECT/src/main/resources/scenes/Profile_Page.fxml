@@ -41,11 +41,11 @@
             <Separator layoutX="8.0" layoutY="138.0" prefHeight="6.0" prefWidth="625.0" />
             <Text fx:id="userNameLabel" layoutX="187.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" />
             <Text fx:id="sportsLabel" layoutX="214.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-            <Text fx:id="avgLabel" layoutX="163.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+            <Text fx:id="avgLabel" layoutX="129.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" />
             <TextArea fx:id="bioText" editable="false" layoutX="441.0" layoutY="20.0" prefHeight="88.0" prefWidth="183.0" />
             <Label layoutX="129.0" layoutY="20.0" text="Username:" />
             <Label layoutX="129.0" layoutY="46.0" prefHeight="17.0" prefWidth="83.0" text="Favorite Sports:" />
-            <Label layoutX="129.0" layoutY="71.0" text="Rating:" />
+            <Label layoutX="129.0" layoutY="72.0" prefHeight="17.0" prefWidth="46.0" text="Rating: " />
             <VBox layoutX="13.0" layoutY="11.0" prefHeight="121.0" prefWidth="108.0" spacing="5.0">
                <children>
                   <ImageView fx:id="imageView" fitHeight="98.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true" />

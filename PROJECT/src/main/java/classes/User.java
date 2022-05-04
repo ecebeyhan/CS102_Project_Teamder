@@ -17,7 +17,7 @@ public class User {
     private String bio;
     private File imageFile;
     private ArrayList<Match> matchList;
-    private Rate rating;
+    private double rating;
 
     /**
      * Create a new user with the given name, password, sports and bio.
@@ -54,7 +54,7 @@ public class User {
     //-----------------------------------------------------------------
     //  Getter methods for all instance variables
     //-----------------------------------------------------------------
-    public Rate getRating() {
+    public double getRating() {
         return rating;
     }
 
@@ -89,7 +89,7 @@ public class User {
     //-----------------------------------------------------------------
     //  Setter methods for all instance variables
     //-----------------------------------------------------------------
-    public void setRating(Rate rating) {
+    public void setRating(double rating) {
         this.rating = rating;
     }
 
