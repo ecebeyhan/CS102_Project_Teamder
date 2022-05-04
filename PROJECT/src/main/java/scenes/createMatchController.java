@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import java.io.IOException;
@@ -66,6 +67,10 @@ public class createMatchController implements  MainController, Initializable {
                     errorLabel.setText("Please select a valid date and time");
                     return;
                 }
+                if( Database.doesMatchNameExist(matchName.getText())){
+                    errorLabel.setText("There is already a match whose name is " + matchName.getText() + ". Please enter another name.");
+                    return;
+                }
                 int minutes = 0;
                 Sport preferredSport = null;
                 if (min30.isSelected()) { minutes = 30; }
@@ -76,21 +81,11 @@ public class createMatchController implements  MainController, Initializable {
                 if (sport.getValue().equals("Basketball")) { preferredSport = new Basketball(); }
                 if (sport.getValue().equals("Volleyball")) { preferredSport = new Volleyball(); }
                 if (sport.getValue().equals("Tennis")) { preferredSport = new Tennis(); }
-                ObservableList<Match> usersAlreadyMatches = FXCollections.observableArrayList();
-                usersAlreadyMatches = Database.getActiveMatches(SceneChanger.loggedInUser);
-                Match newMatch = new Match(matchName.getText(), preferredSport, (String) place.getValue(), date.getValue(), LocalTime.parse(time.getText()), minutes);
-                for( Match m : usersAlreadyMatches){
-                    if( newMatch.getDate().equals(m.getDate()) && (m.getStartTime().isAfter(newMatch.getStartTime()) || m.getStartTime().equals(newMatch.getStartTime()) ) && newMatch.endTime().isAfter(m.getStartTime())){
-                        errorLabel.setText("You already have match at that time!");
-                        return;
-                    }
-                    else if(newMatch.getDate().equals(m.getDate()) && newMatch.getStartTime().isAfter(m.getStartTime()) && m.endTime().isAfter(newMatch.getStartTime())){
-                        errorLabel.setText("You already have match at that time!");
-                        return;
-                    }
+                if( !Database.canUserJoinMatch(new Match(matchName.getText(), preferredSport, (String) place.getValue(), date.getValue(), LocalTime.parse(time.getText()), minutes))){
+                    errorLabel.setText("You already have match at that time!");
+                    return;
                 }
                 Database.createMatch(event, matchName.getText(), preferredSport, (String) place.getValue(), date.getValue(), LocalTime.parse(time.getText()), minutes);
-                errorLabel.setText("Match is created!");
             }
             catch (DateTimeParseException e){
                 errorLabel.setText("Please enter the time in \"HH:mm \" format");

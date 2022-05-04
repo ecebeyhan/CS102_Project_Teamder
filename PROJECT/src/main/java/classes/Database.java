@@ -685,7 +685,42 @@ public class Database {
         return matches;
     }
 
+    /**
+     * Checks whether user can join a match since user can have another match at that time
+     * @param newMatch match that user wants to join and that will be checked
+     * @return true if user can join, false otherwise
+     * @throws SQLException
+     */
+    public static boolean canUserJoinMatch(Match newMatch) throws SQLException {
+        ObservableList<Match> usersAlreadyMatches = FXCollections.observableArrayList();
+        usersAlreadyMatches = Database.getActiveMatches(SceneChanger.loggedInUser);
+        for( Match m : usersAlreadyMatches){
+            if( newMatch.getDate().equals(m.getDate()) && (m.getStartTime().isAfter(newMatch.getStartTime()) || m.getStartTime().equals(newMatch.getStartTime()) ) && newMatch.endTime().isAfter(m.getStartTime())){
+                return false;
+            }
+            else if(newMatch.getDate().equals(m.getDate()) && newMatch.getStartTime().isAfter(m.getStartTime()) && m.endTime().isAfter(newMatch.getStartTime())){
+                return false;
+            }
+        }
+        return true;
+    }
 
+    /**
+     * Checks whether there is already a match whose name is same as the parameter
+     * @param newMatchName name of the match that is intended to be created
+     * @return true if the name is already used, false otherwise
+     * @throws SQLException
+     */
+    public static boolean doesMatchNameExist(String newMatchName) throws SQLException {
+        ArrayList<String> matches = new ArrayList<>();
+        matches = Database.getAllMatches();
+        for( String name: matches){
+            if( newMatchName.equals(name)){
+                return true;
+            }
+        }
+        return false;
+    }
 
 
 }
