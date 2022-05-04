@@ -22,7 +22,7 @@
             <Separator layoutX="8.0" layoutY="141.0" prefHeight="6.0" prefWidth="625.0" />
             <Text fx:id="userNameLabel" layoutX="186.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" />
             <Text fx:id="sportsLabel" layoutX="210.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-            <Text fx:id="avgLabel" layoutX="163.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+            <Text fx:id="avgLabel" layoutX="168.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" />
             <TextArea fx:id="bioText" editable="false" layoutX="441.0" layoutY="20.0" prefHeight="88.0" prefWidth="183.0" />
             <Label layoutX="129.0" layoutY="20.0" text="Username:" />
             <Label layoutX="129.0" layoutY="46.0" prefHeight="17.0" prefWidth="83.0" text="Favorite Sports:" />
