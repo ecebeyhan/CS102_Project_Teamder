@@ -76,8 +76,7 @@ public class createMatchController implements  MainController, Initializable {
     }
     @FXML
     protected void clickOnCancel(ActionEvent event) throws IOException, SQLException {
-        SceneChanger sc = new SceneChanger();
-        sc.changeScenes(event, "Profile_Page.fxml", "Teamder", SceneChanger.getLoggedInUser(), new profileController());
+        new SceneChanger().changeScenes(event, "Profile_Page.fxml", "Teamder", SceneChanger.getLoggedInUser(), new profileController());
     }
 
     @Override

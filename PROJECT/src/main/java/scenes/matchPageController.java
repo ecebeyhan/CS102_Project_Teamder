@@ -144,8 +144,6 @@ public class matchPageController implements MatchController, MainController{
         Hyperlink profile = new Hyperlink();
         profile.setText("userName"); // + users[playerPosition].getName() users pozisyona göre database den alınamıyor
 
-        SceneChanger sc = new SceneChanger();
-
         //eğer kendi profili ise Profile_Page
         //if(users[playerPosition].equals(currentUser))  daha users pozisyona göre database den alınamıyor
         profile.setOnAction(e -> {
@@ -153,7 +151,7 @@ public class matchPageController implements MatchController, MainController{
                 stage.close();
                 MatchController matchController = new profileWithCloseButtonController();
                 MainController mainController = new profileWithCloseButtonController();
-                sc.changeScenes(event, "Profile_With_CloseButton.fxml", "Teamder", SceneChanger.getLoggedInUser(),match,matchController, mainController);
+                new SceneChanger().changeScenes(event, "Profile_With_CloseButton.fxml", "Teamder", SceneChanger.getLoggedInUser(),match,matchController, mainController);
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }

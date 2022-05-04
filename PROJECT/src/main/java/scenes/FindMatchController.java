@@ -51,9 +51,7 @@ public class FindMatchController implements MainController, Initializable {
 
     @FXML
     protected void clickOnCancel(ActionEvent event) throws IOException, SQLException {
-        SceneChanger sc = new SceneChanger();
-        MainController controllerClass = new profileController();
-        sc.changeScenes(event, "Profile_Page.fxml", "Teamder", SceneChanger.getLoggedInUser(), controllerClass);
+        new SceneChanger().changeScenes(event, "Profile_Page.fxml", "Teamder", SceneChanger.getLoggedInUser(), new profileController());
     }
 
     @FXML
@@ -138,12 +136,11 @@ public class FindMatchController implements MainController, Initializable {
 
                 @Override
                 public void handle(ActionEvent t) {
-                    SceneChanger sc = new SceneChanger();
                     try {
                         Match match = Database.getMatch(((Hyperlink) t.getSource()).getText());
                         MainController MatchPage = new matchPageController();
                         MatchController userPage = new matchPageController();
-                        sc.changeScenes(t, "Match_Page.fxml", "Teamder | Match Page", SceneChanger.getLoggedInUser(), match, userPage, MatchPage);
+                        new SceneChanger().changeScenes(t, "Match_Page.fxml", "Teamder | Match Page", SceneChanger.getLoggedInUser(), match, userPage, MatchPage);
                     } catch (IOException | SQLException e) {
                         e.printStackTrace();
                     }
