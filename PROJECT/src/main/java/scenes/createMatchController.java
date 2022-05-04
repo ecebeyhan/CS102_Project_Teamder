@@ -2,6 +2,7 @@ package scenes;
 
 import classes.*;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -39,10 +40,12 @@ public class createMatchController implements  MainController, Initializable {
     private RadioButton min90;
     @FXML
     private Label errorLabel;
-
-
+    
     @FXML
     protected void clickOnCreate(ActionEvent event) throws SQLException, IOException {
+        if(errorLabel.getText() != null){
+            errorLabel.setText(null);
+        }
         if (matchName.getText().isEmpty() || time.getText().isEmpty() || date.getValue() == null || sport.getValue() == null || place.getValue() == null) {
             errorLabel.setText("Please fill all the fields!");
         }
@@ -65,6 +68,19 @@ public class createMatchController implements  MainController, Initializable {
                 if (sport.getValue().equals("Basketball")) { preferredSport = new Basketball(); }
                 if (sport.getValue().equals("Volleyball")) { preferredSport = new Volleyball(); }
                 if (sport.getValue().equals("Tennis")) { preferredSport = new Tennis(); }
+                ObservableList<Match> usersAlreadyMatches = FXCollections.observableArrayList();
+                usersAlreadyMatches = Database.getActiveMatches(SceneChanger.loggedInUser);
+                Match newMatch = new Match(matchName.getText(), preferredSport, (String) place.getValue(), date.getValue(), LocalTime.parse(time.getText()), minutes);
+                for( Match m : usersAlreadyMatches){
+                    if( newMatch.getDate().equals(m.getDate()) && (m.getStartTime().isAfter(newMatch.getStartTime()) || m.getStartTime().equals(newMatch.getStartTime()) ) && newMatch.endTime().isAfter(m.getStartTime())){
+                        errorLabel.setText("You already have match at that time!");
+                        return;
+                    }
+                    else if(newMatch.getDate().equals(m.getDate()) && newMatch.getStartTime().isAfter(m.getStartTime()) && m.endTime().isAfter(newMatch.getStartTime())){
+                        errorLabel.setText("You already have match at that time!");
+                        return;
+                    }
+                }
                 Database.createMatch(event, matchName.getText(), preferredSport, (String) place.getValue(), date.getValue(), LocalTime.parse(time.getText()), minutes);
                 errorLabel.setText("Match is created!");
             }
@@ -74,6 +90,7 @@ public class createMatchController implements  MainController, Initializable {
 
         }
     }
+
     @FXML
     protected void clickOnCancel(ActionEvent event) throws IOException, SQLException {
         SceneChanger sc = new SceneChanger();
