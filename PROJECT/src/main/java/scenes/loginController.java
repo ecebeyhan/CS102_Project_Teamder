@@ -60,8 +60,7 @@ public class loginController {
      */
     @FXML
     protected void clickOnCancel(ActionEvent event) throws IOException {
-        SceneChanger sc = new SceneChanger();
-        sc.changeScenes(event, "Welcome_To_Teamder.fxml", "Teamder | Welcome Page");
+        new SceneChanger().changeScenes(event, "Welcome_To_Teamder.fxml", "Teamder | Welcome Page");
     }
 
 }

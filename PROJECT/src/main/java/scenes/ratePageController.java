@@ -18,7 +18,6 @@ public class ratePageController implements MainController, MatchController {
     }
 
     public void clickOnBack(ActionEvent event) throws IOException {
-        SceneChanger sc = new SceneChanger();
-        sc.changeScenes(event, "Profile_Page.fxml", "Teamder", SceneChanger.getLoggedInUser(), new profileController());
+        new SceneChanger().changeScenes(event, "Profile_Page.fxml", "Teamder", SceneChanger.getLoggedInUser(), new profileController());
     }
 }

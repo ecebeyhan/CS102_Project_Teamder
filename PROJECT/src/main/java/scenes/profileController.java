@@ -66,8 +66,7 @@ public class profileController implements MainController, Initializable  {
      */
     @FXML
     protected void clickOnLogOut(ActionEvent event) throws IOException {
-        SceneChanger sc = new SceneChanger();
-        sc.changeScenes(event, "Log_In.fxml", "Teamder | Login Page");
+        new SceneChanger().changeScenes(event, "Log_In.fxml", "Teamder | Login Page");
     }
 
     /**
@@ -77,9 +76,7 @@ public class profileController implements MainController, Initializable  {
      */
     @FXML
     protected void clickOnJoin(ActionEvent event) throws IOException {
-        SceneChanger sc = new SceneChanger();
-        MainController controllerClass = new FindMatchController();
-        sc.changeScenes(event, "Find_aMatch.fxml", "Teamder | Find a Match Page");
+        new SceneChanger().changeScenes(event, "Find_aMatch.fxml", "Teamder | Find a Match Page");
     }
 
     /**
@@ -89,8 +86,7 @@ public class profileController implements MainController, Initializable  {
      */
     @FXML
     protected void clickOnStart(ActionEvent event) throws IOException, SQLException {
-        SceneChanger sc = new SceneChanger();
-        sc.changeScenes(event, "Create_Match_Page.fxml", "Teamder | Create Match Page");
+        new SceneChanger().changeScenes(event, "Create_Match_Page.fxml", "Teamder | Create Match Page");
     }
 
     /**
@@ -125,12 +121,11 @@ public class profileController implements MainController, Initializable  {
         friendListTable.setOnMouseClicked(event -> {
             if (event.getButton() == MouseButton.PRIMARY) {
                 ActionEvent actionEvent = new ActionEvent(event.getSource(), event.getTarget());
-                SceneChanger sc = new SceneChanger();
                 try {
                     assert friendListTable != null;
                     String username = friendListTable.getSelectionModel().getSelectedItem().getUserName();
                     User friend = database.getUser(username);
-                    sc.changeScenes(actionEvent, "Friend_Page.fxml", "Teamder | Friend", friend, new friendController());
+                    new SceneChanger().changeScenes(actionEvent, "Friend_Page.fxml", "Teamder | Friend", friend, new friendController());
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
@@ -178,12 +173,11 @@ public class profileController implements MainController, Initializable  {
 
                 @Override
                 public void handle(ActionEvent t) {
-                    SceneChanger sc = new SceneChanger();
                     try {
                         Match match = Database.getMatch(((Hyperlink) t.getSource()).getText());
                         MainController MatchPage = new matchPageController();
                         MatchController userPage = new matchPageController();
-                        sc.changeScenes(t, "Match_Page.fxml", "Teamder | Match Page", SceneChanger.getLoggedInUser(), match, userPage, MatchPage);
+                        new SceneChanger().changeScenes(t, "Match_Page.fxml", "Teamder | Match Page", SceneChanger.getLoggedInUser(), match, userPage, MatchPage);
                     } catch (IOException | SQLException e) {
                         e.printStackTrace();
                     }
@@ -212,10 +206,9 @@ public class profileController implements MainController, Initializable  {
 
                 @Override
                 public void handle(ActionEvent t) {
-                    SceneChanger sc = new SceneChanger();
                     try {
                         Match match = Database.getMatch(matches.get(finalJ).getName());
-                        sc.changeScenes(t, "Rate.fxml", "Teamder | Rate Page", SceneChanger.getLoggedInUser(), match, new ratePageController(), new ratePageController());
+                        new SceneChanger().changeScenes(t, "Rate.fxml", "Teamder | Rate Page", SceneChanger.getLoggedInUser(), match, new ratePageController(), new ratePageController());
                     } catch (IOException | SQLException e) {
                         e.printStackTrace();
                     }
