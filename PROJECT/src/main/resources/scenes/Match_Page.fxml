@@ -1,24 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Line?>
-<?import javafx.scene.shape.Polygon?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<Pane fx:id="myPane" prefHeight="612.0" prefWidth="860.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scenes.matchPageController">
+<Pane fx:id="myPane" prefHeight="612.0" prefWidth="860.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scenes.matchPageController">
    <children>
-      <Button layoutX="21.0" layoutY="19.0" mnemonicParsing="false" onAction="#clickOnCancel" text="Cancel" />
+      <AnchorPane fx:id="matchField" layoutX="21.0" layoutY="19.0" prefHeight="428.0" prefWidth="532.0">
+         <children>
+            <ImageView fx:id="footballField" fitHeight="403.0" fitWidth="628.0" layoutX="30.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../java/images/football_field.jpeg" />
+               </image>
+            </ImageView>
+            <Button fx:id="selectPosition0" layoutX="72.0" layoutY="272.0" mnemonicParsing="false" onAction="#clickOnPosition" prefHeight="25.0" prefWidth="44.0" text="join0" />
+            <Button fx:id="selectPosition1" layoutX="158.0" layoutY="188.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join1" />
+            <Button fx:id="selectPosition2" layoutX="137.0" layoutY="271.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join2" />
+            <Button fx:id="selectPosition3" layoutX="158.0" layoutY="352.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join3" />
+            <Button fx:id="selectPosition4" layoutX="246.0" layoutY="231.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join4" />
+            <Button fx:id="selectPosition5" layoutX="246.0" layoutY="306.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join5" />
+            <Button fx:id="selectPosition6" layoutX="353.0" layoutY="231.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join6" />
+            <Button fx:id="selectPosition7" layoutX="353.0" layoutY="306.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join7" />
+            <Button fx:id="selectPosition8" layoutX="434.0" layoutY="188.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join8" />
+            <Button fx:id="selectPosition9" layoutX="458.0" layoutY="271.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join9" />
+            <Button fx:id="selectPosition10" layoutX="431.0" layoutY="352.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join10" />
+            <Button fx:id="selectPosition11" layoutX="521.0" layoutY="271.0" mnemonicParsing="false" onAction="#clickOnPosition" prefHeight="25.0" prefWidth="44.0" text="join11" />
+         </children>
+      </AnchorPane>
+      <Button cancelButton="true" layoutX="21.0" layoutY="19.0" mnemonicParsing="false" onAction="#clickOnCancel" text="Cancel" />
       <TextArea layoutX="641.0" layoutY="11.0" prefHeight="515.0" prefWidth="206.0" />
       <Text fx:id="matchNameText" layoutX="78.0" layoutY="40.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Match Name" textAlignment="CENTER" wrappingWidth="481.6617431640625">
          <font>
@@ -81,26 +93,5 @@
             </VBox>
          </children>
       </HBox>
-      <AnchorPane fx:id="matchField" layoutX="14.0" layoutY="-10.0" prefHeight="485.0" prefWidth="512.0">
-         <children>
-            <ImageView fx:id="footballField" fitHeight="403.0" fitWidth="628.0" layoutX="30.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../java/images/football_field.jpeg" />
-               </image>
-            </ImageView>
-            <Button fx:id="selectPosition0" layoutX="72.0" layoutY="272.0" mnemonicParsing="false" onAction="#clickOnPosition" prefHeight="25.0" prefWidth="44.0" text="join0" />
-            <Button fx:id="selectPosition1" layoutX="158.0" layoutY="188.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join1" />
-            <Button fx:id="selectPosition2" layoutX="137.0" layoutY="271.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join2" />
-            <Button fx:id="selectPosition3" layoutX="158.0" layoutY="352.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join3" />
-            <Button fx:id="selectPosition4" layoutX="246.0" layoutY="231.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join4" />
-            <Button fx:id="selectPosition5" layoutX="246.0" layoutY="306.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join5" />
-            <Button fx:id="selectPosition6" layoutX="353.0" layoutY="231.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join6" />
-            <Button fx:id="selectPosition7" layoutX="353.0" layoutY="306.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join7" />
-            <Button fx:id="selectPosition8" layoutX="434.0" layoutY="188.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join8" />
-            <Button fx:id="selectPosition9" layoutX="458.0" layoutY="271.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join9" />
-            <Button fx:id="selectPosition10" layoutX="431.0" layoutY="352.0" mnemonicParsing="false" onAction="#clickOnPosition" text="join10" />
-            <Button fx:id="selectPosition11" layoutX="521.0" layoutY="271.0" mnemonicParsing="false" onAction="#clickOnPosition" prefHeight="25.0" prefWidth="44.0" text="join11" />
-         </children>
-      </AnchorPane>
    </children>
 </Pane>

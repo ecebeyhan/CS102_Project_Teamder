@@ -55,9 +55,7 @@ public class matchPageController implements MatchController, MainController{
      */
     @FXML
     public void clickOnCancel(ActionEvent event) throws IOException {
-        SceneChanger sc = new SceneChanger();
-        MainController controllerClass = new profileController();
-        sc.changeScenes(event, "Profile_Page.fxml", "Teamder", SceneChanger.getLoggedInUser(), controllerClass);
+        new SceneChanger().changeScenes(event, "Profile_Page.fxml", "Teamder", SceneChanger.getLoggedInUser(), new profileController());
     }
 
     /**
