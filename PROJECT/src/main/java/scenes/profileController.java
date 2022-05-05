@@ -200,6 +200,9 @@ public class profileController implements MainController, Initializable  {
             TableColumn<Match, ?> col = joinedMatchTable.getColumns().get(1);
             Hyperlink link = (Hyperlink) col.getCellObservableValue(m).getValue();
             links.add(link);
+            if(Database.isVoted(user, m)){
+                link.setVisible(false);
+            }
         }
         for (int j = 0; j < joinedMatchTable.getItems().size(); j++) {
             int finalJ = j;

@@ -435,6 +435,35 @@ public class Database {
         return false;
     }
 
+    public static boolean isVoted(User user, Match match){
+        PreparedStatement myStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            String query = "SELECT israted FROM usermatch WHERE name = ? AND matchname = ?;";
+
+            myStatement = conn.prepareStatement(query);
+
+            myStatement.setString(1, user.getName());
+
+            myStatement.setString(2, match.getName());
+
+            resultSet = myStatement.executeQuery();
+
+            boolean rated = false;
+            if (resultSet.next()) {
+                rated = resultSet.getBoolean("israted");
+            }
+            return rated;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+
+
+    }
+
     /**
      * Creates a new user and adds it to the database.
      */
@@ -564,6 +593,26 @@ public class Database {
 
             // 4. put values into the parameters
             preparedStatement.setString(1, name);
+
+            preparedStatement.execute();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public static void setRateInactive(String name, String matchName) throws SQLException {
+        PreparedStatement preparedStatement = null;
+
+        try {
+            // 2. create a String holding query
+            String sql = "UPDATE usermatch SET israted = true WHERE name = ? AND matchname = ?;";
+
+            // 3. create the query
+            preparedStatement = conn.prepareStatement(sql);
+
+            // 4. put values into the parameters
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, matchName);
 
             preparedStatement.execute();
 

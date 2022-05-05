@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ratePageController implements MainController, MatchController {
+    private  Match match;
     @FXML
     private ComboBox comboBox1;
     @FXML
@@ -57,8 +58,8 @@ public class ratePageController implements MainController, MatchController {
     @FXML
     private Label label11;
     private ArrayList<String> playerNames = new ArrayList<>();
-    ArrayList<Label> labels = new ArrayList<>();
-    ArrayList<ComboBox> comboBoxes = new ArrayList<>();
+    private ArrayList<Label> labels = new ArrayList<>();
+    private ArrayList<ComboBox> comboBoxes = new ArrayList<>();
 
     @Override
     public void preloadData(User user) throws IOException {
@@ -67,6 +68,7 @@ public class ratePageController implements MainController, MatchController {
 
     @Override
     public void preLoadMatch(Match match) throws IOException {
+        this.match = match;
         try {
             playerNames = Database.getPlayersFromMatch(match);
         } catch (SQLException e) {
@@ -108,7 +110,7 @@ public class ratePageController implements MainController, MatchController {
             labels.get(i).setVisible(true);
             comboBoxes.get(i).setVisible(true);
             labels.get(i).setText(playerNames.get(i));
-            comboBoxes.get(i).getItems().addAll(1 , 2 , 3 , 4 , 5);
+            comboBoxes.get(i).getItems().addAll("1" , "2" , "3" , "4" , "5");
         }
         for(int i = playerNames.size(); i < 11; i ++){
             labels.get(i).setVisible(false);
@@ -116,10 +118,11 @@ public class ratePageController implements MainController, MatchController {
         }
 
     }
-    public void clickOnRate(ActionEvent event) throws IOException {
+    public void clickOnRate(ActionEvent event) throws IOException, SQLException {
         for(int i = 0; i < playerNames.size(); i++){
-            Database.updateRatings((Integer) comboBoxes.get(i).getValue(), playerNames.get(i));
+            Database.updateRatings(Integer.valueOf((String) comboBoxes.get(i).getValue()), playerNames.get(i));
         }
+        Database.setRateInactive(SceneChanger.loggedInUser.getName(), match.getName());
 
         SceneChanger sc = new SceneChanger();
         sc.changeScenes(event, "Profile_Page.fxml", "Teamder | Profile Page", SceneChanger.loggedInUser, new profileController());
