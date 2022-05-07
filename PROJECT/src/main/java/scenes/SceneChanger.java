@@ -1,7 +1,9 @@
 package scenes;
 
-import classes.Database;
 import classes.Match;
+import javafx.application.Platform;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -11,12 +13,12 @@ import javafx.stage.Stage;
 import classes.User;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 
 public class SceneChanger {
     
     public static User loggedInUser;
+    protected Task<Void> newScene;
 
     /**
      * This method will accept the title of the new scene, the .fxml file name for
@@ -50,26 +52,58 @@ public class SceneChanger {
      * @param viewName .fxml file name for the view (for example "Log_In.fxml")
      * @param title Title of the new scene
      * @param user User object that will be preloaded in the next scene
-     * @param controllerClass Class of the controller for the next scene
+     * @param controller Class of the controller for the next scene
      */
-    public void changeScenes(ActionEvent event, String viewName, String title, User user, MainController controllerClass) throws IOException
+    public void changeScenes(ActionEvent event, String viewName, String title, User user, MainController controller) throws IOException
     {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource(viewName));
-        Parent parent = loader.load();
-
-        Scene scene = new Scene(parent);
-
-        //access the controller class and preloaded the User data
-        controllerClass = loader.getController();
-        controllerClass.preloadData(user);
-
+        final MainController[] controllerClass = {controller};
         //get the stage from the event that was passed in
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 
-        stage.setTitle(title);
-        stage.setScene(scene);
+        //Set the loading page first
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Loading_Page.fxml"));
+        Scene primaryScene = new Scene(fxmlLoader.load(), 640, 400);
+        stage.setScene(primaryScene);
         stage.show();
+
+        //set up the scene on a separate task
+        newScene = new Task<Void>(){
+            @Override
+            protected Void call() throws Exception {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource(viewName));
+                Parent parent = null;
+                try {
+                    parent = loader.load();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+                Scene scene = new Scene(parent);
+                //access the controller class and preloaded the User data
+                controllerClass[0] = loader.getController();
+                try {
+                    controllerClass[0].preloadData(user);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        stage.hide();
+                        stage.setTitle(title);
+                        stage.setScene(scene);
+                        stage.show();
+                        System.out.println("finished scene");
+                    }
+                });
+                return null;
+            }
+        };
+        //start the task
+        Thread th = new Thread(newScene);
+        th.setDaemon(true);
+        th.start();
     }
 
     /**
@@ -104,10 +138,6 @@ public class SceneChanger {
         stage.setScene(scene);
         stage.show();
     }
-
-
-
-    
     public static User getLoggedInUser() {
         return loggedInUser;
     }
