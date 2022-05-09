@@ -60,8 +60,6 @@ public class friendController implements MainController,MatchController, Initial
     private TableColumn<User, String> friendListColumn;
     private ObservableList<User> userObservableList;
 
-    private File imageFile;
-
     public void clickOnBack(ActionEvent event) throws IOException {
         SceneChanger sc = new SceneChanger();
         if(match == null)
@@ -153,7 +151,7 @@ public class friendController implements MainController,MatchController, Initial
         createCurrentMLinks();
 
         try{
-            imageFile = new File(ImageHandler.IMAGE_PATH + user.getImageFile());
+            File imageFile = new File(ImageHandler.IMAGE_PATH + user.getImageFile());
             BufferedImage bufferedImage = ImageIO.read(imageFile);
             Image img = SwingFXUtils.toFXImage(bufferedImage, null);
             imageView.setImage(img);

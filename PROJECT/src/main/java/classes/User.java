@@ -13,11 +13,11 @@ public class User {
 
     private String userName;
     private String password;
-    private String sports;  // interested sports
+    private String sports;
     private String bio;
     private File imageFile;
     private ArrayList<Match> matchList;
-    private double rating;
+    private Rate rating;
 
     /**
      * Create a new user with the given name, password, sports and bio.
@@ -28,6 +28,7 @@ public class User {
      * @param bio the bio of the user
      */
     public User(String name, String password, String sports, String bio) throws IOException, SQLException {
+        rating = new Rate();
         setUserName(name);
         setBio(bio);
         setPassword(password);
@@ -46,6 +47,7 @@ public class User {
      */
     public User(String name, String password, String sports, String bio, File imageFile) throws IOException, SQLException {
         this(name, password, sports, bio);
+        rating = new Rate();
         matchList = new ArrayList<Match>();
         setImageFile(imageFile);
         ImageHandler.copyImageFile(imageFile);
@@ -55,7 +57,7 @@ public class User {
     //  Getter methods for all instance variables
     //-----------------------------------------------------------------
     public double getRating() {
-        return rating;
+        return rating.getRating();
     }
 
     public String getName() {
@@ -90,7 +92,7 @@ public class User {
     //  Setter methods for all instance variables
     //-----------------------------------------------------------------
     public void setRating(double rating) {
-        this.rating = rating;
+        this.rating.setRate(rating);
     }
 
     public void setBio(String bio) {
@@ -135,9 +137,6 @@ public class User {
 
     public boolean equals(Object obj){
         User u = (User) obj;
-        if( this.userName.equals(u.userName) && this.password.equals(u.password)){
-            return true;
-        }
-        return false;
+        return this.userName.equals(u.userName) && this.password.equals(u.password);
     }
 }
