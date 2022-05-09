@@ -39,11 +39,6 @@ public class Database {
         }
     }
 
-//    public static void main(String[] args) throws SQLException {
-//        System.out.println(getMatch("asdads").getMatchDateTime().toString());
-//        matchActivity();
-//    }
-
     /**
      * Filter matches according to the user's preferences
      * @param sportPreffered the user's sport preference
@@ -92,20 +87,6 @@ public class Database {
         return matches;
     }
 
-    // to connect to the database
-    public void connect() {
-        try {
-            Connection myConnection = DriverManager.getConnection(url, username, password);
-            Statement myStat = myConnection.createStatement();
-            ResultSet myRs = myStat.executeQuery("SELECT * FROM public.usermatch WHERE name = 'basar123'"); // write sql command
-            while (myRs.next()) {
-                System.out.println(myRs.getString("name"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     /**
      * Get user according to the username
      * @param name the username to get the user for
@@ -132,9 +113,7 @@ public class Database {
                 int noOfRaters = myRs.getInt("noofraters");
                 double rate = 0;
                 if(noOfRaters > 0){
-                    rate = rating / noOfRaters;
-                    rate = Math.round(rate * 10.0) / 10.0;
-
+                    rate = Rate.update(rating, noOfRaters);
                 }
                 user.setRating(rate);
             }
@@ -332,17 +311,6 @@ public class Database {
         }
     }
 
-    // A Method to add a user to the database
-    public static void insert(int ID, String userName, String pass, String sports, String bio) {
-        try {
-            Statement myStat = conn.createStatement();
-            myStat.execute("INSERT INTO public.\"user\" (\" ID\", \"userName\", pass, sports, bio) VALUES ('" +
-                    ID + "'::smallint, '" + userName + "'::character varying, '" + pass + "'::character varying, '" + sports + "'::character varying, '" + bio + "'::character varying) returning \" ID\";");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     /**
      * Updates the user's image in the database.
      * @param image The image to be updated.
@@ -471,7 +439,6 @@ public class Database {
 
         Match match = new Match(name, sport, place, date, startTime, duration);
         insertMatchToDB(match); // add into database
-        //addMatch(SceneChanger.getLoggedInUser(), match);
 
         SceneChanger sc = new SceneChanger();
         sc.changeScenes(event, "Match_Page.fxml", "Teamder | Match Page", SceneChanger.getLoggedInUser(), match, new matchPageController(), new matchPageController());
@@ -613,30 +580,6 @@ public class Database {
             // 4. put values into the parameters
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, matchName);
-
-            preparedStatement.execute();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Sets the match to active
-     * @param name name of the match
-     */
-    public static void setMatchActive(String name) throws SQLException {
-        PreparedStatement preparedStatement = null;
-
-        try {
-            // 2. create a String holding query
-            String sql = "UPDATE match SET active = true WHERE name = ?;";
-
-            // 3. create the query
-            preparedStatement = conn.prepareStatement(sql);
-
-            // 4. put values into the parameters
-            preparedStatement.setString(1, name);
 
             preparedStatement.execute();
 
