@@ -112,31 +112,66 @@ public class SceneChanger {
      * @param title Title of the new scene
      * @param user User object that will be preloaded in the next scene
      * @param match Match object that will be preloaded in the next scene
-     * @param matchControllerClass Class of the controller for the next scene
-     * @param controllerClass Class of the controller for the next scene
+     * @param matchController Class of the controller for the next scene
+     * @param controller Class of the controller for the next scene
      */
-    public void changeScenes(ActionEvent event, String viewName, String title, User user, Match match, MatchController matchControllerClass, MainController controllerClass) throws IOException
+    public void changeScenes(ActionEvent event, String viewName, String title, User user, Match match, MatchController matchController, MainController controller) throws IOException
     {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource(viewName));
-        Parent parent = loader.load();
-
-        Scene scene = new Scene(parent);
-
-        //access the controller class and preloaded the User data
-        controllerClass = loader.getController();
-        controllerClass.preloadData(user);
-
-        //access the controller class and preloaded the Match data
-        matchControllerClass = loader.getController();
-        matchControllerClass.preLoadMatch(match);
-
+        final MainController[] controllerClass = {controller};
+        final MatchController[] matchControllerClass = {matchController};
         //get the stage from the event that was passed in
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 
-        stage.setTitle(title);
-        stage.setScene(scene);
+        //Set the loading page first
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Loading_Page.fxml"));
+        Scene primaryScene = new Scene(fxmlLoader.load(), 640, 400);
+        stage.setScene(primaryScene);
         stage.show();
+
+        //set up the scene on a separate task
+        newScene = new Task<Void>(){
+            @Override
+            protected Void call() throws Exception {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource(viewName));
+                Parent parent = null;
+                try {
+                    parent = loader.load();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+                Scene scene = new Scene(parent);
+                //access the controller class and preloaded the User data
+                controllerClass[0] = loader.getController();
+                try {
+                    controllerClass[0].preloadData(user);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                //access the controller class and preloaded the Match data
+                matchControllerClass[0] = loader.getController();
+                try {
+                    matchControllerClass[0].preLoadMatch(match);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        stage.hide();
+                        stage.setTitle(title);
+                        stage.setScene(scene);
+                        stage.show();
+                    }
+                });
+                return null;
+            }
+        };
+        //start the task
+        Thread th = new Thread(newScene);
+        th.setDaemon(true);
+        th.start();
     }
     public static User getLoggedInUser() {
         return loggedInUser;
