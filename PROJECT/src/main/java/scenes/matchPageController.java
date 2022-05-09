@@ -55,6 +55,8 @@ public class matchPageController implements MatchController, MainController{
     private Button tennisPosition0,tennisPosition1,tennisPosition2,tennisPosition3;
     @FXML
     private Button basketballPosition0,basketballPosition1,basketballPosition2,basketballPosition3,basketballPosition4,basketballPosition5,basketballPosition6,basketballPosition7,basketballPosition8,basketballPosition9;
+    private ImageView blackIcon;
+    private ImageView greyIcon;
     private User currentUser;
     private Match match;
 
@@ -382,6 +384,28 @@ public class matchPageController implements MatchController, MainController{
         matchNameText.setText(match.getName());
         this.match = match;
         arrangeMatchField(match.getSport().getName());
+        try{
+            // the image file of the black icon
+            File fieldFile = new File(ImageHandler.IMAGE_PATH + "player_icon_black.jpeg");
+            BufferedImage bufferedImage = ImageIO.read(fieldFile);
+            Image img = SwingFXUtils.toFXImage(bufferedImage, null);
+            blackIcon.setImage(img);
+        }
+        catch (IOException e)
+        {
+            System.err.println(e.getMessage());
+        }
+        try{
+            // the image file of the black icon
+            File fieldFile = new File(ImageHandler.IMAGE_PATH + "player_icon_grey.jpeg");
+            BufferedImage bufferedImage = ImageIO.read(fieldFile);
+            Image img = SwingFXUtils.toFXImage(bufferedImage, null);
+            greyIcon.setImage(img);
+        }
+        catch (IOException e)
+        {
+            System.err.println(e.getMessage());
+        }
     }
     @Override
     public void preloadData(User user) throws IOException {
