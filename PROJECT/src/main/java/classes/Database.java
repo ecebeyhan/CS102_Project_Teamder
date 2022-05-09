@@ -7,9 +7,11 @@ package classes;
 
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import scenes.*;
 
 import java.io.File;
@@ -216,7 +218,6 @@ public class Database {
      * @return the inactive matches
      */
     public static ObservableList<Match> getInactiveMatches(User user) throws SQLException {
-        matchActivity();
         ObservableList<Match> matches = FXCollections.observableArrayList();
         ArrayList<String> allMatches = getMatches(user);
         ArrayList<String> inActiveMatches = new ArrayList<>();
@@ -800,7 +801,12 @@ public class Database {
         return false;
     }
 
+    public static ArrayList<String> getMessage(String matchName, TextArea tArea) {
+        ArrayList<String> messageList = new ArrayList<>();
 
+        // username : message
+        return messageList;
+    }
 
 }
 
