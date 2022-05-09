@@ -55,6 +55,10 @@ public class matchPageController implements MatchController, MainController{
     private Button tennisPosition0,tennisPosition1,tennisPosition2,tennisPosition3;
     @FXML
     private Button basketballPosition0,basketballPosition1,basketballPosition2,basketballPosition3,basketballPosition4,basketballPosition5,basketballPosition6,basketballPosition7,basketballPosition8,basketballPosition9;
+    @FXML
+    private TextField sender;
+    @FXML
+    private TextArea receiver;
     private ImageView blackIcon;
     private ImageView greyIcon;
     private User currentUser;
@@ -68,6 +72,17 @@ public class matchPageController implements MatchController, MainController{
     @FXML
     public void clickOnCancel(ActionEvent event) throws IOException {
         new SceneChanger().changeScenes(event, "Profile_Page.fxml", "Teamder", SceneChanger.getLoggedInUser(), new profileController());
+    }
+
+    @FXML
+    public void clickOnSend(ActionEvent event) {
+        Database.sendMessage(sender.getText(), match, receiver);
+        sender.clear();
+    }
+
+    @FXML
+    public void clickOnUpdate(ActionEvent event) {
+
     }
 
     /**
