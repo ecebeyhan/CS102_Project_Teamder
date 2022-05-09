@@ -801,11 +801,28 @@ public class Database {
         return false;
     }
 
-    public static ArrayList<String> getMessage(String matchName, TextArea tArea) {
-        ArrayList<String> messageList = new ArrayList<>();
+    public static void getMessage(String matchName, TextArea tArea) {
 
-        // username : message
-        return messageList;
+    }
+
+    public static void sendMessage(String msg, Match match,TextArea tArea) {
+        PreparedStatement stmt = null;
+
+        try {
+            String query = "INSERT INTO public.message(sender, \"group\", messages) VALUES (?, ?, ?)";
+
+            stmt = conn.prepareStatement(query);
+
+            stmt.setString(1, SceneChanger.getLoggedInUser().getUserName());
+            stmt.setString(2, match.getName());
+            stmt.setString(3, msg);
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        tArea.setText(tArea.getText() + SceneChanger.getLoggedInUser().getUserName() + ": " + msg + "\n");
     }
 
 }
