@@ -110,7 +110,7 @@ public class Database {
      * Get user according to the username
      * @param name the username to get the user for
      */
-    public User getUser(String name) throws SQLException {
+    public static User getUser(String name) throws SQLException {
         Statement myStat = null;
         User user = null;
         try {
@@ -309,12 +309,12 @@ public class Database {
      * @param user the user to add the match to
      * @param match the match to add
      */
-    public static void addMatch(User user, Match match) throws SQLException {
+    public static void addMatch(User user, Match match, int position) throws SQLException {
         PreparedStatement stmt = null;
 
         try {
             // 2 create a query ( with ? for user input)
-            String query = "INSERT INTO usermatch(name, matchname) VALUES (?, ?)";
+            String query = "INSERT INTO usermatch(name, matchname,position ) VALUES (?, ?, ?)";
 
             // 3 prepare the statement wanted to run on the sql
             stmt = conn.prepareStatement(query);
@@ -322,6 +322,7 @@ public class Database {
             // 4 establish the '?' created in 'step 2'
             stmt.setString(1, user.getName());
             stmt.setString(2, match.getName());
+            stmt.setInt(3, position);
 
             // 5 execute the query
             stmt.executeUpdate();
@@ -471,7 +472,7 @@ public class Database {
 
         Match match = new Match(name, sport, place, date, startTime, duration);
         insertMatchToDB(match); // add into database
-        addMatch(SceneChanger.getLoggedInUser(), match);
+        //addMatch(SceneChanger.getLoggedInUser(), match);
 
         SceneChanger sc = new SceneChanger();
         sc.changeScenes(event, "Match_Page.fxml", "Teamder | Match Page", SceneChanger.getLoggedInUser(), match, new matchPageController(), new matchPageController());
@@ -702,6 +703,38 @@ public class Database {
         }
         return false;
     }
+
+    public static User getUserInPosition(String matchName, int position) throws SQLException
+    {
+        PreparedStatement myStatement = null;
+        ResultSet resultSet = null;
+        try {
+            // 2 create a query ( with ? for match input)
+            String query = "SELECT * FROM usermatch WHERE matchname = ?";
+
+            // 3 prepare the statement wanted to run on the sql
+            myStatement = conn.prepareStatement(query);
+
+            // 4 establish the '?' created in 'step 2'
+            myStatement.setString(1, matchName);
+
+            // 5 execute the query
+            resultSet = myStatement.executeQuery();
+
+            // 6 get the user in the match in wanted position
+            while (resultSet.next()) {
+                if(resultSet.getInt("position") == position)
+                {
+                    String name = resultSet.getString("name");
+                    return Database.getUser(name);
+                }
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+
     public static void updateRatings(int value, String playerName){
         PreparedStatement preparedStatement = null;
 

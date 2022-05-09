@@ -24,10 +24,11 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class friendController implements MainController, Initializable {
+public class friendController implements MainController,MatchController, Initializable {
 
     private User user;
     private Database database;
+    private Match match;
     @FXML
     private Button followButton;
     @FXML
@@ -63,7 +64,14 @@ public class friendController implements MainController, Initializable {
 
     public void clickOnBack(ActionEvent event) throws IOException {
         SceneChanger sc = new SceneChanger();
-        sc.changeScenes(event, "Profile_Page.fxml", "Teamder | Profile Page", SceneChanger.loggedInUser, new profileController());
+        if(match == null)
+        {
+            sc.changeScenes(event, "Profile_Page.fxml", "Teamder | Profile Page", SceneChanger.loggedInUser, new profileController());
+        }
+        else
+        {
+            new SceneChanger().changeScenes(event, "Match_Page.fxml", "Teamder", SceneChanger.getLoggedInUser(), match, new matchPageController(), new matchPageController());
+        }
     }
     public void clickOnFollow(ActionEvent event) throws IOException, SQLException {
         SceneChanger sc = new SceneChanger();
@@ -192,4 +200,8 @@ public class friendController implements MainController, Initializable {
         friendListColumn.setCellValueFactory(new PropertyValueFactory<User, String>("userName"));
     }
 
+    @Override
+    public void preLoadMatch(Match match) throws IOException {
+        this.match = match;
+    }
 }

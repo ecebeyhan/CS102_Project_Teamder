@@ -56,7 +56,6 @@ public class matchPageController implements MatchController, MainController{
     @FXML
     private Button basketballPosition0,basketballPosition1,basketballPosition2,basketballPosition3,basketballPosition4,basketballPosition5,basketballPosition6,basketballPosition7,basketballPosition8,basketballPosition9;
     private User currentUser;
-    private User[] users;
     private Match match;
 
     /**
@@ -78,23 +77,21 @@ public class matchPageController implements MatchController, MainController{
      */
     @FXML
     public void clickOnPosition(ActionEvent event) throws IOException, SQLException {
-        if(Database.isUserInMatch(currentUser.getUserName(), match.getName()))
-        //pozisyonun doluluğuna bakmıyor
+        int position = getPositionSelection(event);
+
+
+        if(Database.getUserInPosition(match.getName(),position) != null)
         {
             profileWindow(event);
         }
-        else //if(user is not in match && the position is not occupied)
+        else if(!Database.isUserInMatch(currentUser.getUserName(), match.getName()))
         {
             confirmWindow(event);
         }
-        /*else if(position is occupied)
+        else
         {
-            profileWindow(event);
+            //errorWindow(event);
         }
-        else if(Database.isUserInMatch(currentUser.getUserName(), match.getName()) && the position is not occupied)
-        {
-            errorWindow(event);
-        }*/
     }
 
     /**
@@ -129,9 +126,8 @@ public class matchPageController implements MatchController, MainController{
 
             int position = getPositionSelection(event);
 
-            //Pozisyona göre eklemiyor
             try {
-                Database.addMatch(currentUser,match);
+                Database.addMatch(currentUser,match,position);
             }
             catch (SQLException ex) {
                 throw new RuntimeException(ex);
@@ -143,20 +139,20 @@ public class matchPageController implements MatchController, MainController{
      * This method creates a window that contains the rate and the link to the profile of the player in selected position
      * @param event the event that triggers the method
      */
-    private void profileWindow(ActionEvent event)
-    {
-        int playerPosition = getPositionSelection(event);
+    private void profileWindow(ActionEvent event) throws SQLException {
+        int position = getPositionSelection(event);
+        User selectedUser = Database.getUserInPosition(match.getName(),position);
 
         Stage stage = new Stage();
 
         Label labelRate = new Label();
-        labelRate.setText("Rate: " ); // + users[playerPosition].getRating() users pozisyona göre database den alınamıyor
+        labelRate.setText("Rate: " + selectedUser.getRating());
 
         Hyperlink profile = new Hyperlink();
-        profile.setText("userName"); // + users[playerPosition].getName() users pozisyona göre database den alınamıyor
+        profile.setText(selectedUser.getName());
 
-        //eğer kendi profili ise Profile_Page
-        //if(users[playerPosition].equals(currentUser))  daha users pozisyona göre database den alınamıyor
+        //if the selected position is the user's own position, the user is directed to their own profile
+        if(selectedUser.equals(currentUser))
         profile.setOnAction(e -> {
             try {
                 stage.close();
@@ -168,16 +164,18 @@ public class matchPageController implements MatchController, MainController{
             }
         });
 
-        //
-        /*else if(!users[playerPosition].equals(currentUser)){
+        else if(!selectedUser.equals(currentUser)){
         profile.setOnAction(e -> {
                     try {
-                        sc.changeScenes(e, "Friend_Page.fxml", "Teamder", users[playerPosition], controllerClass);
+                        stage.close();
+                        MatchController matchController = new profileWithCloseButtonController();
+                        MainController mainController = new profileWithCloseButtonController();
+                        new SceneChanger().changeScenes(event, "Friend_Page.fxml", "Teamder", selectedUser,match,matchController, mainController);
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
-                }
-        }*/
+                });
+        }
 
         VBox layout = new VBox(10);
         layout.getChildren().addAll(labelRate,profile);
@@ -195,7 +193,7 @@ public class matchPageController implements MatchController, MainController{
      */
     private void errorWindow(ActionEvent event)
     {
-        Stage stage = new Stage();
+        Stage stage = (Stage) myPane.getScene().getWindow();
         Alert alert = new Alert(Alert.AlertType.NONE);
         alert.getDialogPane().getButtonTypes().add(ButtonType.OK);
         alert.getDialogPane().lookupButton(ButtonType.OK).setVisible(false);
@@ -212,16 +210,16 @@ public class matchPageController implements MatchController, MainController{
     private int getPositionSelection(ActionEvent event)
     {
         Button clickedButton = (Button) event.getTarget();
-        if(clickedButton.equals(footballPosition0)||clickedButton.equals(volleyballPosition0)){return 0;}
-        if(clickedButton.equals(footballPosition1)||clickedButton.equals(volleyballPosition1)){return 1;}
-        if(clickedButton.equals(footballPosition2)||clickedButton.equals(volleyballPosition2)){return 2;}
-        if(clickedButton.equals(footballPosition3)||clickedButton.equals(volleyballPosition3)){return 3;}
-        if(clickedButton.equals(footballPosition4)||clickedButton.equals(volleyballPosition4)){return 4;}
-        if(clickedButton.equals(footballPosition5)||clickedButton.equals(volleyballPosition5)){return 5;}
-        if(clickedButton.equals(footballPosition6)||clickedButton.equals(volleyballPosition6)){return 6;}
-        if(clickedButton.equals(footballPosition7)||clickedButton.equals(volleyballPosition7)){return 7;}
-        if(clickedButton.equals(footballPosition8)){return 8;}
-        if(clickedButton.equals(footballPosition9)){return 9;}
+        if(clickedButton.equals(footballPosition0) || clickedButton.equals(basketballPosition0) || clickedButton.equals(volleyballPosition0) || clickedButton.equals(tennisPosition0)){return 0;}
+        if(clickedButton.equals(footballPosition1) || clickedButton.equals(basketballPosition1) || clickedButton.equals(volleyballPosition1) || clickedButton.equals(tennisPosition1)){return 1;}
+        if(clickedButton.equals(footballPosition2) || clickedButton.equals(basketballPosition2) || clickedButton.equals(volleyballPosition2) || clickedButton.equals(tennisPosition2)){return 2;}
+        if(clickedButton.equals(footballPosition3) || clickedButton.equals(basketballPosition3) || clickedButton.equals(volleyballPosition3) || clickedButton.equals(tennisPosition3)){return 3;}
+        if(clickedButton.equals(footballPosition4) || clickedButton.equals(basketballPosition4) || clickedButton.equals(volleyballPosition4)){return 4;}
+        if(clickedButton.equals(footballPosition5) || clickedButton.equals(basketballPosition5) || clickedButton.equals(volleyballPosition5)){return 5;}
+        if(clickedButton.equals(footballPosition6) || clickedButton.equals(basketballPosition6) || clickedButton.equals(volleyballPosition6)){return 6;}
+        if(clickedButton.equals(footballPosition7) || clickedButton.equals(basketballPosition7) || clickedButton.equals(volleyballPosition7)){return 7;}
+        if(clickedButton.equals(footballPosition8) || clickedButton.equals(basketballPosition8)){return 8;}
+        if(clickedButton.equals(footballPosition9) || clickedButton.equals(basketballPosition9)){return 9;}
         if(clickedButton.equals(footballPosition10)){return 10;}
         if(clickedButton.equals(footballPosition11)){return 11;}
         return -1; //invalid position

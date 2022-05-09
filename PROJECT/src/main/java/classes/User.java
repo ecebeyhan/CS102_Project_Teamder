@@ -13,7 +13,7 @@ public class User {
 
     private String userName;
     private String password;
-    private String sports;  // interested sports (gostermelik)
+    private String sports;  // interested sports
     private String bio;
     private File imageFile;
     private ArrayList<Match> matchList;
@@ -120,9 +120,8 @@ public class User {
         this.matchList = matchList;
     }
 
-    public void addMatch(Match match) throws SQLException {
+    public void addMatch(Match match){
         matchList.add(match);
-        Database.addMatch(this, match);
     }
 
     /**
