@@ -81,10 +81,10 @@ public class matchPageController implements MatchController, MainController{
     public void clickOnPosition(ActionEvent event) throws IOException, SQLException {
         int position = getPositionSelection(event);
 
-
         if(Database.getUserInPosition(match.getName(),position) != null)
         {
             profileWindow(event);
+
         }
         else if(!Database.isUserInMatch(currentUser.getUserName(), match.getName()))
         {
@@ -92,7 +92,7 @@ public class matchPageController implements MatchController, MainController{
         }
         else
         {
-            //errorWindow(event);
+            errorWindow(event);
         }
     }
 
@@ -167,16 +167,16 @@ public class matchPageController implements MatchController, MainController{
         });
 
         else if(!selectedUser.equals(currentUser)){
-        profile.setOnAction(e -> {
-                    try {
-                        stage.close();
-                        MatchController matchController = new profileWithCloseButtonController();
-                        MainController mainController = new profileWithCloseButtonController();
-                        new SceneChanger().changeScenes(event, "Friend_Page.fxml", "Teamder", selectedUser,match,matchController, mainController);
-                    } catch (IOException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                });
+            profile.setOnAction(e -> {
+                try {
+                    stage.close();
+                    MatchController matchController = new profileWithCloseButtonController();
+                    MainController mainController = new profileWithCloseButtonController();
+                    new SceneChanger().changeScenes(event, "Friend_Page.fxml", "Teamder", selectedUser,match,matchController, mainController);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            });
         }
 
         VBox layout = new VBox(10);
@@ -374,6 +374,11 @@ public class matchPageController implements MatchController, MainController{
         basketballPosition8.setVisible(false);
         basketballPosition9.setVisible(false);
         basketballField.setVisible(false);
+    }
+
+    private void changeButtonIcon(int position)
+    {
+
     }
 
     @Override
