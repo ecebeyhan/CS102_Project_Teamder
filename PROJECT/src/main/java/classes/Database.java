@@ -416,8 +416,7 @@ public class Database {
                 int noOfRaters = resultSet.getInt("noofraters");
                 double rate = 0;
                 if(noOfRaters > 0){
-                    rate = rating / noOfRaters;
-                    rate = Math.round(rate * 10.0) / 10.0;
+                    rate = Rate.update(rating, noOfRaters);
                 }
                 user.setRating(rate);
             }
