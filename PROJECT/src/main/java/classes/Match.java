@@ -45,12 +45,7 @@ public class Match {
     //  Setter methods for all variables
     //-----------------------------------------------------------------
     public void setActivity() {
-        if(compareTime()){
-            isActive = true;
-        }
-        else{
-            isActive = false;
-        }
+        isActive = compareTime();
     }
 
     public void setDateTime(LocalDate date, LocalTime time) {
@@ -72,10 +67,8 @@ public class Match {
     //compares endTime with the local time to upgrade the boolean active
     public boolean compareTime(){
         LocalDateTime local = LocalDateTime.now();
-        if(local.isAfter(matchDateTime)){//time of the match has passed
-            return false;
-        }
-        return true;
+        //time of the match has passed
+        return !local.isAfter(matchDateTime);
     }
 
     public LocalTime endTime() {
