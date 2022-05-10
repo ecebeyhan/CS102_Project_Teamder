@@ -394,41 +394,14 @@ public class matchPageController implements MatchController, MainController{
         basketballField.setVisible(false);
     }
 
-    private void changeButtonIcon(int position)
-    {
-
-    }
-
     @Override
-    public void preLoadMatch(Match match) throws IOException {
+    public void preLoadMatch(Match match) {
         placeText.setText(match.getPlace());
         timeText.setText(match.getStartTime().toString());
         dateText.setText(match.getDate().toString());
         matchNameText.setText(match.getName());
         this.match = match;
         arrangeMatchField(match.getSport().getName());
-        try{
-            // the image file of the black icon
-            File fieldFile = new File(ImageHandler.IMAGE_PATH + "player_icon_black.jpeg");
-            BufferedImage bufferedImage = ImageIO.read(fieldFile);
-            Image img = SwingFXUtils.toFXImage(bufferedImage, null);
-            blackIcon.setImage(img);
-        }
-        catch (IOException e)
-        {
-            System.err.println(e.getMessage());
-        }
-        try{
-            // the image file of the black icon
-            File fieldFile = new File(ImageHandler.IMAGE_PATH + "player_icon_grey.jpeg");
-            BufferedImage bufferedImage = ImageIO.read(fieldFile);
-            Image img = SwingFXUtils.toFXImage(bufferedImage, null);
-            greyIcon.setImage(img);
-        }
-        catch (IOException e)
-        {
-            System.err.println(e.getMessage());
-        }
     }
     @Override
     public void preloadData(User user) throws IOException {
