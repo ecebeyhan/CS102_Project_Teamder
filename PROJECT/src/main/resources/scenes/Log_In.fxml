@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml" fx:controller="scenes.loginController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16" fx:controller="scenes.loginController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
@@ -33,9 +28,9 @@
             <Label fx:id="errorLabel" layoutX="285.0" layoutY="234.0" prefHeight="25.0" prefWidth="198.0" />
             <ButtonBar layoutX="259.0" layoutY="252.0" prefHeight="40.0" prefWidth="200.0">
                <buttons>
-                  <Button fx:id="loginButton" mnemonicParsing="false" onAction="#clickOnLogin" prefHeight="25.0" prefWidth="59.0" text="Login" />
+                  <Button fx:id="loginButton" defaultButton="true" mnemonicParsing="false" onAction="#clickOnLogin" prefHeight="25.0" prefWidth="59.0" text="Login" />
                   <Button fx:id="clearButton" mnemonicParsing="false" onAction="#clickOnClear" prefHeight="25.0" prefWidth="59.0" text="Clear" />
-                  <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#clickOnCancel" prefHeight="25.0" prefWidth="59.0" text="Cancel" />
+                  <Button fx:id="cancelButton" cancelButton="true" mnemonicParsing="false" onAction="#clickOnCancel" prefHeight="25.0" prefWidth="59.0" text="Cancel" />
                </buttons>
             </ButtonBar>
       </children>

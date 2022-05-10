@@ -826,7 +826,19 @@ public class Database {
         return false;
     }
     public static void getMessage(String matchName, TextArea tArea) {
-
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        tArea.clear();
+        try {
+            stmt = conn.prepareStatement("SELECT * FROM message WHERE \"group\" = ?");
+            stmt.setString(1, matchName);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                tArea.appendText(rs.getString("sender") + ": " + rs.getString("messages") + "\n");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static void sendMessage(String msg, Match match,TextArea tArea) {
@@ -846,7 +858,7 @@ public class Database {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        tArea.setText(tArea.getText() + SceneChanger.getLoggedInUser().getUserName() + ": " + msg + "\n");
+        tArea.appendText(tArea.getText() + SceneChanger.getLoggedInUser().getUserName() + ": " + msg + "\n");
     }
 
 }

@@ -1,18 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToolBar?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml" fx:controller="scenes.registerController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16" fx:controller="scenes.registerController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
@@ -71,8 +63,8 @@
                         <Label fx:id="label2" layoutX="18.0" layoutY="287.0" />
                         <ToolBar layoutX="143.0" layoutY="345.0" prefHeight="40.0" prefWidth="129.0">
                            <items>
-                              <Button fx:id="registerButton" mnemonicParsing="false" onAction="#clickRegisterButton" text="Register" />
-                            <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#clickCancelButton" text="Cancel" />
+                              <Button fx:id="registerButton" defaultButton="true" mnemonicParsing="false" onAction="#clickRegisterButton" text="Register" />
+                            <Button fx:id="cancelButton" cancelButton="true" mnemonicParsing="false" onAction="#clickCancelButton" text="Cancel" />
                            </items>
                         </ToolBar>
                      </children>

@@ -82,7 +82,7 @@ public class matchPageController implements MatchController, MainController{
 
     @FXML
     public void clickOnUpdate(ActionEvent event) {
-
+        Database.getMessage(match.getName(), receiver);
     }
 
     /**
