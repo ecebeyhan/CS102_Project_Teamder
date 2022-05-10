@@ -58,6 +58,8 @@ public class FindMatchController implements MainController, Initializable {
     void clickSearchButton(ActionEvent event) throws SQLException {
         matchFoundLabel.setText("Found 0 match(es)");
         ObservableList<Match> anyMatches = matchTable.getItems(); //Gets matches from Tableview object if there are any.
+        String city = "";
+        LocalDate date = null;
         if( anyMatches.size() > 0 ){
             matchTable.getItems().clear();
         }
@@ -68,13 +70,11 @@ public class FindMatchController implements MainController, Initializable {
             matchFoundLabel.setText("Please select a sport");
             return;
         }
-        if (cityComboBox.getValue() == null) {
-            matchFoundLabel.setText("Please select a city");
-            return;
+        if (cityComboBox.getValue() != null) {
+            city = (String) cityComboBox.getValue();
         }
-        if (datePicker.getValue() == null) {
-            matchFoundLabel.setText("Please select a date");
-            return;
+        if (datePicker.getValue() != null) {
+            date = datePicker.getValue();
         }
         String sportPreffered = "";
         if (football.isSelected()) {
@@ -86,12 +86,13 @@ public class FindMatchController implements MainController, Initializable {
         } else if (volleyball.isSelected()) {
             sportPreffered = "Volleyball";
         }
-        String city = (String) cityComboBox.getValue();
-        LocalDate date = datePicker.getValue();
         String matchName = matchNameTField.getText();
         LocalDateTime now = LocalDateTime.now();
         ObservableList<Match> matches = null;
-        if( now.toLocalDate().isAfter(date)){
+        if (date == null) {
+            matches = Database.alternativeFilter(sportPreffered, city, matchName, matchFoundLabel);
+        }
+        else if( now.toLocalDate().isAfter(date)){
             errorLabel.setText("Please select a valid date");
             return;
         }
@@ -110,7 +111,6 @@ public class FindMatchController implements MainController, Initializable {
             }
         }
         assert matches != null;
-
         matchTable.getItems().addAll(matches);
         createLinks();
     }
@@ -127,7 +127,7 @@ public class FindMatchController implements MainController, Initializable {
         ObservableList<Hyperlink> links = FXCollections.observableArrayList();
         for( int i = 0; i < matchTable.getItems().size(); i++){
             Match m = matchTable.getItems().get(i);
-            TableColumn col = matchTable.getColumns().get(0);
+            TableColumn<Match, ?> col = matchTable.getColumns().get(0);
             Hyperlink link = (Hyperlink) col.getCellObservableValue(m).getValue();
             links.add(link);
         }
