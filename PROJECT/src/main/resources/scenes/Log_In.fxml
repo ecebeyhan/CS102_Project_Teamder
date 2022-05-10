@@ -6,34 +6,42 @@
 
 <VBox prefHeight="400.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16" fx:controller="scenes.loginController">
   <children>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
-      <children>
-        <Label alignment="CENTER" layoutX="63.0" layoutY="132.0" prefHeight="33.0" prefWidth="220.0" style="&#10;" text="User Name " textAlignment="CENTER" textFill="#6841ec" wrapText="false" AnchorPane.leftAnchor="65.0">
-          <font>
-            <Font name="System Bold" size="24.0" />
-          </font>
-        </Label>
-            <Label alignment="CENTER" layoutX="129.0" layoutY="200.0" prefHeight="33.0" prefWidth="220.0" style="&#10;" text="Password" textAlignment="CENTER" textFill="#6841ec" wrapText="false" AnchorPane.leftAnchor="65.0">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-            </Label>
-            <TextField fx:id="userNameTField" layoutX="285.0" layoutY="133.0" prefHeight="33.0" prefWidth="181.0" promptText="Enter your username" />
-            <Label contentDisplay="CENTER" layoutX="231.0" layoutY="26.0" prefHeight="44.0" prefWidth="198.0" text="TEAMDER" textFill="#6841ec">
-               <font>
-                  <Font name="System Bold" size="36.0" />
-               </font>
-            </Label>
-            <PasswordField fx:id="passTField" layoutX="285.0" layoutY="201.0" prefHeight="33.0" prefWidth="181.0" promptText="Enter your password" />
-            <Label fx:id="errorLabel" layoutX="285.0" layoutY="234.0" prefHeight="25.0" prefWidth="198.0" />
-            <ButtonBar layoutX="259.0" layoutY="252.0" prefHeight="40.0" prefWidth="200.0">
-               <buttons>
-                  <Button fx:id="loginButton" defaultButton="true" mnemonicParsing="false" onAction="#clickOnLogin" prefHeight="25.0" prefWidth="59.0" text="Login" />
-                  <Button fx:id="clearButton" mnemonicParsing="false" onAction="#clickOnClear" prefHeight="25.0" prefWidth="59.0" text="Clear" />
-                  <Button fx:id="cancelButton" cancelButton="true" mnemonicParsing="false" onAction="#clickOnCancel" prefHeight="25.0" prefWidth="59.0" text="Cancel" />
-               </buttons>
-            </ButtonBar>
-      </children>
-    </AnchorPane>
+      <AnchorPane VBox.vgrow="ALWAYS">
+          <Label alignment="CENTER" layoutX="63.0" layoutY="132.0" prefHeight="33.0" prefWidth="220.0" style="&#10;"
+                 text="User Name " textAlignment="CENTER" textFill="#6841ec" wrapText="false"
+                 AnchorPane.leftAnchor="65.0">
+              <font>
+                  <Font name="System Bold" size="24.0"/>
+              </font>
+          </Label>
+          <Label alignment="CENTER" layoutX="129.0" layoutY="200.0" prefHeight="33.0" prefWidth="220.0" style="&#10;"
+                 text="Password" textAlignment="CENTER" textFill="#6841ec" wrapText="true"
+                 AnchorPane.leftAnchor="65.0">
+              <font>
+                <Font name="System Bold" size="24.0"/>
+              </font>
+          </Label>
+          <TextField fx:id="userNameTField" layoutX="285.0" layoutY="133.0" prefHeight="33.0" prefWidth="181.0"
+                     promptText="Enter your username"/>
+          <Label contentDisplay="CENTER" layoutX="231.0" layoutY="26.0" prefHeight="44.0" prefWidth="198.0"
+                 text="TEAMDER" textFill="#6841ec">
+              <font>
+                <Font name="System Bold" size="36.0"/>
+              </font>
+          </Label>
+          <PasswordField fx:id="passTField" layoutX="285.0" layoutY="201.0" prefHeight="33.0" prefWidth="181.0"
+                         promptText="Enter your password"/>
+          <Label fx:id="errorLabel" layoutX="285.0" layoutY="234.0" prefHeight="25.0" prefWidth="198.0"/>
+          <ButtonBar layoutX="259.0" layoutY="252.0" prefHeight="40.0" prefWidth="200.0">
+              <buttons>
+                <Button fx:id="loginButton" defaultButton="true" mnemonicParsing="false" onAction="#clickOnLogin"
+                        prefHeight="25.0" prefWidth="59.0" text="Login"/>
+                <Button fx:id="clearButton" mnemonicParsing="false" onAction="#clickOnClear" prefHeight="25.0"
+                        prefWidth="59.0" text="Clear"/>
+                <Button fx:id="cancelButton" cancelButton="true" mnemonicParsing="false" onAction="#clickOnCancel"
+                        prefHeight="25.0" prefWidth="59.0" text="Cancel"/>
+              </buttons>
+          </ButtonBar>
+      </AnchorPane>
   </children>
 </VBox>

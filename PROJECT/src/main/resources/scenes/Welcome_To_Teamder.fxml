@@ -3,11 +3,13 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml" fx:controller="scenes.welcomeController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml/" fx:controller="scenes.welcomeController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="400.0" prefWidth="620.0" VBox.vgrow="ALWAYS">
       <children>
@@ -15,12 +17,37 @@
                <cursor>
                   <Cursor fx:constant="DEFAULT" />
                </cursor></Button>
-            <Label alignment="CENTER" prefHeight="75.0" prefWidth="429.0" text="WELCOME TO TEAMDER " textAlignment="CENTER" textFill="#6841ec" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="110.0" AnchorPane.topAnchor="5.0">
+            <Label alignment="CENTER" prefHeight="75.0" prefWidth="429.0" text="WELCOME TO TEAMDER " textAlignment="CENTER" textFill="#84860c" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="110.0" AnchorPane.topAnchor="5.0">
                <font>
-                  <Font name="Arial Bold" size="32.0" />
+                  <Font name="Leelawadee UI Bold" size="32.0" />
                </font>
             </Label>
-            <Button fx:id="loginButton" layoutX="256.0" layoutY="200.0" mnemonicParsing="false" onAction="#clickOnLoginButton" style="-fx-background-color: #ffda00#ffda00;" text="Log In" textFill="#00040dfe" AnchorPane.leftAnchor="256.0" AnchorPane.rightAnchor="256.0" AnchorPane.topAnchor="200.0" />
+            <Button fx:id="loginButton" layoutX="256.0" layoutY="188.0" mnemonicParsing="false" onAction="#clickOnLoginButton" style="-fx-background-color: #ffda00#ffda00;" text="Log In" textFill="#00040dfe" AnchorPane.leftAnchor="256.0" AnchorPane.rightAnchor="256.0" AnchorPane.topAnchor="188.0" />
+            <ImageView fx:id="footballImage" fitHeight="150.0" fitWidth="164.0" layoutX="35.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../java/images/futboldobu.jpeg" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="basketballImage" fitHeight="150.0" fitWidth="200.0" layoutX="19.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../java/images/basketdobu.jpeg" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="tennisImage" fitHeight="150.0" fitWidth="200.0" layoutX="455.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../java/images/tennisdobu.jpeg" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="volleyballImage" fitHeight="150.0" fitWidth="200.0" layoutX="455.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../java/images/volleydobu.jpeg" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="logoImage" fitHeight="150.0" fitWidth="200.0" layoutX="250.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../java/images/icon.jpeg" />
+               </image>
+            </ImageView>
       </children>
     </AnchorPane>
   </children>

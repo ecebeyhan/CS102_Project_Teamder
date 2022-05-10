@@ -94,7 +94,6 @@ public class SceneChanger {
                         stage.setTitle(title);
                         stage.setScene(scene);
                         stage.show();
-                        System.out.println("finished scene");
                     }
                 });
                 return null;

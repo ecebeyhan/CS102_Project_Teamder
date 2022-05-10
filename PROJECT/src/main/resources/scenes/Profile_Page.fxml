@@ -5,66 +5,60 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16" fx:controller="scenes.profileController">
-  <children>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
-      <children>
-            <Button layoutX="15.0" layoutY="359.0" mnemonicParsing="false" onAction="#clickOnJoin" text="Join a match" />
-            <Button layoutX="109.0" layoutY="359.0" mnemonicParsing="false" onAction="#clickOnStart" prefWidth="95.0" text="Start a match" />
-            <Pane layoutX="458.0" layoutY="144.0" prefHeight="184.0" prefWidth="168.0">
-               <children>
-                  <TableView fx:id="friendListTable" layoutX="-27.0" prefHeight="200.0" prefWidth="205.0">
-                     <columns>
-                        <TableColumn fx:id="friendListColumn" prefWidth="204.0" text="Friend List" />
-                     </columns>
-                  </TableView>
-               </children>
-            </Pane>
-            <Pane layoutX="205.0" layoutY="144.0" prefHeight="234.0" prefWidth="205.0">
-               <children>
-                  <TableView fx:id="currentMatchTable" layoutX="6.0" prefHeight="200.0" prefWidth="205.0">
-                    <columns>
-                      <TableColumn fx:id="matchNameColumn" prefWidth="204.0" text="Current Matches" />
-                    </columns>
-                  </TableView>
-               </children>
-            </Pane>
-            <Separator layoutX="201.0" layoutY="152.0" orientation="VERTICAL" prefHeight="184.0" prefWidth="6.0" />
-            <Separator layoutX="8.0" layoutY="138.0" prefHeight="6.0" prefWidth="625.0" />
-            <Text fx:id="userNameLabel" layoutX="187.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-            <Text fx:id="sportsLabel" layoutX="214.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-            <Text fx:id="avgLabel" layoutX="170.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-            <TextArea fx:id="bioText" editable="false" layoutX="441.0" layoutY="20.0" prefHeight="88.0" prefWidth="183.0" wrapText="true" />
-            <Label layoutX="129.0" layoutY="20.0" text="Username:" />
-            <Label layoutX="129.0" layoutY="46.0" prefHeight="17.0" prefWidth="83.0" text="Favorite Sports:" />
-            <Label layoutX="129.0" layoutY="72.0" prefHeight="17.0" prefWidth="46.0" text="Rating: " />
-            <VBox layoutX="13.0" layoutY="11.0" prefHeight="121.0" prefWidth="108.0" spacing="5.0">
-               <children>
-                  <ImageView fx:id="imageView" fitHeight="98.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true" />
-                <Button minWidth="45.0" mnemonicParsing="false" onAction="#clickOnEditImage" prefHeight="24.0" prefWidth="71.0" text="Edit Image">
-                     <font>
-                        <Font size="11.0" />
-                     </font>
-                  </Button>
-               </children>
-            </VBox>
-            <Button layoutX="88.0" layoutY="114.0" minWidth="47.0" mnemonicParsing="false" onAction="#clickOnLogOut" prefHeight="24.0" prefWidth="71.0" text="Log Out">
-               <font>
-                  <Font size="11.0" />
-               </font>
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16"
+      fx:controller="scenes.profileController">
+    <AnchorPane VBox.vgrow="ALWAYS">
+        <Button layoutX="15.0" layoutY="359.0" mnemonicParsing="false" onAction="#clickOnJoin" text="Join a match"/>
+        <Button layoutX="109.0" layoutY="359.0" mnemonicParsing="false" onAction="#clickOnStart" prefWidth="95.0"
+                text="Start a match"/>
+        <Pane layoutX="458.0" layoutY="144.0" prefHeight="184.0" prefWidth="168.0">
+            <TableView fx:id="friendListTable" layoutX="-27.0" prefHeight="200.0" prefWidth="205.0">
+                <columns>
+                    <TableColumn fx:id="friendListColumn" prefWidth="204.0" text="Friend List"/>
+                </columns>
+            </TableView>
+        </Pane>
+        <Pane layoutX="205.0" layoutY="144.0" prefHeight="234.0" prefWidth="205.0">
+            <TableView fx:id="currentMatchTable" layoutX="6.0" prefHeight="200.0" prefWidth="205.0">
+                <columns>
+                    <TableColumn fx:id="matchNameColumn" prefWidth="204.0" text="Current Matches"/>
+                </columns>
+            </TableView>
+        </Pane>
+        <Separator layoutX="201.0" layoutY="152.0" orientation="VERTICAL" prefHeight="184.0" prefWidth="6.0"/>
+        <Separator layoutX="8.0" layoutY="138.0" prefHeight="6.0" prefWidth="625.0"/>
+        <Text fx:id="userNameLabel" layoutX="187.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0"/>
+        <Text fx:id="sportsLabel" layoutX="214.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0"/>
+        <Text fx:id="avgLabel" layoutX="170.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0"/>
+        <TextArea fx:id="bioText" editable="false" layoutX="441.0" layoutY="20.0" prefHeight="88.0" prefWidth="183.0"
+                  wrapText="true"/>
+        <Label layoutX="129.0" layoutY="20.0" text="Username:"/>
+        <Label layoutX="129.0" layoutY="46.0" prefHeight="17.0" prefWidth="83.0" text="Favorite Sports:"/>
+        <Label layoutX="129.0" layoutY="72.0" prefHeight="17.0" prefWidth="46.0" text="Rating: "/>
+        <VBox layoutX="13.0" layoutY="11.0" prefHeight="121.0" prefWidth="108.0" spacing="5.0">
+            <ImageView fx:id="imageView" fitHeight="98.0" fitWidth="110.0" pickOnBounds="true"
+                       preserveRatio="true"/>
+            <Button minWidth="45.0" mnemonicParsing="false" onAction="#clickOnEditImage" prefHeight="24.0"
+                    prefWidth="71.0" text="Edit Image">
+                <font>
+                    <Font size="11.0"/>
+                </font>
             </Button>
-            <Pane layoutX="-2.0" layoutY="144.0" prefHeight="208.0" prefWidth="190.0">
-               <children>
-                  <TableView fx:id="joinedMatchTable" layoutX="7.0" prefHeight="200.0" prefWidth="190.0">
-                    <columns>
-                      <TableColumn fx:id="joinedMNameColumn" prefWidth="142.0" text="Joined Matches" />
-                      <TableColumn fx:id="rateColumn" prefWidth="53.0" text="Rate" />
-                    </columns>
-                  </TableView>
-               </children>
-            </Pane>
-            <Separator layoutX="422.0" layoutY="150.0" orientation="VERTICAL" prefHeight="184.0" prefWidth="0.0" />
-      </children>
+        </VBox>
+        <Button layoutX="88.0" layoutY="114.0" minWidth="47.0" mnemonicParsing="false" onAction="#clickOnLogOut"
+                prefHeight="24.0" prefWidth="71.0" text="Log Out">
+            <font>
+              <Font size="11.0"/>
+            </font>
+        </Button>
+        <Pane layoutX="-2.0" layoutY="144.0" prefHeight="208.0" prefWidth="190.0">
+            <TableView fx:id="joinedMatchTable" layoutX="7.0" prefHeight="200.0" prefWidth="190.0">
+                <columns>
+                    <TableColumn fx:id="joinedMNameColumn" prefWidth="142.0" text="Joined Matches"/>
+                    <TableColumn fx:id="rateColumn" prefWidth="53.0" text="Rate"/>
+                </columns>
+            </TableView>
+        </Pane>
+        <Separator layoutX="422.0" layoutY="150.0" orientation="VERTICAL" prefHeight="184.0" prefWidth="0.0"/>
     </AnchorPane>
-  </children>
 </VBox>
