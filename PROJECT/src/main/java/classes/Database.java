@@ -40,7 +40,57 @@ public class Database {
             throw new RuntimeException(e);
         }
     }
+    public static ObservableList<Match> alternativeFilter(String sportPreffered, String city, String matchName, Label resultLabel) {
+        ObservableList<Match> matches = FXCollections.observableArrayList();
+        PreparedStatement stmt = null;
+        int count = 0;
 
+        try {
+            stmt = conn.prepareStatement("SELECT * FROM match WHERE spors LIKE ? AND place LIKE ? AND name LIKE ?");
+
+            stmt.setString(1, sportPreffered);
+            stmt.setString(2, "%" + city + "%");
+            stmt.setString(3, "%" + matchName + "%");
+
+            ResultSet rs = stmt.executeQuery();
+
+            Sport preferredSport = null;
+            if (sportPreffered.equals("Football")) {
+                preferredSport = new Football();
+            }
+            if (sportPreffered.equals("Basketball")) {
+                preferredSport = new Basketball();
+            }
+            if (sportPreffered.equals("Volleyball")) {
+                preferredSport = new Volleyball();
+            }
+            if (sportPreffered.equals("Tennis")) {
+                preferredSport = new Tennis();
+            }
+            while (rs.next()) {
+                int duration = 0;
+                duration = (int) Duration.between(rs.getTime("startTime").toLocalTime(), rs.getTime("endTime").toLocalTime()).toMinutes();
+
+                matches.add(new Match(rs.getString("name"),
+                        preferredSport, // sport object
+                        rs.getString("place"), // place string
+                        rs.getDate("date ").toLocalDate(), // date object
+                        rs.getTime("startTime").toLocalTime(), // start time object
+                        duration)); // duration int
+                count++;
+            }
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
+        }
+        for (Match match : matches) {
+            if (match.getDate().isBefore(LocalDate.now())) {
+                count--;
+            }
+        }
+        matches.removeIf(match -> match.getDate().isBefore(LocalDate.now()));
+        resultLabel.setText("Found " + count + " match(es)");
+        return matches;
+    }
     /**
      * Filter matches according to the user's preferences
      * @param sportPreffered the user's sport preference
@@ -58,23 +108,31 @@ public class Database {
             stmt = conn.prepareStatement("SELECT * FROM match WHERE spors = ? AND place = ? AND \"date \" = ? AND name LIKE ?");
 
             stmt.setString(1, sportPreffered);
-            stmt.setString(2, city);
+            stmt.setString(2, "%" + city + "%");
             stmt.setDate(3, Date.valueOf(date));
-            stmt.setString(4, "%"+matchName+"%");
+            stmt.setString(4, "%" + matchName + "%");
 
             ResultSet rs = stmt.executeQuery();
 
             Sport preferredSport = null;
-            if (sportPreffered.equals("Football")) { preferredSport = new Football(); }
-            if (sportPreffered.equals("Basketball")) { preferredSport = new Basketball(); }
-            if (sportPreffered.equals("Volleyball")) { preferredSport = new Volleyball(); }
-            if (sportPreffered.equals("Tennis")) { preferredSport = new Tennis(); }
+            if (sportPreffered.equals("Football")) {
+                preferredSport = new Football();
+            }
+            if (sportPreffered.equals("Basketball")) {
+                preferredSport = new Basketball();
+            }
+            if (sportPreffered.equals("Volleyball")) {
+                preferredSport = new Volleyball();
+            }
+            if (sportPreffered.equals("Tennis")) {
+                preferredSport = new Tennis();
+            }
 
             while (rs.next()) {
                 int duration = 0;
-                duration = (int) Duration.between(rs.getTime("startTime").toLocalTime() , rs.getTime("endTime").toLocalTime()).toMinutes();
+                duration = (int) Duration.between(rs.getTime("startTime").toLocalTime(), rs.getTime("endTime").toLocalTime()).toMinutes();
 
-                matches.add(new Match( rs.getString("name"),
+                matches.add(new Match(rs.getString("name"),
                         preferredSport, // sport object
                         rs.getString("place"), // place string
                         rs.getDate("date ").toLocalDate(), // date object
@@ -185,7 +243,7 @@ public class Database {
      * @return the active matches
      */
     public static ObservableList<Match> getActiveMatches(User user) throws SQLException {
-        matchActivity(); // some delay to make sure the matches are updated
+//        matchActivity(); // some delay to make sure the matches are updated
         ObservableList<Match> matches = FXCollections.observableArrayList();
         ArrayList<String> allMatches = getMatches(user);
         ArrayList<String> activeMatches = new ArrayList<>();
