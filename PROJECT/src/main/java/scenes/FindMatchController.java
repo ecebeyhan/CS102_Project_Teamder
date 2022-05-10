@@ -92,22 +92,24 @@ public class FindMatchController implements MainController, Initializable {
         if (date == null) {
             matches = Database.alternativeFilter(sportPreffered, city, matchName, matchFoundLabel);
         }
-        else if( now.toLocalDate().isAfter(date)){
-            errorLabel.setText("Please select a valid date");
-            return;
-        }
-        else if( now.toLocalDate().equals(date)){
-            try {
-                matches = Database.filterTodaysMatches(sportPreffered, city, date, matchName, matchFoundLabel);
-            } catch (SQLException e) {
-                e.getStackTrace();
+        else {
+            if( now.toLocalDate().isAfter(date)){
+                errorLabel.setText("Please select a valid date");
+                return;
             }
-        }
-        else{
-            try {
-                matches = Database.filterMatches(sportPreffered, city, date, matchName, matchFoundLabel);
-            } catch (SQLException e) {
-                e.getStackTrace();
+            else if( now.toLocalDate().equals(date)){
+                try {
+                    matches = Database.filterTodaysMatches(sportPreffered, city, date, matchName, matchFoundLabel);
+                } catch (SQLException e) {
+                    e.getStackTrace();
+                }
+            }
+            else{
+                try {
+                    matches = Database.filterMatches(sportPreffered, city, date, matchName, matchFoundLabel);
+                } catch (SQLException e) {
+                    e.getStackTrace();
+                }
             }
         }
         assert matches != null;

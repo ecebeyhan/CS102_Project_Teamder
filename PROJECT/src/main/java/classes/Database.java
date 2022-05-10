@@ -105,7 +105,7 @@ public class Database {
         PreparedStatement stmt = null;
         int count = 0;
         try {
-            stmt = conn.prepareStatement("SELECT * FROM match WHERE spors = ? AND place = ? AND \"date \" = ? AND name LIKE ?");
+            stmt = conn.prepareStatement("SELECT * FROM match WHERE spors = ? AND place LIKE ? AND \"date \" = ? AND name LIKE ?");
 
             stmt.setString(1, sportPreffered);
             stmt.setString(2, "%" + city + "%");
