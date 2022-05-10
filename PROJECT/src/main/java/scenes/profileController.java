@@ -125,7 +125,7 @@ public class profileController implements MainController, Initializable  {
                 try {
                     assert friendListTable != null;
                     String username = friendListTable.getSelectionModel().getSelectedItem().getUserName();
-                    User friend = database.getUser(username);
+                    User friend = Database.getUser(username);
                     new SceneChanger().changeScenes(actionEvent, "Friend_Page.fxml", "Teamder | Friend", friend, new friendController());
                 } catch (Exception e) {
                     throw new RuntimeException(e);

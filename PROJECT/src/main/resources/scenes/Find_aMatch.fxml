@@ -1,20 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<VBox prefHeight="383.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml" fx:controller="scenes.FindMatchController">
+<VBox prefHeight="383.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16" fx:controller="scenes.FindMatchController">
   <children>
       <SplitPane prefHeight="385.0" prefWidth="640.0">
         <items>
@@ -30,7 +20,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Button layoutX="1.0" layoutY="2.0" mnemonicParsing="false" onAction="#clickOnCancel" text="CANCEL" />
+                  <Button cancelButton="true" layoutX="1.0" layoutY="2.0" mnemonicParsing="false" onAction="#clickOnCancel" text="CANCEL" />
                   <RadioButton fx:id="football" layoutX="18.0" layoutY="87.0" mnemonicParsing="false" text="Football">
                      <toggleGroup>
                         <ToggleGroup fx:id="sports" />
@@ -40,7 +30,7 @@
                   <RadioButton fx:id="basketball" layoutX="18.0" layoutY="128.0" mnemonicParsing="false" text="Basketball" toggleGroup="$sports" />
                   <RadioButton fx:id="tennis" layoutX="18.0" layoutY="150.0" mnemonicParsing="false" text="Tennis" toggleGroup="$sports" />
                   <TextField fx:id="matchNameTField" layoutX="257.0" layoutY="37.0" promptText="Enter Match Name" />
-                  <Button layoutX="439.0" layoutY="37.0" mnemonicParsing="false" onAction="#clickSearchButton" text="SEARCH" />
+                  <Button defaultButton="true" layoutX="439.0" layoutY="37.0" mnemonicParsing="false" onAction="#clickSearchButton" text="SEARCH" />
                   <TableView fx:id="matchTable" layoutX="239.0" layoutY="108.0" prefHeight="261.0" prefWidth="391.0">
                     <columns>
                       <TableColumn fx:id="matchNameColumn" prefWidth="151.0" text="Match Name" />
