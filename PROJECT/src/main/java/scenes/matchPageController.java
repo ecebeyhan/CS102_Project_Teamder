@@ -4,6 +4,7 @@ import classes.Database;
 import classes.ImageHandler;
 import classes.Match;
 import classes.User;
+import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -27,6 +28,8 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Optional;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class matchPageController implements MatchController, MainController{
     @FXML
@@ -38,27 +41,27 @@ public class matchPageController implements MatchController, MainController{
     @FXML
     public ImageView basketballField;
     @FXML
-    private Text placeText;
+    public Text placeText;
     @FXML
-    private Text timeText;
+    public Text timeText;
     @FXML
-    private Text dateText;
+    public Text dateText;
     @FXML
-    private Text matchNameText;
+    public Text matchNameText;
     @FXML
-    private Pane myPane;
+    public Pane myPane;
     @FXML
-    private Button footballPosition0,footballPosition1,footballPosition2,footballPosition3,footballPosition4,footballPosition5,footballPosition6,footballPosition7,footballPosition8,footballPosition9,footballPosition10,footballPosition11;
+    public Button footballPosition0,footballPosition1,footballPosition2,footballPosition3,footballPosition4,footballPosition5,footballPosition6,footballPosition7,footballPosition8,footballPosition9,footballPosition10,footballPosition11;
     @FXML
-    private Button volleyballPosition0,volleyballPosition1,volleyballPosition2,volleyballPosition3,volleyballPosition4,volleyballPosition5,volleyballPosition6,volleyballPosition7;
+    public Button volleyballPosition0,volleyballPosition1,volleyballPosition2,volleyballPosition3,volleyballPosition4,volleyballPosition5,volleyballPosition6,volleyballPosition7;
     @FXML
-    private Button tennisPosition0,tennisPosition1,tennisPosition2,tennisPosition3;
+    public Button tennisPosition0,tennisPosition1,tennisPosition2,tennisPosition3;
     @FXML
-    private Button basketballPosition0,basketballPosition1,basketballPosition2,basketballPosition3,basketballPosition4,basketballPosition5,basketballPosition6,basketballPosition7,basketballPosition8,basketballPosition9;
+    public Button basketballPosition0,basketballPosition1,basketballPosition2,basketballPosition3,basketballPosition4,basketballPosition5,basketballPosition6,basketballPosition7,basketballPosition8,basketballPosition9;
     @FXML
-    private TextField sender;
+    public TextField sender;
     @FXML
-    private TextArea receiver;
+    public TextArea receiver;
     private ImageView blackIcon;
     private ImageView greyIcon;
     private User currentUser;
@@ -430,5 +433,14 @@ public class matchPageController implements MatchController, MainController{
     @Override
     public void preloadData(User user) throws IOException {
         this.currentUser = user;
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(() -> {
+                    Database.getMessage(match.getName(), receiver);
+                });
+            }
+        }, 250, 1500);
     }
 }

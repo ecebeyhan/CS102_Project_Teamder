@@ -835,6 +835,7 @@ public class Database {
             rs = stmt.executeQuery();
             while (rs.next()) {
                 tArea.appendText(rs.getString("sender") + ": " + rs.getString("messages") + "\n");
+                tArea.setScrollTop(Double.MAX_VALUE);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -858,8 +859,8 @@ public class Database {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        tArea.appendText(tArea.getText() + SceneChanger.getLoggedInUser().getUserName() + ": " + msg + "\n");
+        tArea.appendText(SceneChanger.getLoggedInUser().getUserName() + ": " + msg + "\n");
+        tArea.setScrollTop(Double.MAX_VALUE);
     }
-
 }
 
