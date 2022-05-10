@@ -13,14 +13,13 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.layout.Pane;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -62,8 +61,6 @@ public class matchPageController implements MatchController, MainController{
     public TextField sender;
     @FXML
     public TextArea receiver;
-    private ImageView blackIcon;
-    private ImageView greyIcon;
     private User currentUser;
     private Match match;
 
@@ -102,7 +99,6 @@ public class matchPageController implements MatchController, MainController{
         if(Database.getUserInPosition(match.getName(),position) != null)
         {
             profileWindow(event);
-
         }
         else if(!Database.isUserInMatch(currentUser.getUserName(), match.getName()))
         {
@@ -121,6 +117,8 @@ public class matchPageController implements MatchController, MainController{
      */
     private void confirmWindow(ActionEvent event)
     {
+        Button clickedButton = (Button) event.getTarget();
+
         Stage stage = (Stage) myPane.getScene().getWindow();
         Alert.AlertType type = Alert.AlertType.NONE;
         Alert alert = new Alert(type,"");
@@ -141,13 +139,14 @@ public class matchPageController implements MatchController, MainController{
             infoAlert.getDialogPane().getButtonTypes().add(ButtonType.OK);
             infoAlert.getDialogPane().lookupButton(ButtonType.OK).setVisible(false);
             infoAlert.initOwner(stage);
-            infoAlert.getDialogPane().setContentText("You successfully joined the match!");
-            infoAlert.show();
 
             int position = getPositionSelection(event);
 
             try {
                 Database.addMatch(currentUser,match,position);
+                infoAlert.getDialogPane().setContentText("You successfully joined the match!");
+                infoAlert.show();
+                clickedButton.setStyle("-fx-background-color: #000000; ");
             }
             catch (SQLException ex) {
                 throw new RuntimeException(ex);
@@ -256,6 +255,11 @@ public class matchPageController implements MatchController, MainController{
             setVolleyballFieldInvisible();
             setTennisFieldInvisible();
             setBasketballFieldInvisible();
+            try {
+                setPositionButtonsFootball();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
             try{
                 // the image file of the field
                 File fieldFile = new File(ImageHandler.IMAGE_PATH + "football_field.jpeg");
@@ -267,12 +271,18 @@ public class matchPageController implements MatchController, MainController{
             {
                 System.err.println(e.getMessage());
             }
+
         }
         else if(sportName.equals("Volleyball"))
         {
             setFootballFieldInvisible();
             setTennisFieldInvisible();
             setBasketballFieldInvisible();
+            try {
+                setPositionButtonsVolleyball();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
             try{
                 // the image file of the field
                 File fieldFile = new File(ImageHandler.IMAGE_PATH + "volleyball_field.jpeg");
@@ -290,6 +300,11 @@ public class matchPageController implements MatchController, MainController{
             setFootballFieldInvisible();
             setVolleyballFieldInvisible();
             setBasketballFieldInvisible();
+            try {
+                setPositionButtonsTennis();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
             try{
                 // the image file of the field
                 File fieldFile = new File(ImageHandler.IMAGE_PATH + "tennis_field.jpeg");
@@ -307,6 +322,11 @@ public class matchPageController implements MatchController, MainController{
             setFootballFieldInvisible();
             setVolleyballFieldInvisible();
             setTennisFieldInvisible();
+            try {
+                setPositionButtonsBasketball();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
             try{
                 // the image file of the field
                 File fieldFile = new File(ImageHandler.IMAGE_PATH + "basketball_field.jpeg");
@@ -393,6 +413,168 @@ public class matchPageController implements MatchController, MainController{
         basketballPosition9.setVisible(false);
         basketballField.setVisible(false);
     }
+
+    /**
+     * This method sets buttons of the football field's background color black to signify that position is occupied
+     */
+    private void setPositionButtonsFootball() throws SQLException
+    {
+        if(Database.getUserInPosition(match.getName(), 0) != null)
+        {
+            footballPosition0.setStyle("-fx-background-color: #000000; ");
+        }
+        if(Database.getUserInPosition(match.getName(), 1) != null)
+        {
+            footballPosition1.setStyle("-fx-background-color: #000000; ");
+        }
+        if(Database.getUserInPosition(match.getName(), 2) != null)
+        {
+            footballPosition2.setStyle("-fx-background-color: #000000; ");
+        }
+        if(Database.getUserInPosition(match.getName(), 3) != null)
+        {
+            footballPosition3.setStyle("-fx-background-color: #000000; ");
+        }
+        if(Database.getUserInPosition(match.getName(), 4) != null)
+        {
+            footballPosition4.setStyle("-fx-background-color: #000000; ");
+        }
+        if(Database.getUserInPosition(match.getName(), 5) != null)
+        {
+            footballPosition5.setStyle("-fx-background-color: #000000; ");
+        }
+        if(Database.getUserInPosition(match.getName(), 6) != null)
+        {
+            footballPosition6.setStyle("-fx-background-color: #000000; ");
+        }
+        if(Database.getUserInPosition(match.getName(), 7) != null)
+        {
+            footballPosition7.setStyle("-fx-background-color: #000000; ");
+        }
+        if(Database.getUserInPosition(match.getName(), 8) != null)
+        {
+            footballPosition8.setStyle("-fx-background-color: #000000; ");
+        }
+        if(Database.getUserInPosition(match.getName(), 9) != null)
+        {
+            footballPosition9.setStyle("-fx-background-color: #000000; ");
+        }
+        if(Database.getUserInPosition(match.getName(), 10) != null)
+        {
+            footballPosition10.setStyle("-fx-background-color: #000000; ");
+        }
+        if(Database.getUserInPosition(match.getName(), 11) != null)
+        {
+            footballPosition11.setStyle("-fx-background-color: #000000; ");
+        }
+    }
+    /**
+     * This method sets buttons of the basketball field's background color black to signify that position is occupied
+     */
+    private void setPositionButtonsBasketball() throws SQLException
+    {
+        if(Database.getUserInPosition(match.getName(), 0) != null)
+        {
+            basketballPosition0.setStyle("-fx-background-color: #000000; ");
+        }
+        if(Database.getUserInPosition(match.getName(), 1) != null)
+        {
+            basketballPosition1.setStyle("-fx-background-color: #000000; ");
+        }
+        if(Database.getUserInPosition(match.getName(), 2) != null)
+        {
+            basketballPosition2.setStyle("-fx-background-color: #000000; ");
+        }
+        if(Database.getUserInPosition(match.getName(), 3) != null)
+        {
+            basketballPosition3.setStyle("-fx-background-color: #000000; ");
+        }
+        if(Database.getUserInPosition(match.getName(), 4) != null)
+        {
+            basketballPosition4.setStyle("-fx-background-color: #000000; ");
+        }
+        if(Database.getUserInPosition(match.getName(), 5) != null)
+        {
+            basketballPosition5.setStyle("-fx-background-color: #000000; ");
+        }
+        if(Database.getUserInPosition(match.getName(), 6) != null)
+        {
+            basketballPosition6.setStyle("-fx-background-color: #000000; ");
+        }
+        if(Database.getUserInPosition(match.getName(), 7) != null)
+        {
+            basketballPosition7.setStyle("-fx-background-color: #000000; ");
+        }
+        if(Database.getUserInPosition(match.getName(), 8) != null)
+        {
+            basketballPosition8.setStyle("-fx-background-color: #000000; ");
+        }
+        if(Database.getUserInPosition(match.getName(), 9) != null)
+        {
+            basketballPosition9.setStyle("-fx-background-color: #000000; ");
+        }
+    }
+    /**
+     * This method sets buttons of the volleyball field's background color black to signify that position is occupied
+     */
+    private void setPositionButtonsVolleyball() throws SQLException
+    {
+        if(Database.getUserInPosition(match.getName(), 0) != null)
+        {
+            volleyballPosition0.setStyle("-fx-background-color: #000000; ");
+        }
+        if(Database.getUserInPosition(match.getName(), 1) != null)
+        {
+            volleyballPosition1.setStyle("-fx-background-color: #000000; ");
+        }
+        if(Database.getUserInPosition(match.getName(), 2) != null)
+        {
+            volleyballPosition2.setStyle("-fx-background-color: #000000; ");
+        }
+        if(Database.getUserInPosition(match.getName(), 3) != null)
+        {
+            volleyballPosition3.setStyle("-fx-background-color: #000000; ");
+        }
+        if(Database.getUserInPosition(match.getName(), 4) != null)
+        {
+            volleyballPosition4.setStyle("-fx-background-color: #000000; ");
+        }
+        if(Database.getUserInPosition(match.getName(), 5) != null)
+        {
+            volleyballPosition5.setStyle("-fx-background-color: #000000; ");
+        }
+        if(Database.getUserInPosition(match.getName(), 6) != null)
+        {
+            volleyballPosition6.setStyle("-fx-background-color: #000000; ");
+        }
+        if(Database.getUserInPosition(match.getName(), 7) != null)
+        {
+            volleyballPosition7.setStyle("-fx-background-color: #000000; ");
+        }
+    }
+    /**
+     * This method sets buttons of the tennis field's background color black to signify that position is occupied
+     */
+    private void setPositionButtonsTennis() throws SQLException
+    {
+        if(Database.getUserInPosition(match.getName(), 0) != null)
+        {
+            tennisPosition0.setStyle("-fx-background-color: #000000; ");
+        }
+        if(Database.getUserInPosition(match.getName(), 1) != null)
+        {
+            tennisPosition1.setStyle("-fx-background-color: #000000; ");
+        }
+        if(Database.getUserInPosition(match.getName(), 2) != null)
+        {
+            tennisPosition2.setStyle("-fx-background-color: #000000; ");
+        }
+        if(Database.getUserInPosition(match.getName(), 3) != null)
+        {
+            tennisPosition3.setStyle("-fx-background-color: #000000; ");
+        }
+    }
+
 
     @Override
     public void preLoadMatch(Match match) {
