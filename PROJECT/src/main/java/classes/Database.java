@@ -477,7 +477,6 @@ public class Database {
     }
 
     public static void createUser(String uName, String pass, String sport, String bio) throws SQLException, IOException {
-
         // create the User object with the information from the text fields
         User user = new User(uName, pass, sport, bio);
         insertUserToDB(user); // add into database
@@ -801,6 +800,31 @@ public class Database {
         return false;
     }
 
+    /**
+     * Checks whether there is already exist whose name is same as the parameter
+     * @param username name of the user that is intended to be created
+     * @return true if the name is already used, false otherwise
+     */
+    public static boolean isUserExist(String username) throws SQLException {
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            stmt = conn.prepareStatement("SELECT * FROM users WHERE name = ?");
+
+            stmt.setString(1, username);
+
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                if (rs.getString("name").equals(username)) {
+                    return true;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
     public static void getMessage(String matchName, TextArea tArea) {
 
     }
