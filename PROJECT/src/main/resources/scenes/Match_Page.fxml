@@ -15,152 +15,129 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:id="myPane" prefHeight="612.0" prefWidth="860.0" xmlns:fx="http://javafx.com/fxml/1"
-       fx:controller="scenes.matchPageController">
-   <AnchorPane layoutX="21.0" layoutY="19.0" prefHeight="428.0" prefWidth="532.0">
-      <ImageView fx:id="footballField" fitHeight="403.0" fitWidth="628.0" layoutX="30.0" layoutY="82.0"
-                 pickOnBounds="true" preserveRatio="true">
-         <Image url="@../../java/images/football_field.jpeg"/>
-      </ImageView>
-      <Button fx:id="footballPosition0" layoutX="72.0" layoutY="272.0" mnemonicParsing="false"
-              onAction="#clickOnPosition" prefWidth="25.0"/>
-      <Button fx:id="footballPosition1" layoutX="158.0" layoutY="188.0" mnemonicParsing="false"
-              onAction="#clickOnPosition" prefWidth="25.0"/>
-      <Button fx:id="footballPosition2" layoutX="137.0" layoutY="271.0" mnemonicParsing="false"
-              onAction="#clickOnPosition" prefWidth="25.0"/>
-      <Button fx:id="footballPosition3" layoutX="158.0" layoutY="352.0" mnemonicParsing="false"
-              onAction="#clickOnPosition" prefWidth="25.0"/>
-      <Button fx:id="footballPosition4" layoutX="246.0" layoutY="231.0" mnemonicParsing="false"
-              onAction="#clickOnPosition" prefWidth="25.0"/>
-      <Button fx:id="footballPosition5" layoutX="246.0" layoutY="306.0" mnemonicParsing="false"
-              onAction="#clickOnPosition" prefWidth="25.0"/>
-      <Button fx:id="footballPosition6" layoutX="353.0" layoutY="231.0" mnemonicParsing="false"
-              onAction="#clickOnPosition" prefWidth="25.0"/>
-      <Button fx:id="footballPosition7" layoutX="353.0" layoutY="306.0" mnemonicParsing="false"
-              onAction="#clickOnPosition" prefWidth="25.0"/>
-      <Button fx:id="footballPosition8" layoutX="434.0" layoutY="188.0" mnemonicParsing="false"
-              onAction="#clickOnPosition" prefWidth="25.0"/>
-      <Button fx:id="footballPosition9" layoutX="458.0" layoutY="271.0" mnemonicParsing="false"
-              onAction="#clickOnPosition" prefWidth="25.0"/>
-      <Button fx:id="footballPosition10" layoutX="431.0" layoutY="352.0" mnemonicParsing="false"
-              onAction="#clickOnPosition" prefWidth="25.0"/>
-      <Button fx:id="footballPosition11" layoutX="521.0" layoutY="271.0" mnemonicParsing="false"
-              onAction="#clickOnPosition" prefWidth="25.0"/>
-      <ImageView fx:id="volleyballField" fitHeight="403.0" fitWidth="577.0" layoutX="30.0" layoutY="83.0"
-                 pickOnBounds="true" preserveRatio="true">
-         <Image url="@../../java/images/volleyball_field.jpeg"/>
-      </ImageView>
-      <Button fx:id="volleyballPosition0" layoutX="122.0" layoutY="201.0" mnemonicParsing="false"
-              onAction="#clickOnPosition" prefWidth="25.0"/>
-      <Button fx:id="volleyballPosition1" layoutX="122.0" layoutY="339.0" mnemonicParsing="false"
-              onAction="#clickOnPosition" prefWidth="25.0"/>
-      <Button fx:id="volleyballPosition2" layoutX="243.0" layoutY="201.0" mnemonicParsing="false"
-              onAction="#clickOnPosition" prefWidth="25.0"/>
-      <Button fx:id="volleyballPosition3" layoutX="243.0" layoutY="339.0" mnemonicParsing="false"
-              onAction="#clickOnPosition" prefWidth="25.0"/>
-      <Button fx:id="volleyballPosition4" layoutX="346.0" layoutY="201.0" mnemonicParsing="false"
-              onAction="#clickOnPosition" prefWidth="25.0"/>
-      <Button fx:id="volleyballPosition5" layoutX="346.0" layoutY="339.0" mnemonicParsing="false"
-              onAction="#clickOnPosition" prefWidth="25.0"/>
-      <Button fx:id="volleyballPosition6" layoutX="472.0" layoutY="201.0" mnemonicParsing="false"
-              onAction="#clickOnPosition" prefWidth="25.0"/>
-      <Button fx:id="volleyballPosition7" layoutX="472.0" layoutY="339.0" mnemonicParsing="false"
-              onAction="#clickOnPosition" prefWidth="25.0"/>
-      <ImageView fx:id="tennisField" fitHeight="403.0" fitWidth="577.0" layoutX="30.0" layoutY="82.0"
-                 pickOnBounds="true" preserveRatio="true">
-         <Image url="@../../java/images/tennis_field.jpeg"/>
-      </ImageView>
-      <Button fx:id="tennisPosition0" layoutX="227.0" layoutY="200.0" mnemonicParsing="false"
-              onAction="#clickOnPosition" prefHeight="25.0" prefWidth="25.0"/>
-      <Button fx:id="tennisPosition1" layoutX="227.0" layoutY="339.0" mnemonicParsing="false"
-              onAction="#clickOnPosition" prefHeight="25.0" prefWidth="25.0"/>
-      <Button fx:id="tennisPosition2" layoutX="361.0" layoutY="200.0" mnemonicParsing="false"
-              onAction="#clickOnPosition" prefHeight="25.0" prefWidth="25.0"/>
-      <Button fx:id="tennisPosition3" layoutX="361.0" layoutY="339.0" mnemonicParsing="false"
-              onAction="#clickOnPosition" prefHeight="25.0" prefWidth="25.0"/>
-      <ImageView fx:id="basketballField" fitHeight="403.0" fitWidth="577.0" layoutX="30.0" layoutY="83.0"
-                 pickOnBounds="true" preserveRatio="true">
-         <Image url="@../../java/images/basketball_field.jpeg"/>
-      </ImageView>
-      <Button fx:id="basketballPosition0" layoutX="94.0" layoutY="175.0" mnemonicParsing="false"
-              onAction="#clickOnPosition" prefWidth="25.0"/>
-      <Button fx:id="basketballPosition1" layoutX="136.0" layoutY="218.0" mnemonicParsing="false"
-              onAction="#clickOnPosition" prefHeight="25.0" prefWidth="25.0"/>
-      <Button fx:id="basketballPosition2" layoutX="116.0" layoutY="352.0" mnemonicParsing="false"
-              onAction="#clickOnPosition" prefHeight="25.0" prefWidth="25.0"/>
-      <Button fx:id="basketballPosition3" layoutX="235.0" layoutY="272.0" mnemonicParsing="false"
-              onAction="#clickOnPosition" prefHeight="25.0" prefWidth="25.0"/>
-      <Button fx:id="basketballPosition4" layoutX="200.0" layoutY="326.0" mnemonicParsing="false"
-              onAction="#clickOnPosition" prefHeight="25.0" prefWidth="25.0"/>
-      <Button fx:id="basketballPosition5" layoutX="357.0" layoutY="272.0" mnemonicParsing="false"
-              onAction="#clickOnPosition" prefHeight="25.0" prefWidth="25.0"/>
-      <Button fx:id="basketballPosition6" layoutX="395.0" layoutY="326.0" mnemonicParsing="false"
-              onAction="#clickOnPosition" prefHeight="25.0" prefWidth="25.0"/>
-      <Button fx:id="basketballPosition7" layoutX="458.0" layoutY="218.0" mnemonicParsing="false"
-              onAction="#clickOnPosition" prefHeight="25.0" prefWidth="25.0"/>
-      <Button fx:id="basketballPosition8" layoutX="474.0" layoutY="352.0" mnemonicParsing="false"
-              onAction="#clickOnPosition" prefHeight="25.0" prefWidth="25.0"/>
-      <Button fx:id="basketballPosition9" layoutX="502.0" layoutY="175.0" mnemonicParsing="false"
-              onAction="#clickOnPosition" prefHeight="25.0" prefWidth="25.0"/>
-   </AnchorPane>
-   <Button cancelButton="true" layoutX="21.0" layoutY="19.0" mnemonicParsing="false" onAction="#clickOnCancel"
-           text="Cancel"/>
-   <TextArea fx:id="receiver" layoutX="641.0" layoutY="11.0" prefHeight="515.0" prefWidth="206.0" wrapText="true"/>
-   <Text fx:id="matchNameText" layoutX="78.0" layoutY="40.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0"
-         text="Match Name" textAlignment="CENTER" wrappingWidth="481.6617431640625">
-      <font>
-         <Font size="22.0"/>
-      </font>
-   </Text>
+<Pane fx:id="myPane" prefHeight="612.0" prefWidth="860.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scenes.matchPageController">
+   <children>
+      <AnchorPane layoutX="21.0" layoutY="19.0" prefHeight="428.0" prefWidth="532.0">
+         <children>
+            <ImageView fx:id="footballField" fitHeight="403.0" fitWidth="628.0" layoutX="30.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../java/images/football_field.jpeg" />
+               </image>
+            </ImageView>
+            <Button fx:id="footballPosition0" layoutX="72.0" layoutY="272.0" mnemonicParsing="false" onAction="#clickOnPosition" prefWidth="25.0" />
+            <Button fx:id="footballPosition1" layoutX="158.0" layoutY="188.0" mnemonicParsing="false" onAction="#clickOnPosition" prefWidth="25.0" />
+            <Button fx:id="footballPosition2" layoutX="137.0" layoutY="271.0" mnemonicParsing="false" onAction="#clickOnPosition" prefWidth="25.0" />
+            <Button fx:id="footballPosition3" layoutX="158.0" layoutY="352.0" mnemonicParsing="false" onAction="#clickOnPosition" prefWidth="25.0" />
+            <Button fx:id="footballPosition4" layoutX="246.0" layoutY="231.0" mnemonicParsing="false" onAction="#clickOnPosition" prefWidth="25.0" />
+            <Button fx:id="footballPosition5" layoutX="246.0" layoutY="306.0" mnemonicParsing="false" onAction="#clickOnPosition" prefWidth="25.0" />
+            <Button fx:id="footballPosition6" layoutX="353.0" layoutY="231.0" mnemonicParsing="false" onAction="#clickOnPosition" prefWidth="25.0" />
+            <Button fx:id="footballPosition7" layoutX="353.0" layoutY="306.0" mnemonicParsing="false" onAction="#clickOnPosition" prefWidth="25.0" />
+            <Button fx:id="footballPosition8" layoutX="434.0" layoutY="188.0" mnemonicParsing="false" onAction="#clickOnPosition" prefWidth="25.0" />
+            <Button fx:id="footballPosition9" layoutX="458.0" layoutY="271.0" mnemonicParsing="false" onAction="#clickOnPosition" prefWidth="25.0" />
+            <Button fx:id="footballPosition10" layoutX="431.0" layoutY="352.0" mnemonicParsing="false" onAction="#clickOnPosition" prefWidth="25.0" />
+            <Button fx:id="footballPosition11" layoutX="521.0" layoutY="271.0" mnemonicParsing="false" onAction="#clickOnPosition" prefWidth="25.0" />
+            <ImageView fx:id="volleyballField" fitHeight="403.0" fitWidth="577.0" layoutX="30.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../java/images/volleyball_field.jpeg" />
+               </image>
+            </ImageView>
+            <Button fx:id="volleyballPosition0" layoutX="122.0" layoutY="201.0" mnemonicParsing="false" onAction="#clickOnPosition" prefWidth="25.0" />
+            <Button fx:id="volleyballPosition1" layoutX="122.0" layoutY="339.0" mnemonicParsing="false" onAction="#clickOnPosition" prefWidth="25.0" />
+            <Button fx:id="volleyballPosition2" layoutX="243.0" layoutY="201.0" mnemonicParsing="false" onAction="#clickOnPosition" prefWidth="25.0" />
+            <Button fx:id="volleyballPosition3" layoutX="243.0" layoutY="339.0" mnemonicParsing="false" onAction="#clickOnPosition" prefWidth="25.0" />
+            <Button fx:id="volleyballPosition4" layoutX="346.0" layoutY="201.0" mnemonicParsing="false" onAction="#clickOnPosition" prefWidth="25.0" />
+            <Button fx:id="volleyballPosition5" layoutX="346.0" layoutY="339.0" mnemonicParsing="false" onAction="#clickOnPosition" prefWidth="25.0" />
+            <Button fx:id="volleyballPosition6" layoutX="472.0" layoutY="201.0" mnemonicParsing="false" onAction="#clickOnPosition" prefWidth="25.0" />
+            <Button fx:id="volleyballPosition7" layoutX="472.0" layoutY="339.0" mnemonicParsing="false" onAction="#clickOnPosition" prefWidth="25.0" />
+            <ImageView fx:id="tennisField" fitHeight="403.0" fitWidth="577.0" layoutX="30.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../java/images/tennis_field.jpeg" />
+               </image>
+            </ImageView>
+            <Button fx:id="tennisPosition0" layoutX="227.0" layoutY="200.0" mnemonicParsing="false" onAction="#clickOnPosition" prefHeight="25.0" prefWidth="25.0" />
+            <Button fx:id="tennisPosition1" layoutX="227.0" layoutY="339.0" mnemonicParsing="false" onAction="#clickOnPosition" prefHeight="25.0" prefWidth="25.0" />
+            <Button fx:id="tennisPosition2" layoutX="361.0" layoutY="200.0" mnemonicParsing="false" onAction="#clickOnPosition" prefHeight="25.0" prefWidth="25.0" />
+            <Button fx:id="tennisPosition3" layoutX="361.0" layoutY="339.0" mnemonicParsing="false" onAction="#clickOnPosition" prefHeight="25.0" prefWidth="25.0" />
+            <ImageView fx:id="basketballField" fitHeight="403.0" fitWidth="577.0" layoutX="30.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../java/images/basketball_field.jpeg" />
+               </image>
+            </ImageView>
+            <Button fx:id="basketballPosition0" layoutX="94.0" layoutY="175.0" mnemonicParsing="false" onAction="#clickOnPosition" prefWidth="25.0" />
+            <Button fx:id="basketballPosition1" layoutX="136.0" layoutY="218.0" mnemonicParsing="false" onAction="#clickOnPosition" prefHeight="25.0" prefWidth="25.0" />
+            <Button fx:id="basketballPosition2" layoutX="116.0" layoutY="352.0" mnemonicParsing="false" onAction="#clickOnPosition" prefHeight="25.0" prefWidth="25.0" />
+            <Button fx:id="basketballPosition3" layoutX="235.0" layoutY="272.0" mnemonicParsing="false" onAction="#clickOnPosition" prefHeight="25.0" prefWidth="25.0" />
+            <Button fx:id="basketballPosition4" layoutX="200.0" layoutY="326.0" mnemonicParsing="false" onAction="#clickOnPosition" prefHeight="25.0" prefWidth="25.0" />
+            <Button fx:id="basketballPosition5" layoutX="357.0" layoutY="272.0" mnemonicParsing="false" onAction="#clickOnPosition" prefHeight="25.0" prefWidth="25.0" />
+            <Button fx:id="basketballPosition6" layoutX="395.0" layoutY="326.0" mnemonicParsing="false" onAction="#clickOnPosition" prefHeight="25.0" prefWidth="25.0" />
+            <Button fx:id="basketballPosition7" layoutX="458.0" layoutY="218.0" mnemonicParsing="false" onAction="#clickOnPosition" prefHeight="25.0" prefWidth="25.0" />
+            <Button fx:id="basketballPosition8" layoutX="474.0" layoutY="352.0" mnemonicParsing="false" onAction="#clickOnPosition" prefHeight="25.0" prefWidth="25.0" />
+            <Button fx:id="basketballPosition9" layoutX="502.0" layoutY="175.0" mnemonicParsing="false" onAction="#clickOnPosition" prefHeight="25.0" prefWidth="25.0" />
+         </children>
+      </AnchorPane>
+      <Button cancelButton="true" layoutX="21.0" layoutY="19.0" mnemonicParsing="false" onAction="#clickOnCancel" text="Cancel" />
+      <TextArea fx:id="receiver" layoutX="641.0" layoutY="11.0" prefHeight="515.0" prefWidth="206.0" wrapText="true" />
+      <Text fx:id="matchNameText" layoutX="78.0" layoutY="40.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Match Name" textAlignment="CENTER" wrappingWidth="481.6617431640625">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
 
-   <HBox layoutX="47.0" layoutY="512.0" prefHeight="100.0" prefWidth="200.0">
-      <VBox prefHeight="100.0" prefWidth="42.0">
-         <Label text="Place:">
-            <font>
-               <Font size="14.0"/>
-            </font>
-            <VBox.margin>
-               <Insets bottom="5.0"/>
-            </VBox.margin>
-         </Label>
-         <Label text="Date:">
-            <font>
-               <Font size="14.0"/>
-            </font>
-            <VBox.margin>
-               <Insets bottom="5.0"/>
-            </VBox.margin>
-         </Label>
-         <Label text="Time:">
-            <font>
-               <Font size="14.0"/>
-            </font>
-         </Label>
-      </VBox>
-      <VBox prefHeight="100.0" prefWidth="52.0">
-         <Text fx:id="placeText" strokeType="OUTSIDE" strokeWidth="0.0" text="PLACE"
-               wrappingWidth="155.97772979736328">
-            <VBox.margin>
-               <Insets bottom="8.0" top="2.0"/>
-            </VBox.margin>
-         </Text>
-         <Text fx:id="dateText" strokeType="OUTSIDE" strokeWidth="0.0" text="DATE"
-               wrappingWidth="155.97775650024414"/>
-         <Text fx:id="timeText" strokeType="OUTSIDE" strokeWidth="0.0" text="TIME"
-               wrappingWidth="156.77777862548828">
-            <VBox.margin>
-               <Insets top="7.5"/>
-            </VBox.margin>
-         </Text>
-      </VBox>
-   </HBox>
-   <TextField fx:id="sender" layoutX="644.0" layoutY="526.0" prefHeight="29.0" prefWidth="200.0" promptText="type"/>
-   <ButtonBar layoutX="644.0" layoutY="555.0" prefHeight="40.0" prefWidth="200.0">
-      <buttons>
-         <Button defaultButton="true" mnemonicParsing="false" onAction="#clickOnSend" prefHeight="26.0" prefWidth="51.0"
-                 text="Send" textAlignment="CENTER"/>
-         <Button mnemonicParsing="false" onAction="#clickOnUpdate" prefHeight="26.0" prefWidth="51.0" text="Update"
-                 textAlignment="CENTER"/>
-      </buttons>
-   </ButtonBar>
+      <HBox layoutX="47.0" layoutY="512.0" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <VBox prefHeight="100.0" prefWidth="42.0">
+               <children>
+                  <Label text="Place:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label text="Date:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label text="Time:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox prefHeight="100.0" prefWidth="52.0">
+               <children>
+                  <Text fx:id="placeText" strokeType="OUTSIDE" strokeWidth="0.0" text="PLACE" wrappingWidth="155.97772979736328">
+                     <VBox.margin>
+                        <Insets bottom="8.0" top="2.0" />
+                     </VBox.margin>
+                  </Text>
+                  <Text fx:id="dateText" strokeType="OUTSIDE" strokeWidth="0.0" text="DATE" wrappingWidth="155.97775650024414" />
+                  <Text fx:id="timeText" strokeType="OUTSIDE" strokeWidth="0.0" text="TIME" wrappingWidth="156.77777862548828">
+                     <VBox.margin>
+                        <Insets top="7.5" />
+                     </VBox.margin>
+                  </Text>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <TextField fx:id="sender" layoutX="644.0" layoutY="526.0" prefHeight="29.0" prefWidth="200.0" promptText="type" />
+      <ButtonBar layoutX="644.0" layoutY="555.0" prefHeight="40.0" prefWidth="200.0">
+         <buttons>
+            <Button defaultButton="true" mnemonicParsing="false" onAction="#clickOnSend" prefHeight="26.0" prefWidth="51.0" text="Send" textAlignment="CENTER" />
+            <Button mnemonicParsing="false" onAction="#clickOnUpdate" prefHeight="26.0" prefWidth="51.0" text="Update" textAlignment="CENTER" />
+         </buttons>
+      </ButtonBar>
+      <Button fx:id="quitButton" layoutX="545.0" layoutY="527.0" mnemonicParsing="false" onAction="#clickOnQuit" prefHeight="26.0" prefWidth="65.0" text="QUIT">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+   </children>
 </Pane>

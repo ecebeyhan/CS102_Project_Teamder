@@ -58,6 +58,8 @@ public class matchPageController implements MatchController, MainController{
     @FXML
     public Button basketballPosition0,basketballPosition1,basketballPosition2,basketballPosition3,basketballPosition4,basketballPosition5,basketballPosition6,basketballPosition7,basketballPosition8,basketballPosition9;
     @FXML
+    public Button quitButton;
+    @FXML
     public TextField sender;
     @FXML
     public TextArea receiver;
@@ -83,6 +85,41 @@ public class matchPageController implements MatchController, MainController{
     @FXML
     public void clickOnUpdate(ActionEvent event) {
         Database.getMessage(match.getName(), receiver);
+    }
+
+    /**
+     * This method creates a window for user to confirm that they want to quit the match
+     * If they confirm, it removes the user from the match
+     * @param event the event that triggers the method
+     */
+    @FXML
+    public void clickOnQuit(ActionEvent event) throws IOException {
+        Stage stage = (Stage) myPane.getScene().getWindow();
+        Alert.AlertType type = Alert.AlertType.NONE;
+        Alert alert = new Alert(type,"");
+
+        alert.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        alert.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
+
+        alert.initModality(Modality.APPLICATION_MODAL);
+        alert.initOwner(stage);
+
+        alert.getDialogPane().setContentText("Are you sure you want to quit the match?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if(result.get() == ButtonType.OK)
+        {
+            Alert infoAlert = new Alert(Alert.AlertType.NONE);
+            infoAlert.getDialogPane().getButtonTypes().add(ButtonType.OK);
+            infoAlert.getDialogPane().lookupButton(ButtonType.OK).setVisible(false);
+            infoAlert.initOwner(stage);
+
+            Database.removePlayerFromMatch(currentUser,match);
+            infoAlert.getDialogPane().setContentText("You quit the match!");
+            infoAlert.show();
+            new SceneChanger().changeScenes(event, "Profile_Page.fxml", "Teamder", SceneChanger.getLoggedInUser(), new profileController());
+        }
     }
 
     /**
@@ -144,6 +181,7 @@ public class matchPageController implements MatchController, MainController{
 
             try {
                 Database.addMatch(currentUser,match,position);
+                quitButton.setVisible(true);
                 infoAlert.getDialogPane().setContentText("You successfully joined the match!");
                 infoAlert.show();
                 clickedButton.setStyle("-fx-background-color: #000000; ");
@@ -367,7 +405,6 @@ public class matchPageController implements MatchController, MainController{
         footballField.setVisible(false);
     }
 
-
     /**
      * This method sets the volleyball field invisible when the match is not a volleyball match
      */
@@ -584,6 +621,14 @@ public class matchPageController implements MatchController, MainController{
         matchNameText.setText(match.getName());
         this.match = match;
         arrangeMatchField(match.getSport().getName());
+        try {
+            if(!Database.isUserInMatch(currentUser.getUserName(), match.getName()))
+            {
+                quitButton.setVisible(false);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
     @Override
     public void preloadData(User user) throws IOException {

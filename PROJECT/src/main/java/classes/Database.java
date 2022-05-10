@@ -735,6 +735,27 @@ public class Database {
         return null;
     }
 
+    public static void removePlayerFromMatch(User user, Match match)
+    {
+        PreparedStatement preparedStatement = null;
+
+        try {
+            // 2. create a String holding query with ? as user inputs
+            String sql = "DELETE FROM usermatch WHERE name= ? and matchname= ?;";
+
+            // 3. create the query
+            preparedStatement = conn.prepareStatement(sql);
+
+            // 4. put values into the parameters
+            preparedStatement.setString(1, user.getName());
+            preparedStatement.setString(2, match.getName());
+            preparedStatement.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void updateRatings(int value, String playerName){
         PreparedStatement preparedStatement = null;
 
