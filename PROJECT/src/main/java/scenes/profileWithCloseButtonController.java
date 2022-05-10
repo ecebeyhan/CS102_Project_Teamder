@@ -123,6 +123,7 @@ public class profileWithCloseButtonController implements MainController, MatchCo
         userNameLabel.setText(user.getName());
         sportsLabel.setText(user.getSports());
         bioText.setText(user.getBio());
+        avgLabel.setText(String.valueOf(user.getRating()) + "/5");
 
         try {
             userObservableList = database.getFriends(user);
@@ -135,8 +136,9 @@ public class profileWithCloseButtonController implements MainController, MatchCo
             if (event.getButton() == MouseButton.PRIMARY) {
                 ActionEvent actionEvent = new ActionEvent(event.getSource(), event.getTarget());
                 try {
+                    assert friendListTable != null;
                     String username = friendListTable.getSelectionModel().getSelectedItem().getUserName();
-                    User friend = database.getUser(username);
+                    User friend = Database.getUser(username);
                     new SceneChanger().changeScenes(actionEvent, "Friend_Page.fxml", "Teamder | Friend", friend, new friendController());
                 } catch (Exception e) {
                     throw new RuntimeException(e);
@@ -158,6 +160,7 @@ public class profileWithCloseButtonController implements MainController, MatchCo
         joinedMatchTable.getItems().addAll(joinedMatches);
         createCurrentMLinks();
         createRateLinks();
+
 
         try{
             imageFile = new File(ImageHandler.IMAGE_PATH + user.getImageFile());
@@ -195,10 +198,6 @@ public class profileWithCloseButtonController implements MainController, MatchCo
                 }
             });
         }
-
-
-
-
     }
 
     private void createRateLinks(){
@@ -210,6 +209,9 @@ public class profileWithCloseButtonController implements MainController, MatchCo
             TableColumn<Match, ?> col = joinedMatchTable.getColumns().get(1);
             Hyperlink link = (Hyperlink) col.getCellObservableValue(m).getValue();
             links.add(link);
+            if(Database.isVoted(user, m)){
+                link.setVisible(false);
+            }
         }
         for (int j = 0; j < joinedMatchTable.getItems().size(); j++) {
             int finalJ = j;

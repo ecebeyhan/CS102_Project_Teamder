@@ -93,7 +93,7 @@ public class matchPageController implements MatchController, MainController{
      * @param event the event that triggers the method
      */
     @FXML
-    public void clickOnQuit(ActionEvent event) throws IOException {
+    public void clickOnQuit(ActionEvent event) throws IOException{
         Stage stage = (Stage) myPane.getScene().getWindow();
         Alert.AlertType type = Alert.AlertType.NONE;
         Alert alert = new Alert(type,"");
