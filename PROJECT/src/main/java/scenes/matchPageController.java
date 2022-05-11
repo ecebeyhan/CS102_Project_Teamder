@@ -84,11 +84,6 @@ public class matchPageController implements MatchController, MainController{
         sender.clear();
     }
 
-    @FXML
-    public void clickOnUpdate(ActionEvent event) {
-        Database.getMessage(match.getName(), receiver);
-    }
-
     /**
      * This method creates a window for user to confirm that they want to quit the match
      * If they confirm, it removes the user from the match
