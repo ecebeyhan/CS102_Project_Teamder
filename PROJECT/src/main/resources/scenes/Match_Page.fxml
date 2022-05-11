@@ -121,7 +121,7 @@
       <TextField fx:id="sender" layoutX="644.0" layoutY="526.0" prefHeight="29.0" prefWidth="200.0" promptText="type" />
       <ButtonBar layoutX="644.0" layoutY="555.0" prefHeight="40.0" prefWidth="200.0">
          <buttons>
-            <Button defaultButton="true" mnemonicParsing="false" onAction="#clickOnSend" prefHeight="26.0" prefWidth="51.0" text="Send" textAlignment="CENTER" />
+            <Button fx:id="sendButton" defaultButton="true" mnemonicParsing="false" onAction="#clickOnSend" prefHeight="26.0" prefWidth="51.0" text="Send" textAlignment="CENTER" />
             <Button disable="true" mnemonicParsing="false" onAction="#clickOnUpdate" prefHeight="26.0" prefWidth="51.0" text="Update" textAlignment="CENTER" />
          </buttons>
       </ButtonBar>

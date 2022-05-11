@@ -62,6 +62,8 @@ public class matchPageController implements MatchController, MainController{
     @FXML
     public Button quitButton;
     @FXML
+    public Button sendButton;
+    @FXML
     public TextField sender;
     @FXML
     public TextArea receiver;
@@ -188,6 +190,7 @@ public class matchPageController implements MatchController, MainController{
 
             try {
                 Database.addMatch(currentUser,match,position);
+                sendButton.setVisible(true);
                 quitButton.setVisible(true);
                 infoAlert.getDialogPane().setContentText("You successfully joined the match!");
                 infoAlert.show();
@@ -631,6 +634,7 @@ public class matchPageController implements MatchController, MainController{
         try {
             if(!Database.isUserInMatch(currentUser.getUserName(), match.getName()))
             {
+                sendButton.setVisible(false);
                 quitButton.setVisible(false);
             }
         } catch (SQLException e) {
