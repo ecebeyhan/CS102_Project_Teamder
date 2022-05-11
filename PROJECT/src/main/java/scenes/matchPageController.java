@@ -6,6 +6,8 @@ import classes.Match;
 import classes.User;
 import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -113,7 +115,15 @@ public class matchPageController implements MatchController, MainController{
             Database.removePlayerFromMatch(currentUser,match);
             infoAlert.getDialogPane().setContentText("You quit the match!");
             infoAlert.show();
-            new SceneChanger().changeScenes(event, "Profile_Page.fxml", "Teamder", SceneChanger.getLoggedInUser(), new profileController());
+            infoAlert.setOnCloseRequest(new EventHandler() {
+                public void handle(Event we) {
+                    try {
+                        new SceneChanger().changeScenes(event, "Profile_Page.fxml", "Teamder", SceneChanger.getLoggedInUser(), new profileController());
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            });
         }
     }
 
