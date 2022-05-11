@@ -122,7 +122,6 @@
       <ButtonBar layoutX="644.0" layoutY="555.0" prefHeight="40.0" prefWidth="200.0">
          <buttons>
             <Button fx:id="sendButton" defaultButton="true" mnemonicParsing="false" onAction="#clickOnSend" prefHeight="26.0" prefWidth="51.0" text="Send" textAlignment="CENTER" />
-            <Button disable="true" mnemonicParsing="false" onAction="#clickOnUpdate" prefHeight="26.0" prefWidth="51.0" text="Update" textAlignment="CENTER" />
          </buttons>
       </ButtonBar>
       <Button fx:id="quitButton" layoutX="545.0" layoutY="527.0" mnemonicParsing="false" onAction="#clickOnQuit" prefHeight="26.0" prefWidth="65.0" text="QUIT">
