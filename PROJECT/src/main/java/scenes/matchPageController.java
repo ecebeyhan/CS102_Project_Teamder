@@ -67,6 +67,7 @@ public class matchPageController implements MatchController, MainController{
     public TextArea receiver;
     private User currentUser;
     private Match match;
+    private Timer timer;
 
     /**
      * This method is called when the user clicks on the Close button.
@@ -75,6 +76,7 @@ public class matchPageController implements MatchController, MainController{
      */
     @FXML
     public void clickOnCancel(ActionEvent event) throws IOException {
+        timer.cancel();
         new SceneChanger().changeScenes(event, "Profile_Page.fxml", "Teamder", SceneChanger.getLoggedInUser(), new profileController());
     }
 
@@ -638,7 +640,7 @@ public class matchPageController implements MatchController, MainController{
     @Override
     public void preloadData(User user) throws IOException {
         this.currentUser = user;
-        Timer timer = new Timer();
+        timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -646,6 +648,6 @@ public class matchPageController implements MatchController, MainController{
                     Database.getMessage(match.getName(), receiver);
                 });
             }
-        }, 250, 1500);
+        }, 250, 1000);
     }
 }

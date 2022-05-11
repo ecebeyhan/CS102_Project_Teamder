@@ -86,8 +86,12 @@ public class Database {
             if (match.getDate().isBefore(LocalDate.now())) {
                 count--;
             }
+            if(match.getDate().equals(LocalDate.now()) && match.getStartTime().isBefore(LocalTime.now())){
+                count--;
+            }
         }
         matches.removeIf(match -> match.getDate().isBefore(LocalDate.now()));
+        matches.removeIf(match -> match.getDate().equals(LocalDate.now()) && match.getStartTime().isBefore(LocalTime.now()));
         resultLabel.setText("Found " + count + " match(es)");
         return matches;
     }
