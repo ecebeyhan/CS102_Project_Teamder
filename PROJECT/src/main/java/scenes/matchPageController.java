@@ -82,18 +82,13 @@ public class matchPageController implements MatchController, MainController{
         sender.clear();
     }
 
-    @FXML
-    public void clickOnUpdate(ActionEvent event) {
-        Database.getMessage(match.getName(), receiver);
-    }
-
     /**
      * This method creates a window for user to confirm that they want to quit the match
      * If they confirm, it removes the user from the match
      * @param event the event that triggers the method
      */
     @FXML
-    public void clickOnQuit(ActionEvent event) throws IOException {
+    public void clickOnQuit(ActionEvent event) throws IOException{
         Stage stage = (Stage) myPane.getScene().getWindow();
         Alert.AlertType type = Alert.AlertType.NONE;
         Alert alert = new Alert(type,"");
