@@ -52,9 +52,9 @@
         <Separator layoutX="103.0" layoutY="99.0" prefWidth="200.0"/>
         <Separator layoutX="103.0" layoutY="163.0" prefHeight="3.0" prefWidth="200.0"/>
         <ComboBox fx:id="sport" layoutX="103.0" layoutY="181.0" prefHeight="26.0" prefWidth="200.0"
-                  promptText="Football"/>
+                  promptText="Football" value="Football"/>
         <ComboBox fx:id="place" layoutX="103.0" layoutY="56.0" prefHeight="26.0" prefWidth="200.0"
-                  promptText="Ankara"/>
+                  promptText="Ankara" value="Ankara"/>
         <Separator layoutX="448.0" layoutY="99.0" prefHeight="3.0" prefWidth="175.0"/>
         <GridPane layoutX="115.0" layoutY="247.0" prefHeight="27.0" prefWidth="505.0">
             <columnConstraints>
