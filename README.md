@@ -6,3 +6,5 @@
 
 # Dependencies
   You can use the Teamder with the any version of the PostgreSQL's JDBC (Java Database Connectivity) from official site of the PostgreSQL (https://jdbc.postgresql.org/download.html).
+  We used javafx for ui.
+  We used postgresql for database.
